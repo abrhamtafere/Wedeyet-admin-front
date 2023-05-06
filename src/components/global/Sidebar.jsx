@@ -16,7 +16,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -45,7 +46,8 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
+          // background: `${colors.primary[400]} !important`,
+          background: "white !important",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -66,7 +68,11 @@ const Sidebar = () => {
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            icon={isCollapsed ?
+              <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
+              ="center" display="flex">
+                <ArrowForwardIosIcon />
+              </Box> : undefined}
             style={{
               margin: "10px 0 20px 0",
               color: colors.grey[100],
@@ -75,15 +81,17 @@ const Sidebar = () => {
             {!isCollapsed && (
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="flex-end"
                 alignItems="center"
                 ml="15px"
+                
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography>
+              
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
+                  <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
+              ="center" display="flex">
+                <ArrowBackIosNewIcon />
+              </Box>
                 </IconButton>
               </Box>
             )}
