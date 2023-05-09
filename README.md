@@ -7,7 +7,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+/* Sure, here are the steps to push code to 2 GitHub repositories at the same time:
 
+1. Open your terminal or command prompt.
+2. Navigate to the directory containing the code you want to push.
+3. Initialize a local repository using "git init".
+4. Add your remote repositories using "git remote add origin [first repo URL]" and "git remote set-url --add origin [second repo URL]".
+5. Make sure your changes are staged and ready to be committed using "git add ."
+6. Commit your changes using "git commit -m 'commit message'".
+7. Push your changes to both repositories by running "git push --all". */
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 

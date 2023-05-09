@@ -4,6 +4,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
+
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -18,6 +19,12 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import wedeyetLogo from "./wedeyetLogo.png"
+import BusinessIcon from '@mui/icons-material/Business';
+import Divider from '@mui/material/Divider';
+import EmailIcon from '@mui/icons-material/Email';
+import QuizIcon from '@mui/icons-material/Quiz';
+import CategoryIcon from '@mui/icons-material/Category';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -46,7 +53,7 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          // background: `${colors.primary[400]} !important`,
+         //  background: `${colors.primary[400]} !important`,
           background: "white !important",
         },
         "& .pro-icon-wrapper": {
@@ -56,10 +63,16 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+         
+
+          color: "#61CE70 !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          //backgroundColor:"#81CA8C !important",
+          borderLeft: "5px solid #61CE70 !important",
+          
+          color: "#464E5F !important",
+   
         },
       }}
     >
@@ -74,14 +87,14 @@ const Sidebar = () => {
                 <ArrowForwardIosIcon />
               </Box> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "10px 0 5px 0",
               color: colors.grey[100],
             }}
           >
             {!isCollapsed && (
               <Box
                 display="flex"
-                justifyContent="flex-end"
+                justifyContent="flex-start"
                 alignItems="center"
                 ml="15px"
                 
@@ -98,134 +111,76 @@ const Sidebar = () => {
           </MenuItem>
 
           {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
+            <Box mb="15px" display="flex"flexDirection="row" justifyContent="flex-left" alignItems="center">
+              <Box ml="20px" display="flex"flexDirection="row" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  object-fit= "cover"
+                  src={wedeyetLogo}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box textAlign="center">
+              <Box   display="flex"gap="10px" justifyContent="center" alignItems="center">
                 <Typography
-                  variant="h2"
+                  variant="h5"
                   color={colors.grey[100]}
                   fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                
                 >
-                  Ed Roh
+                  Wedeyet
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                <Typography variant="h5"  fontWeight="bold" color={colors.greenAccent[500]}>
+                  Admin
                 </Typography>
               </Box>
             </Box>
           )}
+          
+          <Box mb="25px" ml="40px" >
+          <Divider  />
+          </Box>
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
+              title="Categorys"
+              to="/categorys"
+              icon={<CategoryIcon sx={{ color: colors.grey[500] }}  />}
               selected={selected}
               setSelected={setSelected}
             />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
-            <Item
-              title="Manage Team"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              <Item
+              title="Businesses"
+              to="/businesses"
+              icon={<BusinessIcon sx={{ color: colors.grey[500] }}  />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
+                <Item
+              title="FAQ"
               to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
+              icon={<QuizIcon sx={{ color: colors.grey[500] }}  />}
               selected={selected}
               setSelected={setSelected}
             />
+                <Item
+              title="Email Template"
+              to="/emailtemplate"
+              icon={<EmailIcon sx={{ color: colors.grey[500] }}  />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+      
+                {/* <Item
+              title="Logout"
+              to=""
+              icon={<CategoryIcon sx={{ color: colors.grey[500] }}  />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             */}
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
           </Box>
         </Menu>
       </ProSidebar>
