@@ -9,8 +9,10 @@ import Business from "./Page/Business ";
 import Faq from "./Page/Faq";
 import EmailTemplate from "./Page/EmailTemplate";
 import './App.css';
+import LoginPage from "./Page/LoginPage";
 
 function App() {
+  const login =false
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   return (
@@ -18,16 +20,18 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="app">
-        <Sidebar isSidebar={isSidebar} />
+
+        {login && <Sidebar isSidebar={isSidebar} />}
         <main className="content">
-          <Topbar setIsSidebar={setIsSidebar} />
+         {login &&  <Topbar setIsSidebar={setIsSidebar} />}
           <Routes>
+          <Route path="/login" element={<LoginPage />} />
            <Route path="/categorys" element={<Category />} />
             <Route path="/businesses" element={<Business />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/emailtemplate" element={<EmailTemplate />} />
-          
-  
+
+
           </Routes>
         </main>
       </div>
