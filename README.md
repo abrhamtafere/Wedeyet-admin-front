@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+git push -f -u origin main
 /* Sure, here are the steps to push code to 2 GitHub repositories at the same time:
 
 1. Open your terminal or command prompt.
