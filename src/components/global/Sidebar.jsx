@@ -63,16 +63,16 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-         
+
 
           color: "#61CE70 !important",
         },
         "& .pro-menu-item.active": {
           //backgroundColor:"#81CA8C !important",
           borderLeft: "5px solid #61CE70 !important",
-          
+
           color: "#464E5F !important",
-   
+
         },
       }}
     >
@@ -97,9 +97,9 @@ const Sidebar = () => {
                 justifyContent="flex-start"
                 alignItems="center"
                 ml="15px"
-                
+
               >
-              
+
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
               ="center" display="flex">
@@ -127,7 +127,7 @@ const Sidebar = () => {
                   variant="h5"
                   color={colors.grey[100]}
                   fontWeight="bold"
-                
+
                 >
                   Wedeyet
                 </Typography>
@@ -137,7 +137,7 @@ const Sidebar = () => {
               </Box>
             </Box>
           )}
-          
+
           <Box mb="25px" ml="40px" >
           <Divider  />
           </Box>
@@ -171,7 +171,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-      
+
                 {/* <Item
               title="Logout"
               to=""
