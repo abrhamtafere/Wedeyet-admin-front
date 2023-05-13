@@ -101,7 +101,7 @@ const LoginForm = () => {
                   
                 }
               },
-              "& .MuiOutlinedInput-root:focus": {
+              "& .MuiOutlinedInput-root:Mui-focused": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
                   
@@ -109,9 +109,6 @@ const LoginForm = () => {
               },
               gridColumn: "span 4"
             }}
-              // color=}
-           
-            
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
@@ -135,7 +132,7 @@ const LoginForm = () => {
                   
                 }
               },
-              "& .MuiOutlinedInput-root:focus": {
+              "& .MuiOutlinedInput-root:Mui-focused": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
                   
@@ -145,7 +142,9 @@ const LoginForm = () => {
             }}
             />
           </Box>
-
+          <Typography textAlign="right" mt="2px" variant="h6"  color={colors.grey[500]}>
+              Forgot Password
+            </Typography>
           {/* BUTTONS */}
           <Box>
             <Button
