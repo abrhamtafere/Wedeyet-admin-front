@@ -10,6 +10,7 @@ import {
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { tokens } from "../../theme";
 
 // import { useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
@@ -17,30 +18,13 @@ import * as yup from "yup";
 // import Dropzone from "react-dropzone";
 // import FlexBetween from "components/FlexBetween";
 
-const registerSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
-  location: yup.string().required("required"),
-  occupation: yup.string().required("required"),
-  picture: yup.string().required("required"),
-});
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
 });
 
-const initialValuesRegister = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  location: "",
-  occupation: "",
-  picture: "",
-};
+
 
 const initialValuesLogin = {
   email: "",
@@ -48,36 +32,14 @@ const initialValuesLogin = {
 };
 
 const LoginForm = () => {
-  const [pageType, setPageType] = useState("login");
-  const { palette } = useTheme();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const isLogin = pageType === "login";
-  const isRegister = pageType === "register";
 
-  const register = async (values, onSubmitProps) => {
-    // this allows us to send form info with image
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
 
-    if (savedUser) {
-      setPageType("login");
-    }
-  };
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
@@ -99,8 +61,8 @@ const LoginForm = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    if (isLogin) await login(values, onSubmitProps);
-    if (isRegister) await register(values, onSubmitProps);
+ await login(values, onSubmitProps);
+
   };
 
   return (
@@ -131,13 +93,32 @@ const LoginForm = () => {
 
             <TextField
               label="Email"
+              id="outlined-search"
+              type="search"
+              sx={{ "& .MuiOutlinedInput-root:hover": {
+                "& > fieldset": {
+                  borderColor: colors.greenAccent[400]
+                  
+                }
+              },
+              "& .MuiOutlinedInput-root:focus": {
+                "& > fieldset": {
+                  borderColor: colors.greenAccent[400]
+                  
+                }
+              },
+              gridColumn: "span 4"
+            }}
+              // color=}
+           
+            
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
               name="email"
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
-              sx={{ gridColumn: "span 4" }}
+              // sx={{ gridColumn: "span 4" }}
             />
             <TextField
               label="Password"
@@ -148,7 +129,20 @@ const LoginForm = () => {
               name="password"
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
-              sx={{ gridColumn: "span 4" }}
+              sx={{ "& .MuiOutlinedInput-root:hover": {
+                "& > fieldset": {
+                  borderColor: colors.greenAccent[400]
+                  
+                }
+              },
+              "& .MuiOutlinedInput-root:focus": {
+                "& > fieldset": {
+                  borderColor: colors.greenAccent[400]
+                  
+                }
+              },
+              gridColumn: "span 4"
+            }}
             />
           </Box>
 
@@ -160,12 +154,12 @@ const LoginForm = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                backgroundColor: colors.greenAccent[500],
+                 color: colors.white[100],
+                "&:hover": { color:colors.white[100] ,backgroundColor: colors.greenAccent[400] },
               }}
             >
-           LOGIN            </Button>
+           Login           </Button>
 
           </Box>
         </form>
