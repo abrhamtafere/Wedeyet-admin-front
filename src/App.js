@@ -16,8 +16,9 @@ function App() {
   const login=false;
 
 
-  const [theme, colorMode] = useMode();
+
   const [isSidebar, setIsSidebar] = useState(true);
+  const [theme, colorMode] = useMode();
   return (
     <ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
@@ -25,9 +26,7 @@ function App() {
       <div className="app">
      {login&& <Sidebar isSidebar={isSidebar} />}  
 
-
-        {login && <Sidebar isSidebar={isSidebar} />}
-
+    
         <main className="content">
          {login &&  <Topbar setIsSidebar={setIsSidebar} />}
           <Routes>

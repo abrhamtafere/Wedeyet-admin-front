@@ -1,6 +1,6 @@
+import React from 'react'
 
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-import LoginForm from "../components/LoginForm/LoginForm";
+
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import wedeyetLogo from "./wedeyetLogo.png"
 import LoginForm from "../components/Login/LoginForm";
@@ -49,7 +49,7 @@ const LoginPage = () => {
 
       <Box
 
-justifyContent="center"
+  justifyContent="center"
 alignItems="center"
         width={isNonMobileScreens ? "30%" : "93%"}
         p="2rem"
