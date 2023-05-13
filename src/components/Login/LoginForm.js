@@ -145,7 +145,7 @@ const LoginForm = () => {
           <Typography textAlign="right" mt="2px" variant="h6"  color={colors.grey[500]}>
               Forgot Password
             </Typography>
-          {/* BUTTONS */}
+         
           <Box>
             <Button
               fullWidth
@@ -158,7 +158,8 @@ const LoginForm = () => {
                 "&:hover": { color:colors.white[100] ,backgroundColor: colors.greenAccent[400] },
               }}
             >
-           Login           </Button>
+           Login           
+           </Button>
 
           </Box>
         </form>
