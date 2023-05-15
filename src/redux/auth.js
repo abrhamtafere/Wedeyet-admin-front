@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import localStorage from "redux-persist/es/storage";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+let parsedData;
 
 const initialState = {
-  user: localStorage,
+  user: parsedData||localStorage.getItem('root')
 
 };
+
 
 export const authSlice = createSlice({
   name: "auth",
