@@ -11,12 +11,9 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { tokens } from "../../theme";
-
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { setLogin } from "state";
-// import Dropzone from "react-dropzone";
-// import FlexBetween from "components/FlexBetween";
+import { useNavigate } from "react-router-dom";
+ import { useDispatch } from "react-redux";
+ import { setLogin } from "../../redux/auth";
 
 
 const loginSchema = yup.object().shape({
@@ -34,8 +31,8 @@ const initialValuesLogin = {
 const LoginForm = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
 
@@ -50,15 +47,15 @@ const LoginForm = () => {
     const loggedIn = await loggedInResponse.json();
     console.log(loggedIn);
     onSubmitProps.resetForm();
-    // if (loggedIn) {
-    //   dispatch(
-    //     setLogin({
-    //       user: loggedIn.user,
-    //       token: loggedIn.token,
-    //     })
-    //   );
-    //   navigate("/home");
-    // }
+    if (loggedIn) {
+      dispatch(
+        setLogin({
+          user: loggedIn.User,
+      
+        })
+      );
+      navigate("/categorys");
+    }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
