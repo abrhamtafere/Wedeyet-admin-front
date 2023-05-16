@@ -6,9 +6,9 @@ const ProtectedRoute = ({ allowedRoles }) => {
     console.log(auth.role)
     const {_id, token, role} = auth;
     const location = useLocation();
-    const allowroute = role==allowedRoles
+    const allowroute = allowedRoles.includes(role)
     
-    console.log(role)
+    console.log(allowroute)
     return (
         allowroute
             ? <Outlet />

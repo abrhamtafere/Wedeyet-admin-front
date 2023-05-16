@@ -42,18 +42,18 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
-              <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
+              <Route element={<ProtectedRoute allowedRoles={["ADMIN", "SUPERADMIN"]} />}>
                 <Route exact path="/" element={<Category />} />
                 <Route path="/categorys" element={<Category />} />
                 <Route path="/businesses" element={<Business />} />
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/emailtemplate" element={<EmailTemplate />} />
-                <Route path="/superAdminPage" element={<SuperAdmin />} />
+
             
               </Route>
               <Route element={<ProtectedRoute allowedRoles={["SUPERADMIN"]} />}>
-            
-                <Route path="/adminPage" element={<AdminPage />} />
+                <Route path="/superAdminPage" element={<SuperAdmin />} />
+                
               </Route>
 
 
