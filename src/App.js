@@ -49,11 +49,11 @@ function App() {
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/emailtemplate" element={<EmailTemplate />} />
 
-            
+
               </Route>
               <Route element={<ProtectedRoute allowedRoles={["SUPERADMIN"]} />}>
                 <Route path="/superAdminPage" element={<SuperAdmin />} />
-                
+
               </Route>
 
 
