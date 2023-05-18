@@ -34,15 +34,15 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {token && <Sidebar isSidebar={isSidebar} />}
+          {!token && <Sidebar isSidebar={isSidebar} />}
 
 
           <main className="content">
-            {token && <Topbar setIsSidebar={setIsSidebar} />}
+            {!token && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
-              <Route element={<ProtectedRoute allowedRoles={["ADMIN", "SUPERADMIN"]} />}>
+              {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN", "SUPERADMIN"]} />}> */}
                 <Route exact path="/" element={<Category />} />
                 <Route path="/categorys" element={<Category />} />
                 <Route path="/businesses" element={<Business />} />
@@ -50,11 +50,11 @@ function App() {
                 <Route path="/emailtemplate" element={<EmailTemplate />} />
 
 
-              </Route>
-              <Route element={<ProtectedRoute allowedRoles={["SUPERADMIN"]} />}>
+              {/* </Route> */}
+              {/* <Route element={<ProtectedRoute allowedRoles={["SUPERADMIN"]} />}> */}
                 <Route path="/superAdminPage" element={<SuperAdmin />} />
 
-              </Route>
+              {/* </Route> */}
 
 
               {/* <Route path="/categorys" element={token?<Category />: <Navigate to="/login" />} />
