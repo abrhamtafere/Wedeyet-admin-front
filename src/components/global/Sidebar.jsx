@@ -50,9 +50,10 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Categorys");
 
   return (
-    <Box
+    <Box display="flex"
       sx={{
         "& .pro-sidebar-inner": {
+   
          //  background: `${colors.primary[400]} !important`,
           background: "white !important",
         },
