@@ -11,16 +11,14 @@ const LoginPage = () => {
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
-    <Box justifyContent="center"
-      alignItems="center" >
+    <>
       <Box
-        //    backgroundColor="blue"
         width="100%"
         p="1rem 6%"
         textAlign="left"
 
       >
-        <Box mb="15px" display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
+        <Box  display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
           <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
             <img
               alt="profile-user"
@@ -47,23 +45,26 @@ const LoginPage = () => {
         </Box>
       </Box>
 
-      <Box
+      <Box justifyContent="center"
+   alignItems="center" display="flex" height="90vh" >
 
-        justifyContent="center"
-        alignItems="center"
-        width={isNonMobileScreens ? "30%" : "93%"}
-        p="2rem"
-        m="3.5rem auto"
-        borderRadius="1.5rem"
-        backgroundColor="white"
-        boxShadow="1"
-      >
-        <Typography align='center' fontWeight="600" variant="h3" sx={{ mb: "1.5rem" }}>
-          Login
-        </Typography>
-        <LoginForm />
+        <Box
+          justifyContent="center"
+          alignItems="center"
+          width={isNonMobileScreens ? "30%" : "93%"}
+          p="2rem"
+          m="3.5rem auto"
+          borderRadius="1.5rem"
+          backgroundColor="white"
+          boxShadow="1"
+        >
+          <Typography align='center' fontWeight="600" variant="h3" sx={{ mb: "1.5rem" }}>
+            Login
+          </Typography>
+          <LoginForm />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

@@ -62,6 +62,9 @@ export const tokens = (mode) => ({
         },
       }
     : {
+      orange: {
+        500: "#FFD233",
+      },
         grey: {
           100: "#141414",
           200: "#292929",
