@@ -142,11 +142,10 @@ const LoginForm = () => {
           </Box>
           <Typography textAlign="right" mt="2px" variant="h6"  color={colors.grey[500]}>
               Forgot Password
-            </Typography>
+          </Typography>
          
           <Box>
             <Button
-         
               fullWidth
               type="submit"
               sx={{

@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import { tokens } from "../../theme";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import TabItem from './TabItem';
+import MainCategory from './MainCategory/MainCategory';
 export default function CategoryTabs({ active, handleChange }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -33,7 +34,7 @@ export default function CategoryTabs({ active, handleChange }) {
           </Tabs>
         </Box>
         <TabItem value={active} index={0}>
-          <Box width="100%" p="1rem" display="flex" flexDirection="row" justifyContent="center" alignItems="center" m="" >sdxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxf</Box>
+          <MainCategory/>
         </TabItem>
         <TabItem value={active} index={1}>
           Item Two
