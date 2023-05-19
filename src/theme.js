@@ -168,6 +168,13 @@ export const themeSettings = (mode) => {
             },
           }),
     },
+    components: {
+      MuiTouchRipple: {
+        defaultProps: {
+          disableTouchRipple: true,
+        },
+      },
+    },
     typography: {
       fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
       fontSize: 12,
@@ -190,10 +197,12 @@ export const themeSettings = (mode) => {
       h5: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 16,
+        textTransform: 'none',
       },
       h6: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 14,
+        textTransform: 'none',
       },
     },
   };

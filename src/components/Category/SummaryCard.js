@@ -1,14 +1,9 @@
-// @mui
+
 import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography,  useTheme, } from '@mui/material';
 import Iconify from '../../Utils/Iconify';
 import { tokens } from "../../theme";
-
-// components
-
-
-// ----------------------------------------------------------------------
 
 const StyledIcon = styled('div')(({ theme }) => ({
   margin: 'auto',
