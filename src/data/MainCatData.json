@@ -1,0 +1,28 @@
+{
+    "mainCat": [
+        {
+            "id": 1,
+            "image": "material-symbols:restaurant",
+            "Name": "Restaurant",
+            "num": "23"
+        },
+        {
+            "id": 2,
+            "image": "material-symbols:home-repair-service",
+            "Name": "Home Services",
+            "num": "26"
+        },
+        {
+            "id": 3,
+            "image": "material-symbols:home-repair-service",
+            "Name": "Shops",
+            "num": "40"
+        },
+        {
+            "id": 4,
+            "image": "material-symbols:add-box-outline-rounded",
+            "Name": "others",
+            "num": "20"
+        }
+    ]
+}
