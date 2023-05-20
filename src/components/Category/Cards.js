@@ -3,8 +3,8 @@ import { Box, Grid } from "@mui/material";
 import SummaryCard from './SummaryCard';
 function Cards() {
   return (
-    <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" m="2.5rem 5rem">
-    <Grid container spacing={3}>
+    <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" m="2.5rem 10rem">
+    <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={3}>
         <SummaryCard title="Restaurant " total={71} icon={'material-symbols:restaurant'} />
       </Grid>

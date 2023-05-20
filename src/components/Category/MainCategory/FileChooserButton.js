@@ -1,20 +1,42 @@
 import React from 'react'
-import { Box,TextField, Button, useTheme } from "@mui/material";
+import {  TextField, Button, useTheme } from "@mui/material";
+import { tokens } from "../../../theme";
 export function FileChooserButton(props) {
-    const [fileName, setFileName] = React.useState('');
-  
-    const handleFileChange = (event) => {
-      setFileName(event.target.files[0].name);
-    };
-  
-    return (
-      <div style={{ display: 'flex',marginTop:"10px" }}>
-        <Button variant="contained" color="primary" onClick={() => props.inputRef.current.click()}>
-          Choose
-        </Button>
-        <TextField value={fileName} label="Selected file" style={{ flexGrow: 1 }} />
-        <input type="file" onChange={handleFileChange} style={{ display: 'none' }} ref={props.inputRef} />
+  const [fileName, setFileName] = React.useState('');
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const handleFileChange = (event) => {
+    setFileName(event.target.files[0].name);
+  };
 
-      </div>
-    );
-  }
+  return (
+    <div style={{ display: 'flex'}}>
+      <Button variant="text" disableElevation={true} sx={{
+        "&.MuiButton-root": {
+          borderRadius: "0px !important",
+          width: "120px",
+          backgroundColor: "#DADADA",
+          border: "none !important",
+          color: "White !important",
+          textTransform: "none"
+        },
+      }}
+        onClick={() => props.inputRef.current.click()}>
+        Choose SVG
+      </Button>
+      <TextField  placeholder='Choose SVG' value={fileName} label="Selected file" style={{ flexGrow: 1 } } sx={{  "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: colors.greenAccent[400]
+              },
+              width: "100%",
+            },
+            "& .MuiTextField-root:focused": {
+              "& > fieldset": {
+                borderColor: colors.greenAccent[400]
+              }
+            },}}/>
+      <input type="file" onChange={handleFileChange} style={{ display: 'none' }} ref={props.inputRef} />
+
+    </div>
+  );
+}

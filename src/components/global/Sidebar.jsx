@@ -52,9 +52,12 @@ const Sidebar = () => {
   return (
     <Box display="flex"
       sx={{
+        // position:"fixed !important",
+        zIndex: "100",
         "& .pro-sidebar-inner": {
-   
-         //  background: `${colors.primary[400]} !important`,
+          height: "100vh",
+
+          //  background: `${colors.primary[400]} !important`,
           background: "white !important",
         },
         "& .pro-icon-wrapper": {
@@ -77,14 +80,15 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={isCollapsed} style={{ position: 'fixed', height: '100vh' }}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
+
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ?
               <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
-              ="center" display="flex">
+                ="center" display="flex">
                 <ArrowForwardIosIcon />
               </Box> : undefined}
             style={{
@@ -103,27 +107,27 @@ const Sidebar = () => {
 
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
-              ="center" display="flex">
-                <ArrowBackIosNewIcon />
-              </Box>
+                    ="center" display="flex">
+                    <ArrowBackIosNewIcon />
+                  </Box>
                 </IconButton>
               </Box>
             )}
           </MenuItem>
 
           {!isCollapsed && (
-            <Box mb="15px" display="flex"flexDirection="row" justifyContent="flex-left" alignItems="center">
-              <Box ml="20px" display="flex"flexDirection="row" justifyContent="center" alignItems="center">
+            <Box mb="15px" display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
+              <Box ml="20px" display="flex" flexDirection="row" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  object-fit= "cover"
+                  object-fit="cover"
                   src={wedeyetLogo}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box   display="flex"gap="10px" justifyContent="center" alignItems="center">
+              <Box display="flex" gap="10px" justifyContent="center" alignItems="center">
                 <Typography
                   variant="h5"
                   color={colors.grey[100]}
@@ -132,7 +136,7 @@ const Sidebar = () => {
                 >
                   Wedeyet
                 </Typography>
-                <Typography variant="h5"  fontWeight="bold" color={colors.greenAccent[500]}>
+                <Typography variant="h5" fontWeight="bold" color={colors.greenAccent[500]}>
                   Admin
                 </Typography>
               </Box>
@@ -140,40 +144,40 @@ const Sidebar = () => {
           )}
 
           <Box mb="25px" ml="40px" >
-          <Divider  />
+            <Divider />
           </Box>
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Categorys"
               to="/categorys"
-              icon={<CategoryIcon sx={{ color: colors.grey[500] }}  />}
+              icon={<CategoryIcon sx={{ color: colors.grey[500] }} />}
               selected={selected}
               setSelected={setSelected}
             />
-              <Item
+            <Item
               title="Businesses"
               to="/businesses"
-              icon={<BusinessIcon sx={{ color: colors.grey[500] }}  />}
+              icon={<BusinessIcon sx={{ color: colors.grey[500] }} />}
               selected={selected}
               setSelected={setSelected}
             />
-                <Item
+            <Item
               title="FAQ"
               to="/faq"
-              icon={<QuizIcon sx={{ color: colors.grey[500] }}  />}
+              icon={<QuizIcon sx={{ color: colors.grey[500] }} />}
               selected={selected}
               setSelected={setSelected}
             />
-                <Item
+            <Item
               title="Email Template"
               to="/emailtemplate"
-              icon={<EmailIcon sx={{ color: colors.grey[500] }}  />}
+              icon={<EmailIcon sx={{ color: colors.grey[500] }} />}
               selected={selected}
               setSelected={setSelected}
             />
 
-                {/* <Item
+            {/* <Item
               title="Logout"
               to=""
               icon={<CategoryIcon sx={{ color: colors.grey[500] }}  />}

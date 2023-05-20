@@ -16,6 +16,7 @@ import SuperAdmin from "./Page/SuperAdmin";
 import AdminPage from "./Page/AdminPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Unauthorized from "./Page/Unauthorized";
+import { Box, Grid } from "@mui/material";
 // import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
 
 function App() {
@@ -29,15 +30,19 @@ function App() {
   }
   const [isSidebar, setIsSidebar] = useState(true);
   const [theme, colorMode] = useMode();
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {!token && <Sidebar isSidebar={isSidebar} />}
+        <Grid container spacing={10}> 
+        <Grid item xs={12} sm={3} md={2}>
+        <Sidebar/>
+      </Grid>
 
-
-          <main className="content">
+      <Grid item xs={12} sm={9} md={10}>
+      <main className="content">
             {!token && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
               <Route path="/login" element={<LoginPage />} />
@@ -66,6 +71,12 @@ function App() {
 
             </Routes>
           </main>
+      </Grid>
+      </Grid>
+         
+
+
+       
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
