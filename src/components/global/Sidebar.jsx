@@ -43,12 +43,16 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Categorys");
-
+  const handleCollapse = () => {
+    setIsCollapsed(!isCollapsed)
+    setIsSidebar(!isSidebarOn)
+    console.log("isSidebarOn")
+  }
   return (
     <Box display="flex"
       sx={{
@@ -64,7 +68,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
+          padding: "5px 35px 5px 10px !important",
         },
         "& .pro-inner-item:hover": {
 
@@ -84,8 +88,8 @@ const Sidebar = () => {
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={() => handleCollapse()}
+            // onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ?
               <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
                 ="center" display="flex">
@@ -105,7 +109,7 @@ const Sidebar = () => {
 
               >
 
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton onClick={() => handleCollapse()}>
                   <Box backgroundColor={colors.greenAccent[500]} color="white" borderRadius="100%" p="10px" height="25px" width="25px" alignItems="center" justifyContent
                     ="center" display="flex">
                     <ArrowBackIosNewIcon />

@@ -35,9 +35,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-
-
-
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("api/auth/login", {
       method: "POST",
@@ -51,7 +48,7 @@ const LoginForm = () => {
       dispatch(
         setLogin({
           user: loggedIn.User,
-      
+
         })
       );
       navigate("/categorys");
@@ -59,7 +56,7 @@ const LoginForm = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
- await login(values, onSubmitProps);
+   await login(values, onSubmitProps);
 
   };
 
@@ -96,13 +93,13 @@ const LoginForm = () => {
               sx={{ "& .MuiOutlinedInput-root:hover": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
-                  
+
                 }
               },
               "& .MuiOutlinedInput-root:Mui-focused": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
-                  
+
                 }
               },
               gridColumn: "span 4"
@@ -127,13 +124,13 @@ const LoginForm = () => {
               sx={{ "& .MuiOutlinedInput-root:hover": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
-                  
+
                 }
               },
               "& .MuiOutlinedInput-root:Mui-focused": {
                 "& > fieldset": {
                   borderColor: colors.greenAccent[400]
-                  
+
                 }
               },
               gridColumn: "span 4"
@@ -143,7 +140,7 @@ const LoginForm = () => {
           <Typography textAlign="right" mt="2px" variant="h6"  color={colors.grey[500]}>
               Forgot Password
           </Typography>
-         
+
           <Box>
             <Button
               fullWidth
@@ -156,7 +153,7 @@ const LoginForm = () => {
                 "&:hover": { color:colors.white[100] ,backgroundColor: colors.greenAccent[400] },
               }}
             >
-           Login           
+           Login
            </Button>
 
           </Box>

@@ -28,7 +28,7 @@ function App() {
     'ADMIN': 2001,
     'SUPERADMIN': 5150
   }
-  const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebarOn, setIsSidebar] = useState(true);
   const [theme, colorMode] = useMode();
 
   return (
@@ -36,12 +36,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-        <Grid container spacing={10}> 
-        <Grid item xs={12} sm={3} md={2}>
-        <Sidebar/>
-      </Grid>
+        <Grid container spacing={10}>
+     { isSidebarOn?  <Grid item xs={12} sm={3} md={2}>
+        <Sidebar isSidebarOn={isSidebarOn} setIsSidebar={setIsSidebar}/>
+      </Grid>:<Grid item xs={12} sm={3} md={1}>
+        <Sidebar  setIsSidebar={setIsSidebar}/>
+      </Grid>}
 
-      <Grid item xs={12} sm={9} md={10}>
+    { isSidebarOn? <Grid item xs={12} sm={9} md={10}>
       <main className="content">
             {!token && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
@@ -61,22 +63,36 @@ function App() {
 
               {/* </Route> */}
 
+            </Routes>
+          </main>
+      </Grid>:<Grid item xs={12} sm={9} md={11}>
+      <main className="content">
+            {!token && <Topbar setIsSidebar={setIsSidebar} />}
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN", "SUPERADMIN"]} />}> */}
+                <Route exact path="/" element={<Category />} />
+                <Route path="/categorys" element={<Category />} />
+                <Route path="/businesses" element={<Business />} />
+                <Route path="/faq" element={<Faq />} />
+                <Route path="/emailtemplate" element={<EmailTemplate />} />
 
-              {/* <Route path="/categorys" element={token?<Category />: <Navigate to="/login" />} />
-            <Route path="/businesses" element={token?<Business />:<LoginPage/>} />
-            <Route path="/faq" element={token ?<Faq />:<LoginPage/>} />
-            <Route path="/emailtemplate" element={token ?<EmailTemplate />:<LoginPage/>} />
-            <Route exact path="/superAdminPage" element={<SuperAdmin />} />
-            <Route exact path="/adminPage" element={<AdminPage />} /> */}
+
+              {/* </Route> */}
+              {/* <Route element={<ProtectedRoute allowedRoles={["SUPERADMIN"]} />}> */}
+                <Route path="/superAdminPage" element={<SuperAdmin />} />
+
+              {/* </Route> */}
 
             </Routes>
           </main>
+      </Grid>}
       </Grid>
-      </Grid>
-         
 
 
-       
+
+
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
