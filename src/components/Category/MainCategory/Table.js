@@ -44,7 +44,7 @@ function Table() {
 
                                 <Iconify icon={params.row.image} width={30} height={30} />
                             </StyledIcon>
-                            {/* <img draggable="false" src={params.row.image} borderRadius={"50%"} alt={params.row.name} width={"100%"} height={"100%"} /> */}
+                            
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.Name} </Box> <p ></p>

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
@@ -25,6 +26,11 @@ import Divider from '@mui/material/Divider';
 import EmailIcon from '@mui/icons-material/Email';
 import QuizIcon from '@mui/icons-material/Quiz';
 import CategoryIcon from '@mui/icons-material/Category';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import AdminMenu from "./AdminMenu";
+import { useSelector } from "react-redux";
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -48,6 +54,9 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Categorys");
+
+  const auth = useSelector((state) => state.user);
+
   const handleCollapse = () => {
     setIsCollapsed(!isCollapsed)
     setIsSidebar(!isSidebarOn)
@@ -151,7 +160,7 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
             <Divider />
           </Box>
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          {auth.role === "ADMIN" ? <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Categorys"
               to="/categorys"
@@ -180,18 +189,26 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
               selected={selected}
               setSelected={setSelected}
             />
-
-            {/* <Item
-              title="Logout"
-              to=""
-              icon={<CategoryIcon sx={{ color: colors.grey[500] }}  />}
+            <AdminMenu collapsed={isCollapsed}/>
+          </Box> : <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="Dashboard"
+              to="/superAdminPage"
+              icon={<DashboardIcon sx={{ color: colors.grey[500] }} />}
               selected={selected}
               setSelected={setSelected}
             />
-             */}
-
-          </Box>
+            <Item
+              title="Admins"
+              to="/admins"
+              icon={<PersonIcon sx={{ color: colors.grey[500] }} />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <AdminMenu collapsed={isCollapsed}/>
+          </Box>}
         </Menu>
+
       </ProSidebar>
     </Box>
   );

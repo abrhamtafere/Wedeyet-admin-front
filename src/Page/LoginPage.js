@@ -18,7 +18,7 @@ const LoginPage = () => {
         textAlign="left"
 
       >
-        <Box  display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
+        <Box display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
           <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
             <img
               alt="profile-user"
@@ -46,7 +46,7 @@ const LoginPage = () => {
       </Box>
 
       <Box justifyContent="center"
-   alignItems="center" display="flex" height="90vh" >
+        alignItems="center" /* bgcolor={"blue"}  */width={"100vw"} display="flex" height="88vh" >
 
         <Box
           justifyContent="center"

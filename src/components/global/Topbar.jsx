@@ -1,5 +1,5 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -8,12 +8,20 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Topbar = () => {
+  const isAuth = useSelector((state) => state.user);
+  const { _id, token } = isAuth;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
   const colorMode = useContext(ColorModeContext);
-
+const handleLogout=()=>{
+  localStorage.removeItem('persist:root');
+  window.location.reload()
+  navigate("/login");
+}
   return (
     <Box display="flex" justifyContent="flex-end" p={2}>
       {/* SEARCH BAR */}
@@ -46,9 +54,9 @@ const Topbar = () => {
         <IconButton>
           <PersonOutlinedIcon />
         </IconButton> */}
-              <Box padding="10px !important"display="flex"justifyContent="center" alignItems="center"       backgroundColor={colors.greenAccent[400]} color="white"
-        borderRadius="3px">
-        logout
+        <Box onClick={()=>handleLogout()} padding="10px !important" display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.greenAccent[400]} color="white"
+          borderRadius="3px">
+          logout
         </Box>
       </Box>
 
