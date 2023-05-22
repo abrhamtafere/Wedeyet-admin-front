@@ -1,6 +1,8 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import MainCatData from "../../../data/MainCatData.json"
+import categorys from "../../../data/category.json"
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import Actions from './Actions';
 import { tokens } from "../../../theme";
@@ -14,11 +16,15 @@ const StyledIcon = styled('div')(({ theme }) => ({
     width: 40,
     height:40,
     justifyContent: 'center',
-  
+
   }));
 function Table() {
+    const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    useEffect(()=>{
+     setRowData(categorys.MainCategories)
+    })
     const columns = [
         {
             field: "id",
@@ -38,17 +44,17 @@ function Table() {
                             <StyledIcon
                                 sx={{
                                     color: colors.orange[500],
-                    
+
                                 }}
                             >
 
                                 <Iconify icon={params.row.image} width={30} height={30} />
                             </StyledIcon>
-                            
+
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-                            <Box >{params.row.Name} </Box> <p ></p>
-                            <p>{params.row.num} subcatagory </p>
+                            <Box >{params.row.name} </Box> <p ></p>
+                            <p>{params.row.subcategories.length} subcatagory </p>
                         </Box>
 
                     </Box>
@@ -65,7 +71,7 @@ function Table() {
             renderCell: (params) => {
                 return (
 
-                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.Name)} />
+                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name)} />
                 );
             },
         },
@@ -83,8 +89,8 @@ function Table() {
                 Main Catagory
             </Typography>
             <DataGrid
-                checkboxSelection
-                rows={MainCatData.mainCat}
+                // checkboxSelection
+                rows={rowData}
                 columns={columns}
                 pageSize={7}
                 disableSelectIconOnClick

@@ -19,7 +19,7 @@ const StyledContent = styled('div')(({ theme }) => ({
 export default function Page404() {
   return (
     <>
-   
+
 
       <Container>
         <StyledContent sx={{ textAlign: 'center', alignItems: 'center' }}>
@@ -33,15 +33,12 @@ export default function Page404() {
            Please request to the Super Admin to access
           </Typography>
 
-          {/* <Typography sx={{ color: 'text.secondary' }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your
-            spelling.
-          </Typography> */}
+      
 
-          <Box 
+          <Box
             component="img"
             src="https://th.bing.com/th/id/OIP.le6OGfeOYPxiQgZnkkZz4QHaES?pid=ImgDet&rs=1"
-            sx={{ height: 260,width:260, mx: 'auto', borderRadius:"50%", my: { xs: 5, sm: 10 } }}
+            sx={{ height: 230,width:240, mx: 'auto', borderRadius:"50%", my: { xs: 5, sm: 10 } }}
           />
 
           <Button to="/" size="large"sx={{color:"white",bgcolor:"#61CE70"}} component={RouterLink}>
