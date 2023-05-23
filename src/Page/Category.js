@@ -7,18 +7,21 @@ import PropTypes from 'prop-types';
 import { tokens } from "../theme";
 import CategoryTabs from '../components/Category/Tabs';
 import Cards from '../components/Category/Cards';
-
+import { useDispatch } from 'react-redux';
+import { setactive } from '../redux/tab';
 function Category() {
+   const dispatch= useDispatch()
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    dispatch(setactive(newValue))
   };
   return (
     <>
     <Header title={" Add Category"} />
-      <Cards/>    
+      <Cards/>
 
       <CategoryTabs
         active={value}

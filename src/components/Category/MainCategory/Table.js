@@ -62,7 +62,7 @@ function Table() {
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.name} </Box> <p ></p>
-                           {params.row.subcategories?.length?  <p> subcatagory </p>:<p>no sub category</p>}
+                           {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>}
                         </Box>
 
                     </Box>
@@ -99,7 +99,7 @@ function Table() {
                 // checkboxSelection
                 rows={maincategoryData}
                 columns={columns}
-                pageSize={7}
+                pageSize={4}
                 disableSelectIconOnClick
                 sx={{
                     boxShadow: 0,
