@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setData, deleteRows } from '../../../redux/mainCategory';
 
 const StyledIcon = styled('div')(({ theme }) => ({
-   
     margin: 'auto',
     display: 'flex',
     borderRadius: '50%',
@@ -26,21 +25,18 @@ function Table() {
     const dispatch = useDispatch();
   
     useEffect(()=>{
-      
-    //    // console.log(maincategoryData)
-    //    console.log("DATA");
 //    setRowData(categorys.MainCategories)
-   dispatch(setData(categorys))
-   },[dispatch])
+      dispatch(setData(categorys))
+   },[categorys])
      const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
-    const columns = [
+ const columns = [
         {
             field: "id",
-            headerName: "Main Catagory ID",
+            headerName: " ID",
             minWidth: 50,
             flex: 0.3,
         },
@@ -60,13 +56,13 @@ function Table() {
                                 }}
                             >
 
-                                <Iconify icon={params.row.image} width={30} height={30} />
+                                <Iconify icon={params.row?.image} width={30} height={30} />
                             </StyledIcon>
 
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.name} </Box> <p ></p>
-                            <p>{params.row.subcategories.length} subcatagory </p>
+                           {params.row.subcategories?.length?  <p> subcatagory </p>:<p>no sub category</p>} 
                         </Box>
 
                     </Box>
@@ -78,12 +74,11 @@ function Table() {
             headerName: "Actions",
             minWidth: 100,
             flex: 0.3,
-            type: "number",
             sortable: false,
             renderCell: (params) => {
                 return (
 
-                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name)} />
+                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name) } main={maincategoryData}/>
                 );
             },
         },
@@ -92,7 +87,7 @@ function Table() {
 
     ];
     const rows = [];
-     console.log(maincategoryData)
+
     return (
         <>
             <Typography variant="h5"

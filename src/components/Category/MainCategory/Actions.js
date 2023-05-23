@@ -8,15 +8,25 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import { Box, TextField, Button, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../../theme";
-const Actions = ({ id, deleteHandler, name, editRoute }) => {
+import { setData, deleteRows } from '../../../redux/mainCategory';
 
+import { useDispatch, useSelector } from 'react-redux';
+const Actions = ({ id, main, name, editRoute }) => {
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
+    const [maindata, setMain] = useState(main);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const handleClose = () => {
         setOpen(false);
     };
-
+    const deleteHandeler=()=>{
+        // setData((prevData) => prevData.filter((item) => !maindata.includes(item.id)));
+        dispatch(deleteRows(id))
+        // main.filter(item => item.id==!id)
+        console.log(id)
+        console.log("deleter")
+        }
     return (
         <>
             <Box display={"flex"} justifyContent="flex-left" alignItems="center" gap={"3px"}>
@@ -26,7 +36,7 @@ const Actions = ({ id, deleteHandler, name, editRoute }) => {
                         <EditIcon color="warning" />
                     </Box>
                 </Link>
-                <Box onClick={() => setOpen(true)} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"} sx={{ cursor: "pointer" }}>
+                <Box onClick={() => deleteHandeler()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"} sx={{ cursor: "pointer" }}>
                     <DeleteIcon color="error" />
                 </Box>
             </Box>
@@ -56,7 +66,7 @@ const Actions = ({ id, deleteHandler, name, editRoute }) => {
                         </Typography>
                     </Box>
                     <Box ml={"5px"} onClick={handleClose} sx={{cursor:"pointer"}}>
-                    <Typography onClick={() => deleteHandler(id)} variant="h5"
+                    <Typography onClick={() => deleteHandeler()} variant="h5"
                         color="red"
                         fontWeight="bold">
                         Delete
