@@ -83,12 +83,12 @@ export const mainCategorySlice = createSlice({
       state.mainCategory=action.payload.MainCategories;
     },
     addNewMainCategory(state, action) {
-     state.mainCategory.push(action.payload)
+     state.mainCategory.unshift(action.payload)
     },
-    editData(state, action) {
-      const index = state.data.findIndex((d) => d.id === action.payload.id)
+    editMainCategory(state, action) {
+      const index = state.mainCategory.findIndex((d) => d.id === action.payload.id)
       if (index !== -1) {
-        state.data[index] = action.payload
+        state.mainCategory[index] = action.payload
       }
     },
     deleteRows: (state, action) => {
@@ -98,6 +98,6 @@ export const mainCategorySlice = createSlice({
   },
 });
 
-export const { setData, deleteRows,addNewMainCategory } =
+export const { setData, deleteRows,addNewMainCategory,editMainCategory } =
 mainCategorySlice.actions;
 export default mainCategorySlice.reducer;

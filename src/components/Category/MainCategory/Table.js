@@ -23,7 +23,7 @@ const StyledIcon = styled('div')(({ theme }) => ({
   }));
 function Table() {
     const dispatch = useDispatch();
-  
+
     useEffect(()=>{
 //    setRowData(categorys.MainCategories)
       dispatch(setData(categorys))
@@ -62,7 +62,7 @@ function Table() {
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.name} </Box> <p ></p>
-                           {params.row.subcategories?.length?  <p> subcatagory </p>:<p>no sub category</p>} 
+                           {params.row.subcategories?.length?  <p> subcatagory </p>:<p>no sub category</p>}
                         </Box>
 
                     </Box>
@@ -78,7 +78,7 @@ function Table() {
             renderCell: (params) => {
                 return (
 
-                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name) } main={maincategoryData}/>
+                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name) } rowData={params.row}/>
                 );
             },
         },
