@@ -11,7 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Topbar = () => {
-  const isAuth = useSelector((state) => state.user);
+  const isAuth = useSelector((state) => state.persistedReducer.user);
   const { _id, token } = isAuth;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

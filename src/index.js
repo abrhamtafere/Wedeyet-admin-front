@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import authReducer from './redux/auth';
+import mainCategory from './redux/mainCategory';
 import {
   persistStore,
   persistReducer,
@@ -21,8 +22,12 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
+const rootReducer = {
+  mainCategoryState: mainCategory,
+  persistedReducer: persistReducer(persistConfig, persistedReducer),
+};
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

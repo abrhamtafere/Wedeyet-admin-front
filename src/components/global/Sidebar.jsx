@@ -55,7 +55,7 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Categorys");
 
-  const auth = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.persistedReducer.user);
 
   const handleCollapse = () => {
     setIsCollapsed(!isCollapsed)

@@ -22,7 +22,7 @@ import Admins from "./Page/SuperAdminPage/Admins";
 
 function App() {
   const navigate = useNavigate();
-  const isAuth = useSelector((state) => state.user);
+  const isAuth = useSelector((state) => state.persistedReducer.user);
   const { _id, token } = isAuth;
   console.log(isAuth);
   const ROLES = {

@@ -1,14 +1,18 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import MainCatData from "../../../data/MainCatData.json"
+// import MainCatData from "../../../data/MainCatData.json"
 import categorys from "../../../data/category.json"
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import Actions from './Actions';
 import { tokens } from "../../../theme";
 import { alpha, styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData, deleteRows } from '../../../redux/mainCategory';
+
 const StyledIcon = styled('div')(({ theme }) => ({
+   
     margin: 'auto',
     display: 'flex',
     borderRadius: '50%',
@@ -19,12 +23,20 @@ const StyledIcon = styled('div')(({ theme }) => ({
 
   }));
 function Table() {
+    const dispatch = useDispatch();
+  
+    useEffect(()=>{
+      
+    //    // console.log(maincategoryData)
+    //    console.log("DATA");
+//    setRowData(categorys.MainCategories)
+   dispatch(setData(categorys))
+   },[dispatch])
+     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    useEffect(()=>{
-     setRowData(categorys.MainCategories)
-    })
+
     const columns = [
         {
             field: "id",
@@ -80,7 +92,7 @@ function Table() {
 
     ];
     const rows = [];
-    console.log(MainCatData)
+     console.log(maincategoryData)
     return (
         <>
             <Typography variant="h5"
@@ -90,7 +102,7 @@ function Table() {
             </Typography>
             <DataGrid
                 // checkboxSelection
-                rows={rowData}
+                rows={maincategoryData}
                 columns={columns}
                 pageSize={7}
                 disableSelectIconOnClick

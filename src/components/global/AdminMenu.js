@@ -21,7 +21,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import QuizIcon from '@mui/icons-material/Quiz';
 import CategoryIcon from '@mui/icons-material/Category';
 function AdminMenu({ collapsed }) {
-  const auth = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.persistedReducer.user);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [anchorEl, setAnchorEl] = useState(null);
