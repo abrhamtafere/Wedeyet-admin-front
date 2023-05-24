@@ -52,7 +52,7 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
             <Box display={"flex"} justifyContent="flex-left" alignItems="center" gap={"3px"}>
 
 
-                <Box onClick={() => handleEditClose()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"}sx={{ cursor: "pointer" }}>
+                <Box onClick={() => handleEditClose()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"} sx={{ cursor: "pointer" }}>
                     <EditIcon color="warning" />
                 </Box>
 

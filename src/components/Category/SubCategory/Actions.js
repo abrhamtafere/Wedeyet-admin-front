@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
+import { editSubCategory,deleteSubCategory } from '../../../redux/mainCategory';
 const StyledIcon = styled('div')(() => ({
     display: 'flex',
     borderRadius: '50%',
@@ -22,16 +23,16 @@ const StyledIcon = styled('div')(() => ({
     width: 40,
     height: 40,
     justifyContent: 'center',
-  
+
   }))
 const Actions = ({ id, main, name, editRoute, rowData }) => {
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const dispatch = useDispatch();
-    const [value, setValue] = useState(rowData.name);
+    const [value, setValue] = useState(name);
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [maindata, setMain] = useState(main);
-    const [subCategoryName, setSubCategoryName] = useState(name)
+    const [subCategoryName, setSubCategoryName] = useState(rowData.subcategoriename)
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [mainCategoryName, setMainCategoryName] = useState(name)
@@ -45,20 +46,21 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
     }
     const deleteHandeler = () => {
         // setData((prevData) => prevData.filter((item) => !maindata.includes(item.id)));
-        dispatch(deleteRows(id))
+        dispatch(deleteSubCategory(id))
         // main.filter(item => item.id==!id)
         console.log(id)
         console.log("deleter")
     }
     const editData = {
-        id: rowData.id, name: mainCategoryName,
+        id: rowData.id, subcategoriename: subCategoryName,
         image: fileName,
+        name:value
     }
 
 
     const editHandeler = (e) => {
         e.preventDefault();
-        dispatch(editMainCategory(editData))
+        dispatch(editSubCategory(editData))
         setEditOpen(!editOpen)
 
     }
@@ -100,17 +102,17 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
           </Typography>
           <Autocomplete
             id="country-select-demo"
-            
+
             options={maincategoryData}
             autoHighlight
             getOptionLabel={(maincategoryData) => maincategoryData.name}
-            // value={value}
+            value={value}
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
-            //  inputValue={value}
-           
-           
+             inputValue={value}
+
+
             renderOption={(props, maincategoryData) => (
               <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
                 {/* <img
