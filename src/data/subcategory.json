@@ -1,0 +1,26 @@
+
+{
+
+  "sub": [
+    {
+      "id": 1,
+      "name": " sub Category 1",
+      "image": "material-symbols:restaurant",
+      "maincategory": "restaurant"
+    },
+    {
+      "id": 2,
+      "name": " sub Category 2",
+      "image": "material-symbols:restaurant",
+      "maincategory": "Shop"
+    },
+    {
+      "id": 3,
+      "name": " sub Category 3",
+      "image": "material-symbols:restaurant",
+      "maincategory": "Home"
+    }
+    
+    
+  ]
+}

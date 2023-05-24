@@ -5,6 +5,7 @@ import { tokens } from "../../theme";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import TabItem from './TabItem';
 import MainCategory from './MainCategory/MainCategory';
+import SubCategory from './SubCategory/SubCategory';
 export default function CategoryTabs({ active, handleChange }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -37,7 +38,7 @@ export default function CategoryTabs({ active, handleChange }) {
           <MainCategory/>
         </TabItem>
         <TabItem value={active} index={1}>
-          Item Two
+          <SubCategory/>
         </TabItem>
 
       </Box>

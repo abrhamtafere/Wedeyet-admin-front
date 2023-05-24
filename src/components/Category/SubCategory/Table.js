@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 // import MainCatData from "../../../data/MainCatData.json"
 import categorys from "../../../data/category.json"
+import subcategorys from "../../../data/category.json"
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import Actions from './Actions';
 import { tokens } from "../../../theme";
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, deleteRows } from '../../../redux/mainCategory';
@@ -21,17 +22,19 @@ const StyledIcon = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 
   }));
-function Table() {
+function Table({main}) {
     const dispatch = useDispatch();
-
+     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     useEffect(()=>{
 //    setRowData(categorys.MainCategories)
-      dispatch(setData(categorys))
-   },[categorys])
-     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
+      dispatch(setData(subcategorys))
+   },[subcategorys])
+    //  const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const sub = useSelector((state) => state.mainCategoryState.sub);
+console.log(sub)
 
  const columns = [
         {
@@ -41,10 +44,39 @@ function Table() {
             flex: 0.3,
         },
         {
+            field: "subName",
+            headerName: "Sub Catagory",
+            minWidth: 100,
+            flex: 1,
+            renderCell: (params) => {
+  
+                return (
+                    <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
+                        <Box backgroundColor={"#F3F6F9"} padding={"3px"}  borderRadius={"5px"}>
+                            <StyledIcon
+                                sx={{
+                                    color: colors.orange[500],
+                                }}
+                            >
+                                <Iconify icon={params.row?.image} width={30} height={30} />
+                            </StyledIcon>
+
+                        </Box>
+                        <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
+                          
+                            <Box >{params.row.subcategoriename}</Box> <p ></p>
+                           {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+                        </Box>
+
+                    </Box>
+                )
+            },
+        },
+        {
             field: "Name",
             headerName: "Main Catagory",
             minWidth: 200,
-            flex: 1,
+            flex: 0.5,
             renderCell: (params) => {
                 return (
                     <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
@@ -52,7 +84,6 @@ function Table() {
                             <StyledIcon
                                 sx={{
                                     color: colors.orange[500],
-
                                 }}
                             >
                                 <Iconify icon={params.row?.image} width={30} height={30} />
@@ -61,7 +92,7 @@ function Table() {
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.name} </Box> <p ></p>
-                           {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>}
+                           {/* {main.name===params.row.name? <p> {`${main.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
                         </Box>
 
                     </Box>
@@ -96,9 +127,12 @@ function Table() {
             </Typography>
             <DataGrid
                 // checkboxSelection
-                rows={maincategoryData}
+                rows={sub}
                 columns={columns}
                 pageSize={4}
+                groupModel={{
+                    field: 'subName',
+                  }}
                 disableSelectIconOnClick
                 sx={{
                     boxShadow: 0,

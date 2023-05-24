@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+     sub:[],
     mainCategory: [
       // {
       //   "id": 1,
@@ -81,10 +82,21 @@ export const mainCategorySlice = createSlice({
   reducers: {
     setData: (state, action) => {
       state.mainCategory=action.payload.MainCategories;
+      // state.sub=action.payload.sub;
     },
     addNewMainCategory(state, action) {
      state.mainCategory.unshift(action.payload)
     },
+    addNewSubCategory(state, action) {
+      const {id,mainID,name,image,subcategoriename}=action.payload
+      const index = state.mainCategory.findIndex((d) => d.id == mainID)
+      console.log(state.mainCategory[index])
+      if (index !== -1) {
+       state.mainCategory[index].subcategories.unshift({ id: id, name: name, image: image, }) 
+       state.sub.unshift({id: id, name: name, image: image ,subcategoriename})
+      }
+    
+     },
     editMainCategory(state, action) {
       const index = state.mainCategory.findIndex((d) => d.id === action.payload.id)
       if (index !== -1) {
@@ -98,6 +110,6 @@ export const mainCategorySlice = createSlice({
   },
 });
 
-export const { setData, deleteRows,addNewMainCategory,editMainCategory } =
+export const { setData, deleteRows,addNewMainCategory,editMainCategory,  addNewSubCategory } =
 mainCategorySlice.actions;
 export default mainCategorySlice.reducer;
