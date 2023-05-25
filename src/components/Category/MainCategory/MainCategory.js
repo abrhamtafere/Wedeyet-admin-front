@@ -7,6 +7,7 @@ import Table from './Table';
 import { setData, addNewMainCategory } from '../../../redux/mainCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateRandomId } from '../../../Utils/randomID';
+import ButtonComponent from '../../global/ButtonComponent';
 function MainCategory() {
   const dispatch = useDispatch();
   const [mainCategoryName, setMainCategoryName] = useState("")
@@ -74,23 +75,7 @@ function MainCategory() {
           </Typography>
 
           <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} />
-          <Button variant="text" sx={{
-            "&.MuiButton-root": {
-              borderRadius: "4px !important",
-              width: "100px",
-              height: "50px",
-              marginTop: "20px",
-              backgroundColor: colors.greenAccent[500],
-              border: "none !important",
-              color: "White !important",
-              textTransform: "none",
-              fontSize: "15px"
-            },
-
-          }}
-            onClick={handleAdd}>
-            Add
-          </Button>
+          <ButtonComponent buttonText={"Add"} onClick={handleAdd}/>
         </Box>
       </Box>
 
