@@ -29,7 +29,7 @@ function Table() {
       dispatch(setData(categorys))
    },[categorys])
      const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
-    const [rowData, setRowData]= useState([])
+    // const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 

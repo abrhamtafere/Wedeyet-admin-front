@@ -25,7 +25,7 @@ const StyledIcon = styled('div')(() => ({
     justifyContent: 'center',
 
   }))
-const Actions = ({ id, main, name, editRoute, rowData }) => {
+  function Actions  ({ id, main, name, editRoute, rowData }) {
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const dispatch = useDispatch();
     const [value, setValue] = useState(name);

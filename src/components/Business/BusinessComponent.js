@@ -26,22 +26,28 @@ function BusinessComponent() {
   const [age, setAge] = useState('');
   const [subcategory, setsubcategory] = useState([]);
 
-  const index = maincategoryData.findIndex((d) => d.id == age)
-  console.log(index)
-  const subData =maincategoryData[index]/* .subcategories.map((m)=>m.name) */
 
-const subcateData=subData?.subcategories.map((m)=>setsubcategory(m))
-console.log(subcateData)
+// const subcateData=subData?.subcategories.map((m)=>setsubcategory(m))
+// console.log(subcateData)
 const dispatch = useDispatch();
 
     useEffect(()=>{
 //    setRowData(categorys.MainCategories)
-      dispatch(setData(categorys))
+       dispatch(setData(categorys))
+
       // setsubcategory(subcateData)
    },[categorys])
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    console.log(event.target.value)
+    const index = maincategoryData.findIndex((d) => d.id == event.target.value)
+    console.log(index)
+   const subData =maincategoryData[index]/* .subcategories.map((m)=>m.name) */
+  const subname= subData?.subcategories?.map((sub)=>sub)
+    setsubcategory(subname)
+    console.log(subname)
+     console.log(subcategory[0])
   };
   const handleChangeSubCategory = (event) => {
     setsubcategory(event.target.value);
@@ -73,12 +79,13 @@ const dispatch = useDispatch();
             <Box mb={"5px"}>
               <Lable text="Main Category Name" />
               <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label">Select Main Category</InputLabel>
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
                   value={age}
-                  label="Age"
+                  // defaultValue={maincategoryData[0].name}
+                  label="Select Main Category"
                   onChange={handleChange}
                 >
                   {maincategoryData.map((main)=> <MenuItem value={main.id}>{main.name}</MenuItem>)}
@@ -89,16 +96,16 @@ const dispatch = useDispatch();
             <Box mb={"5px"}>
               <Lable text="Sub Category Name" />
               <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-simple-select-helper-label">Main Category</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label"> Select Sub Category</InputLabel>
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
                   value={subcategory}
-                  label="Sub Category"
+                  label="Select Sub Category"
+                  // defaultValue={maincategoryData[0].name}
                   onChange={handleChangeSubCategory}
                 >
-
-                  {subcategory.map((main)=> <MenuItem value={main.id}>{main.name}</MenuItem>)}
+                  {subcategory.map((sub)=> <MenuItem value={sub.id}>{sub.name}</MenuItem>)}
 
                 </Select>
               </FormControl>

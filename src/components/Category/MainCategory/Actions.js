@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,7 +12,8 @@ import { tokens } from "../../../theme";
 import { editMainCategory, deleteRows } from '../../../redux/mainCategory';
 import { FileChooserButton } from './FileChooserButton';
 import { useDispatch, useSelector } from 'react-redux';
-const Actions = ({ id, main, name, editRoute, rowData }) => {
+
+function Actions ({ id, main, name, editRoute, rowData })  {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
@@ -21,7 +22,8 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
     const colors = tokens(theme.palette.mode);
     const [mainCategoryName, setMainCategoryName] = useState(rowData.name)
     const [fileName, setFileName] = useState(rowData.image);
-    const fileInputRef = React.useRef(null);
+    const fileInputRef = useRef(null);
+    const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const handleClose = () => {
         setOpen(false);
     };
@@ -29,11 +31,9 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
         setEditOpen(!editOpen)
     }
     const deleteHandeler = () => {
-        // setData((prevData) => prevData.filter((item) => !maindata.includes(item.id)));
-        dispatch(deleteRows(id))
-        // main.filter(item => item.id==!id)
         console.log(id)
         console.log("deleter")
+        dispatch(deleteRows(id))
     }
     const editData = {
         id: rowData.id, name: mainCategoryName,
@@ -45,7 +45,6 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
         e.preventDefault();
         dispatch(editMainCategory(editData))
         setEditOpen(!editOpen)
-
     }
     return (
         <>
@@ -137,39 +136,8 @@ const Actions = ({ id, main, name, editRoute, rowData }) => {
             </Dialog>
 
 
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {"Are you sure?"}
-                </DialogTitle>
-                <DialogContent>
-                    <Typography variant="h5"
-                        color={colors.grey[100]}
-                        fontWeight="500">
-                        Do you really want to delete <span style={{ color: "red" }}>{name}</span> <br /> This process cannot be undone
-                    </Typography>
-
-                </DialogContent>
-                <DialogActions>
-                    <Box onClick={handleClose} sx={{ cursor: "pointer" }}>
-                        <Typography variant="h5"
-                            color="lightblue"
-                            fontWeight="bold">
-                            Cancle
-                        </Typography>
-                    </Box>
-                    <Box ml={"5px"} onClick={handleClose} sx={{ cursor: "pointer" }}>
-                        <Typography onClick={() => deleteHandeler()} variant="h5"
-                            color="red"
-                            fontWeight="bold">
-                            Delete
-                        </Typography>
-                    </Box>
-                </DialogActions>
-            </Dialog>
+          
+            
         </>
     );
 };
