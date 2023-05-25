@@ -8,7 +8,11 @@ const Header = ({ title}) => {
   console.log(activeTab)
   console.log("activeTab")
   return (
-    <Box ml="30px" mb="10px" >
+
+   
+
+    <Box ml="30px" mb="30px" >
+
       <Typography
         variant="h3"
         color={colors.grey[100]}
