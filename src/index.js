@@ -23,10 +23,12 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
+const tabReducer = persistReducer(persistConfig, tab);
 const rootReducer = {
-  tabstate:tab,
+  // tabstate:tab,
   mainCategoryState: mainCategory,
   persistedReducer: persistReducer(persistConfig, persistedReducer),
+  tabstate: persistReducer(persistConfig, tab),
 };
 const store = configureStore({
   reducer: rootReducer,

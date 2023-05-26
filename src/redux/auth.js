@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 let parsedData;
 
 const initialState = {
-  user: parsedData||localStorage.getItem('root')
+  user: parsedData||localStorage.getItem('persist:root')
 
 };
 
