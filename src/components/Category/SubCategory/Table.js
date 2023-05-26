@@ -18,25 +18,25 @@ const StyledIcon = styled('div')(({ theme }) => ({
     borderRadius: '50%',
     alignItems: 'center',
     width: 40,
-    height:40,
+    height: 40,
     justifyContent: 'center',
 
-  }));
-function Table({main}) {
+}));
+function Table({ main }) {
     const dispatch = useDispatch();
-     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
-    useEffect(()=>{
-//    setRowData(categorys.MainCategories)
-      dispatch(setData(subcategorys))
-   },[subcategorys])
+    const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
+    useEffect(() => {
+        //    setRowData(categorys.MainCategories)
+        dispatch(setData(subcategorys))
+    }, [subcategorys])
     //  const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
-    const [rowData, setRowData]= useState([])
+    const [rowData, setRowData] = useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const sub = useSelector((state) => state.mainCategoryState.sub);
-console.log(sub)
+    console.log(sub)
 
- const columns = [
+    const columns = [
         {
             field: "id",
             headerName: " ID",
@@ -49,10 +49,10 @@ console.log(sub)
             minWidth: 100,
             flex: 1,
             renderCell: (params) => {
-  
+
                 return (
                     <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
-                        <Box backgroundColor={"#F3F6F9"} padding={"3px"}  borderRadius={"5px"}>
+                        <Box backgroundColor={"#F3F6F9"} padding={"3px"} borderRadius={"5px"}>
                             <StyledIcon
                                 sx={{
                                     color: colors.orange[500],
@@ -63,9 +63,9 @@ console.log(sub)
 
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-                          
+
                             <Box >{params.row.subcategoriename}</Box> <p ></p>
-                           {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+                            {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
                         </Box>
 
                     </Box>
@@ -80,7 +80,7 @@ console.log(sub)
             renderCell: (params) => {
                 return (
                     <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
-                        <Box backgroundColor={"#F3F6F9"} padding={"3px"}  borderRadius={"5px"}>
+                        <Box backgroundColor={"#F3F6F9"} padding={"3px"} borderRadius={"5px"}>
                             <StyledIcon
                                 sx={{
                                     color: colors.orange[500],
@@ -92,7 +92,7 @@ console.log(sub)
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params.row.name} </Box> <p ></p>
-                           {/* {main.name===params.row.name? <p> {`${main.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+                            {/* {main.name===params.row.name? <p> {`${main.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
                         </Box>
 
                     </Box>
@@ -108,7 +108,7 @@ console.log(sub)
             renderCell: (params) => {
                 return (
 
-                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name) } rowData={params.row}/>
+                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name)} rowData={params.row} />
                 );
             },
         },
@@ -132,7 +132,7 @@ console.log(sub)
                 pageSize={4}
                 groupModel={{
                     field: 'subName',
-                  }}
+                }}
                 disableSelectIconOnClick
                 sx={{
                     boxShadow: 0,

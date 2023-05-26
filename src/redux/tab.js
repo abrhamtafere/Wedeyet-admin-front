@@ -4,20 +4,16 @@ const initialState = {
   tab: (localStorage.getItem('persist:root').tab)
 
 };
-
-
 export const tabSlice = createSlice({
   name: "tab",
   initialState,
   reducers: {
-setactive: (state, action) => {
+    setactive: (state, action) => {
       state.tab = action.payload
-
     },
 
   },
 });
-
 export const { setactive } =
-tabSlice.actions;
+  tabSlice.actions;
 export default tabSlice.reducer;

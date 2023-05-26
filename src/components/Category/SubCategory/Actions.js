@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
-import { editSubCategory,deleteSubCategory } from '../../../redux/mainCategory';
+import { editSubCategory, deleteSubCategory } from '../../../redux/mainCategory';
 const StyledIcon = styled('div')(() => ({
     display: 'flex',
     borderRadius: '50%',
@@ -24,8 +24,8 @@ const StyledIcon = styled('div')(() => ({
     height: 40,
     justifyContent: 'center',
 
-  }))
-  function Actions  ({ id, main, name, editRoute, rowData }) {
+}))
+function Actions({ id, main, name, editRoute, rowData }) {
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const dispatch = useDispatch();
     const [value, setValue] = useState(name);
@@ -54,7 +54,7 @@ const StyledIcon = styled('div')(() => ({
     const editData = {
         id: rowData.id, subcategoriename: subCategoryName,
         image: fileName,
-        name:value
+        name: value
     }
 
 
@@ -69,7 +69,7 @@ const StyledIcon = styled('div')(() => ({
             <Box display={"flex"} justifyContent="flex-left" alignItems="center" gap={"3px"}>
 
 
-                <Box onClick={() => handleEditClose()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"}sx={{ cursor: "pointer" }}>
+                <Box onClick={() => handleEditClose()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"} sx={{ cursor: "pointer" }}>
                     <EditIcon color="warning" />
                 </Box>
 
@@ -94,70 +94,70 @@ const StyledIcon = styled('div')(() => ({
 
                         >
                             <Typography
-            variant="h6"
-            color={colors.grey[100]}
-            fontWeight="600"
-          >
-            Main Category Name
-          </Typography>
-          <Autocomplete
-            id="country-select-demo"
+                                variant="h6"
+                                color={colors.grey[100]}
+                                fontWeight="600"
+                            >
+                                Main Category Name
+                            </Typography>
+                            <Autocomplete
+                                id="country-select-demo"
 
-            options={maincategoryData}
-            autoHighlight
-            getOptionLabel={(maincategoryData) => maincategoryData.name}
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-             inputValue={value}
+                                options={maincategoryData}
+                                autoHighlight
+                                getOptionLabel={(maincategoryData) => maincategoryData.name}
+                                value={value}
+                                onChange={(event, newValue) => {
+                                    setValue(newValue);
+                                }}
+                                inputValue={value}
 
 
-            renderOption={(props, maincategoryData) => (
-              <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
-                {/* <img
+                                renderOption={(props, maincategoryData) => (
+                                    <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
+                                        {/* <img
                   loading="lazy"
                   width="20"
                   src={}
                   alt=""
                 /> */}
 
-                <StyledIcon
-                  sx={{
-                    color: colors.orange[500],
-                  }}
-                >
-                  <Iconify icon={maincategoryData.image} width={30} height={30} />
-                </StyledIcon>
-                {maincategoryData.name} {/* ({option.code}) +{option.phone} */}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                label="Choose a Main Category"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: 'new-password', // disable autocomplete and autofill
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root:hover": {
-                    "& > fieldset": {
-                      borderColor: colors.greenAccent[400]
-                    },
-                    width: "100%",
-                  },
-                  "& .MuiTextField-root:focused": {
-                    "& > fieldset": {
-                      borderColor: colors.greenAccent[400]
-                    }
-                  },
-                  flexGrow: 1
-                }}
-              />
-            )}
-          />
+                                        <StyledIcon
+                                            sx={{
+                                                color: colors.orange[500],
+                                            }}
+                                        >
+                                            <Iconify icon={maincategoryData.image} width={30} height={30} />
+                                        </StyledIcon>
+                                        {maincategoryData.name} {/* ({option.code}) +{option.phone} */}
+                                    </Box>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        fullWidth
+                                        label="Choose a Main Category"
+                                        inputProps={{
+                                            ...params.inputProps,
+                                            autoComplete: 'new-password', // disable autocomplete and autofill
+                                        }}
+                                        sx={{
+                                            "& .MuiOutlinedInput-root:hover": {
+                                                "& > fieldset": {
+                                                    borderColor: colors.greenAccent[400]
+                                                },
+                                                width: "100%",
+                                            },
+                                            "& .MuiTextField-root:focused": {
+                                                "& > fieldset": {
+                                                    borderColor: colors.greenAccent[400]
+                                                }
+                                            },
+                                            flexGrow: 1
+                                        }}
+                                    />
+                                )}
+                            />
                             <Typography
                                 variant="h6"
                                 color={colors.grey[100]}

@@ -1,18 +1,19 @@
 import { Box, Grid } from "@mui/material"
 import TextFieldComponent from "../global/TextFieldComponent"
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Lable from "../global/Lable";
 import { FileChooserButton } from "../Category/MainCategory/FileChooserButton";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';import { useSelector,useDispatch } from "react-redux";
+import Select from '@mui/material/Select'; import { useSelector, useDispatch } from "react-redux";
 import categorys from "../../data/category.json"
-import { setData, deleteRows } from '../../redux/mainCategory';
+import { setData, setFilterSub } from '../../redux/mainCategory';
 function BusinessComponent() {
 
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
+  const sub = useSelector((state) => state.mainCategoryState.sub);
   const [businessName, setbusinessName] = useState('');
   const [fileName, setFileName] = useState('');
   const [mainCategory, setMainCategory] = useState('');
@@ -22,43 +23,39 @@ function BusinessComponent() {
   const [location, setLocation] = useState('');
   const [telegramUserName, settelegramUserName] = useState('');
   const [about, setAbout] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+  // const [text, setText] = useState('');
+
   const fileInputRef = useRef(null);
   const [age, setAge] = useState('');
-  const [subcategory, setsubcategory] = useState([]);
+  const [subcategory, setsubcategory] = useState();
 
-
-// const subcateData=subData?.subcategories.map((m)=>setsubcategory(m))
-// console.log(subcateData)
-const dispatch = useDispatch();
-
-    useEffect(()=>{
-//    setRowData(categorys.MainCategories)
-       dispatch(setData(categorys))
-
-      // setsubcategory(subcateData)
-   },[categorys])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setData(categorys))
+  }, [])
 
   const handleChange = (event) => {
     setAge(event.target.value);
     console.log(event.target.value)
+    setsubcategory(sub)
+    console.log(subcategory)
     const index = maincategoryData.findIndex((d) => d.id == event.target.value)
     console.log(index)
-   const subData =maincategoryData[index]/* .subcategories.map((m)=>m.name) */
-  const subname= subData?.subcategories?.map((sub)=>sub)
-    setsubcategory(subname)
-    console.log(subname)
-     console.log(subcategory[0])
+    const subData = maincategoryData[index]/* .subcategories.map((m)=>m.name) */
+    dispatch(setFilterSub(event.target.value))
+    console.log("subcategory")
+    console.log(sub)
+
   };
   const handleChangeSubCategory = (event) => {
     setsubcategory(event.target.value);
   };
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
 
   const handlebusinessNameChange = (event) => {
     setbusinessName(event.target.value);
@@ -88,7 +85,7 @@ const dispatch = useDispatch();
                   label="Select Main Category"
                   onChange={handleChange}
                 >
-                  {maincategoryData.map((main)=> <MenuItem value={main.id}>{main.name}</MenuItem>)}
+                  {maincategoryData.map((main) => <MenuItem value={main.id}>{main.name}</MenuItem>)}
 
                 </Select>
               </FormControl>
@@ -102,10 +99,10 @@ const dispatch = useDispatch();
                   id="demo-simple-select-helper"
                   value={subcategory}
                   label="Select Sub Category"
-                  // defaultValue={maincategoryData[0].name}
+                  //  defaultValue={subcategory}
                   onChange={handleChangeSubCategory}
                 >
-                  {subcategory.map((sub)=> <MenuItem value={sub.id}>{sub.name}</MenuItem>)}
+                  {sub?.map((s) => <MenuItem value={s.id}>{s.name}</MenuItem>)}
 
                 </Select>
               </FormControl>
