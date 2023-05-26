@@ -93,13 +93,13 @@ function BusinessComponent() {
             <Box mb={"5px"}>
               <Lable text="Sub Category Name" />
               <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-simple-select-helper-label"> Select Sub Category</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label1"> {age?sub[0]?.name:"Select Sub-Category"}</InputLabel>
                 <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
+                  labelId="demo-simple-select-helper-label1"
+                  id="demo-simple-select-helper1"
                   value={subcategory}
-                  label="Select Sub Category"
-                  //  defaultValue={subcategory}
+                  label={sub[0]?.name}
+
                   onChange={handleChangeSubCategory}
                 >
                   {sub?.map((s) => <MenuItem value={s.id}>{s.name}</MenuItem>)}
