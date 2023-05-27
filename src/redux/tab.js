@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 const initialState = {
-  tab: (localStorage.getItem('persist:root').tab)
+  tab: /* (localStorage.getItem('persist:root').tab) */null
 
 };
 export const tabSlice = createSlice({

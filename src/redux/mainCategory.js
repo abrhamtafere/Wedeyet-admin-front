@@ -5,6 +5,7 @@ const initialState = {
     {
       "id": 1,
       "mainID":1,
+      "mainName": " Main Category 1",
       "name": " sub Category 1",
       "image": "material-symbols:restaurant",
       "maincategory": "restaurant"
@@ -12,6 +13,7 @@ const initialState = {
     {
       "id": 2,
       "mainID":1,
+      "mainName": " Main Category 1",
       "name": " sub Category 2",
       "image": "material-symbols:restaurant",
       "maincategory": "Shop"
@@ -19,6 +21,7 @@ const initialState = {
     {
       "id": 3,
       "mainID":2,
+      "mainName": " Main Category 2",
       "name": " sub Category 3",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -26,6 +29,7 @@ const initialState = {
      {
       "id": 3,
       "mainID":2,
+      "mainName": " Main Category 2",
       "name": " sub Category 4",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -33,6 +37,7 @@ const initialState = {
     {
       "id": 3,
       "mainID":3,
+      "mainName": " Main Category 3",
       "name": " sub Category 5",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -40,6 +45,7 @@ const initialState = {
     {
       "id": 3,
       "mainID":3,
+      "mainName": " Main Category 3",
       "name": " sub Category 6",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -47,6 +53,7 @@ const initialState = {
     {
       "id": 3,
       "mainID":4,
+      "mainName": " Main Category 4",
       "name": " sub Category 7",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -54,6 +61,7 @@ const initialState = {
     {
       "id": 3,
       "mainID":4,
+      "mainName": " Main Category 4",
       "name": " sub Category 8",
       "image": "material-symbols:restaurant",
       "maincategory": "Home"
@@ -157,6 +165,7 @@ export const mainCategorySlice = createSlice({
 
     },
     setFilterSub: (state, action) => {
+            
       state.sub= state.sub.filter((d) => d.mainID === action.payload)
   // state.sub=action.payload.sub;
     },
