@@ -1,4 +1,4 @@
-import { Box, Grid, Button, TextField } from "@mui/material"
+import { Box, Grid, Chip, Button, TextField } from "@mui/material"
 import { styled } from '@mui/material/styles';
 import TextFieldComponent from "../global/TextFieldComponent"
 import { useState, useEffect, useRef } from "react";
@@ -51,17 +51,33 @@ function BusinessComponent() {
   });
   // branch
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
+  const [branchName, setBranchName] = useState('');
   const [file, setFile] = useState('');
+  const [phone, setPhone] = useState('');
+  const [selectplace, setAPlace] = useState('');
   const [avatar, setAvatar] = useState('');
   const [description, setDescription] = useState('');
   const [chips, setChips] = useState([]);
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleSetBranch = (event) => {
+    setBranchName(event.target.value)
+  }
+  const handleSetPhone = (event) => {
+    setPhone(event.target.value)
+  }
   const handleClose = () => {
     setOpen(false);
+  };
+  console.log(selectplace)
+  const handleSave = () => {
+    setChips([...chips, branchName]);
+    setOpen(false);
+    setBranchName('');
+    setFile('');
+    setAvatar('');
+    setDescription('');
   };
 
   //
@@ -143,6 +159,7 @@ function BusinessComponent() {
               </FormControl>
             </Box>
             <Box mb={"5px"}>
+              Branch
               <Switch checked={state.checkedA} onChange={handleSwitchChange} name="checkedA" sx={{
 
                 "& .MuiSwitch-switchBase.Mui-checked": {
@@ -158,13 +175,38 @@ function BusinessComponent() {
           {state.checkedA && <Box mb={"5px"}>
             <Lable text="Sub Category Name" />
             <Box gap={"5px"} display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-              <TextField fullWidth label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+              <TextField fullWidth disabled placeholder="Add Branch"  /* value={name} */ InputProps={{
+                startAdornment: (
+                  <div>
+                    {chips.map((chip) => (
+                      <Chip key={chip} label={chip} onDelete={() => setChips(chips.filter((c) => c !== chip))} />
+                    ))}
+                  </div>
+                ),
+              }} />
               <ButtonComponent buttonText={"Add"} onClick={handleClickOpen} isicon={true} startIcon={<Add />} />
             </Box>
           </Box>
           }
-          <Branch open={open}/>
+
+          <Branch
+            open={open}
+            branchName={branchName}
+            setBranchName={handleSetBranch}
+            handleClose={handleClose}
+            handleSave={handleSave}
+            setFile={setFile}
+            file={file}
+            mainCategory={selectedMainCategory}
+            subcategory={subcategory}
+            setPhone={handleSetPhone}
+            // plcaeName={PlaceName}
+            Place={selectplace}
+            setAPlace={setAPlace}
+
+          />
         </Grid>
+
         <Grid item xs={12} sm={12} md={6}>
           <Box bgcolor={"blue"} padding={"2px"}>xc</Box>
         </Grid>

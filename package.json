@@ -1,7 +1,6 @@
 {
   "name": "wedeyet-admin",
   "version": "0.1.0",
-
   "allowedHosts": [
     "localhost"
   ],

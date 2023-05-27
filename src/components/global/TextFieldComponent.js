@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import { Box, Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-const TextFieldComponent = ({ text, label, onChange }) => {
+const TextFieldComponent = ({ text, value, label, onChange }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -11,6 +11,7 @@ const TextFieldComponent = ({ text, label, onChange }) => {
       label={label}
       variant="outlined"
       onChange={onChange}
+      value={value&&value}
       fullWidth
       sx={{
         "& .MuiOutlinedInput-root:hover": {

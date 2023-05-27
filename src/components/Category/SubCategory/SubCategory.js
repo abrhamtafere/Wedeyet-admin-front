@@ -65,7 +65,6 @@ function SubCategory() {
           </Typography>
           <Autocomplete
             id="country-select-demo"
-       
             options={maincategoryData}
             autoHighlight
             getOptionLabel={(maincategoryData) => maincategoryData.name}
@@ -74,9 +73,7 @@ function SubCategory() {
               setValue(newValue);
             }}
             // inputValue={value.name}
-           
-           
-            renderOption={(props, maincategoryData) => (
+             renderOption={(props, maincategoryData) => (
               <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
                 {/* <img
                   loading="lazy"
