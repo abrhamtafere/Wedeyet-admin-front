@@ -128,6 +128,7 @@ function BusinessComponent() {
       },
     ]);
     setOpen(false);
+
   };
 
   //Place Data
@@ -321,12 +322,13 @@ function BusinessComponent() {
               }} />
               <ButtonComponent buttonText={"Add"} onClick={handleClickOpen} isicon={true} startIcon={<Add />} />
             </Box>
-            <Box mb={"5px"}>
+
+          </Box>
+          }
+           <Box mb={"5px"}>
               <Lable text="Business Phone Number" />
               <TextFieldComponent label="Business Phone Number" onChange={handelsetServicePhoneNumber} />
             </Box>
-          </Box>
-          }
           <Branch
             open={open}
             branchName={branchName}
@@ -434,7 +436,7 @@ function BusinessComponent() {
             />
           </Box>
         </Grid>
-        <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"}>
+        <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"} width={"100%"} >
           <ButtonComponent buttonText={"Add Business"} onClick={handleSaveBusiness} />
         </Box>
         <Dialog open={openServiceModal} onClose={handleServiceClose}>
