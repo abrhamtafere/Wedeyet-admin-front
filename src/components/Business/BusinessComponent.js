@@ -1,34 +1,26 @@
 import { Box, Grid, Chip, useTheme, Avatar, Button, TextField } from "@mui/material"
-import { styled } from '@mui/material/styles';
 import TextFieldComponent from "../global/TextFieldComponent"
 import { useState, useEffect, useRef } from "react";
 import Lable from "../global/Lable";
-import { FileChooserButton } from "../Category/MainCategory/FileChooserButton";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select'; import { useSelector, useDispatch } from "react-redux";
 import categorys from "../../data/category.json"
 import { setData, setFilterSub } from '../../redux/mainCategory';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import Stack from '@mui/material/Stack';
 import { Add } from '@mui/icons-material';
 import { Dialog, DialogActions, DialogContent, DialogTitle, } from '@mui/material';
-// import { SwitchComponent } from "../../Utils/SwitchComponent";
-import { CheckBoxOutlined } from "@mui/icons-material";
 import ButtonComponent from "../global/ButtonComponent";
 import Branch from "./Form/Branch";
 import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../theme';
-import { inherits } from "@babel/types";
 function BusinessComponent() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
   const sub = useSelector((state) => state.mainCategoryState.sub);
+  //Busniness Varaible
   const [businessName, setbusinessName] = useState('');
   const [businessImages, setBusinessImages] = useState([]);
   const [fileName, setFileName] = useState('');
@@ -39,15 +31,6 @@ function BusinessComponent() {
   const [location, setLocation] = useState('');
   const [telegramUserName, settelegramUserName] = useState('');
   const [about, setAbout] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-  // const [text, setText] = useState('');
-
-  const fileInputRef = useRef(null);
   const [selectedMainCategory, setSelectMainCategory] = useState('');
   const [subcategory, setsubcategory] = useState("");
   const [branchChecked, setBranchChecked] = useState(true);
@@ -59,7 +42,6 @@ function BusinessComponent() {
   const [serviceName, setServiceName] = useState('');
   const [servicePhone, setServicePhone] = useState('');
   const [services, setServices] = useState([]);
-  // const [servicePlace, setservicePlace] = useState('');
   const [state, setState] = useState({ checkedA: true, });
   const handleServiceOpen = () => {
     setopenServiceModal(true);
@@ -88,19 +70,28 @@ function BusinessComponent() {
       Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
     }
   };
+  const handleSelectBranchImages = (event) => {
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
+      setBranchImages((prevImages) => prevImages.concat(fileArray));
+      Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
+    }
+  };
 
 
   // branch
   const [branches, setBranches] = useState([]);
+  const [branchImages, setBranchImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [branchName, setBranchName] = useState('');
   const [file, setFile] = useState('');
   const [phone, setPhone] = useState('');
   const [selectplace, setAPlace] = useState('');
-  const [avatar, setAvatar] = useState('');
   const [branchTelegramUserName, setBranchTelegramUserName] = useState('');
   const [branchLocation, setBrachLocation] = useState('');
   const [chips, setChips] = useState([]);
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -126,23 +117,19 @@ function BusinessComponent() {
   }
   const handleSave = () => {
     setChips([...chips, branchName]);
+
     setBranches([
       ...branches,
       {
         "branchName": branchName,
-        "file": file,
+        "file": branchImages,
         "phone": phone,
         "selectplace": selectplace,
         "branchTelegramUserName": branchTelegramUserName,
         "branchLocation": branchLocation,
       },
-
-
-
     ]);
     setOpen(false);
-
-
   };
 
   //
@@ -215,8 +202,6 @@ function BusinessComponent() {
     console.log(JSON.stringify(data, undefined, 4))
 
   }
-
-
   return (
     <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"} bgcolor={"white"} width={"100%"}>
       <Grid container spacing={5}>
@@ -241,7 +226,7 @@ function BusinessComponent() {
                   "&.MuiButton-root": {
                     borderRadius: "0px !important",
                     width: "120px",
-                    height: "inherits",
+                    height: "50px",
                     backgroundColor: "#DADADA",
                     border: "none !important",
                     color: "White !important",
@@ -254,7 +239,7 @@ function BusinessComponent() {
                 <TextField
                   id="images"
                   label="Images"
-
+                  fullWidth
                   InputProps={{
                     readOnly: true,
                     startAdornment: (
@@ -266,7 +251,7 @@ function BusinessComponent() {
                           },
                         }}
                       >
-                        {businessImages.slice(0,3).map((image) => (
+                        {businessImages.slice(0, 3).map((image) => (
                           <Avatar key={image} alt="Image" src={image} />
 
                         ))}
@@ -280,7 +265,6 @@ function BusinessComponent() {
                   }}
                 />
               </Box>
-              {/* <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
             </Box>
             <Box mb={"5px"}>
               <Lable text="Main Category Name" />
@@ -290,12 +274,10 @@ function BusinessComponent() {
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
                   value={selectedMainCategory}
-                  // defaultValue={maincategoryData[0].name}
                   label="Select Main Category"
                   onChange={handleChange}
                 >
                   {maincategoryData.map((main) => <MenuItem key={main.id} value={main}>{main.name}</MenuItem>)}
-
                 </Select>
               </FormControl>
             </Box>
@@ -365,6 +347,8 @@ function BusinessComponent() {
             setAPlace={setAPlace}
             handleBranchLocation={handleBranchLocation}
             handleBranchTelegramUserName={handleBranchTelegramUserName}
+            handleSelectBranchImages={handleSelectBranchImages}
+            branchImages={branchImages}
 
           />
         </Grid>
@@ -456,11 +440,11 @@ function BusinessComponent() {
               onChange={(event) => setAboutService(event.target.value)}
             />
           </Box>
-          <Box justifyContent={"flex-end"} alignItems={"end"}>
+
+        </Grid>
+        <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"}>
             <ButtonComponent buttonText={"Add Business"} onClick={handleSaveBusiness} />
           </Box>
-        </Grid>
-
         <Dialog open={openServiceModal} onClose={handleServiceClose}>
           <DialogTitle>Add Service</DialogTitle>
           <DialogContent>

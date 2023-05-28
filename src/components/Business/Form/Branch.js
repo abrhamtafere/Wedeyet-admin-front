@@ -1,27 +1,25 @@
 import React from 'react'
-import { Box, Grid } from "@mui/material"
+import { Box, Grid ,Avatar} from "@mui/material"
 import { Button, useTheme, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Lable from '../../global/Lable';
 import TextFieldComponent from '../../global/TextFieldComponent';
 import { FileChooserButton } from '../../Category/MainCategory/FileChooserButton';
 import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../../theme';
-
-function Branch({ open,
-    
-    setFile,
+import { Add } from '@mui/icons-material';
+function Branch({open,
     setBranchName,
     handleClose,
     handleSave,
-    file,
     subcategory,
     mainCategory,
     setPhone,
-
     setAPlace,
     Place,
     handleBranchLocation,
-    handleBranchTelegramUserName
+    handleBranchTelegramUserName,
+    handleSelectBranchImages,
+    branchImages
 }) {
     const PlaceName = [
         {
@@ -59,7 +57,58 @@ function Branch({ open,
                                 </Box>
                                 <Lable text="Branch Images" />
                                 <Box mb={"5px"}>
-                                    <FileChooserButton fileName={file} setFileName={setFile} inputRef={fileInputRef} />
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            '& > *': {
+                                                m: 1,
+                                            },
+                                        }}
+                                    >
+                                        <Button variant="contained" component="label" sx={{
+                                            "&.MuiButton-root": {
+                                                borderRadius: "0px !important",
+                                                width: "120px",
+                                                height: "50px",
+                                                backgroundColor: "#DADADA",
+                                                border: "none !important",
+                                                color: "White !important",
+                                                textTransform: "none"
+                                            },
+                                        }}>
+                                            Select Images
+                                            <input type="file" hidden multiple onChange={handleSelectBranchImages} />
+                                        </Button>
+                                        <TextField
+                                            id="images"
+                                            label="Images"
+                                            fullWidth
+                                            InputProps={{
+                                                readOnly: true,
+                                                startAdornment: (
+                                                    <Box
+                                                        sx={{
+                                                            display: 'flex',
+                                                            '& > *': {
+                                                                m: 1,
+                                                            },
+                                                        }}
+                                                    >
+                                                        {branchImages.slice(0, 3).map((image) => (
+                                                            <Avatar key={image} alt="Image" src={image} />
+
+                                                        ))}
+                                                        {branchImages.length > 3 && (
+                                                            <Avatar>
+                                                                <Box display="flex" alignItems="center" justifyContent={"center"}><Add /><p>{branchImages.slice(3, branchImages.length).length}</p></Box>
+                                                            </Avatar>
+                                                        )}
+                                                    </Box>
+                                                ),
+                                            }}
+                                        />
+                                    </Box>
                                 </Box>
                                 <Box mb={"5px"}>
                                     <Lable text="Branch Main Category" />
@@ -123,25 +172,19 @@ function Branch({ open,
                                 </Box>
 
                                 <Box mb={"5px"}>
-                                <Lable text="Business Location" />
-                                <TextFieldComponent label="Business Location" onChange={handleBranchLocation} />
+                                    <Lable text="Business Location" />
+                                    <TextFieldComponent label="Business Location" onChange={handleBranchLocation} />
                                 </Box>
                                 <Box mb={"5px"}>
                                     <Lable text="Branch Telegram Address" />
-                                    <TextFieldComponent label="Branch Telegram Address"  onChange={handleBranchTelegramUserName} />
+                                    <TextFieldComponent label="Branch Telegram Address" onChange={handleBranchTelegramUserName} />
                                 </Box>
-                                <Box mb={"5px"}>
-                                    <Lable text="Branch Phone Number" />
-                                    <TextFieldComponent label="Branch Phone Number" onChange={setPhone} />
-                                </Box>
+
                             </Box>
                         </Grid>
 
                     </Grid>
-                    {/* <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <TextField type="file" label="Choose File" value={file} onChange={(e) => setFile(e.target.value)} />
-          <TextField label="Avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
-          <TextField label="Description" value={description} onChange={(e) => setDescription(e.target.value)} /> */}
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
