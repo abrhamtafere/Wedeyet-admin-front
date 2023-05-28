@@ -3,7 +3,6 @@ import { Box, Grid ,Avatar} from "@mui/material"
 import { Button, useTheme, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Lable from '../../global/Lable';
 import TextFieldComponent from '../../global/TextFieldComponent';
-import { FileChooserButton } from '../../Category/MainCategory/FileChooserButton';
 import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../../theme';
 import { Add } from '@mui/icons-material';
@@ -44,7 +43,6 @@ function Branch({open,
     const fileInputRef = React.useRef(null);
     return (
         <>
-
             <Dialog open={open} maxWidth={"md"} fullWidth={true} onClose={handleClose} >
                 <DialogTitle>Add Branch</DialogTitle>
                 <DialogContent>
@@ -182,18 +180,13 @@ function Branch({open,
 
                             </Box>
                         </Grid>
-
                     </Grid>
-
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSave}>Save</Button>
                 </DialogActions>
-
             </Dialog>
-
-
         </>
     )
 }

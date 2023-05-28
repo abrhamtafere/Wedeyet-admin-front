@@ -77,8 +77,6 @@ function BusinessComponent() {
       Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
     }
   };
-
-
   // branch
   const [branches, setBranches] = useState([]);
   const [branchImages, setBranchImages] = useState([]);
@@ -132,7 +130,7 @@ function BusinessComponent() {
     setOpen(false);
   };
 
-  //
+  //Place Data
   const PlaceName = [
     {
       id: 1,
@@ -171,7 +169,6 @@ function BusinessComponent() {
     dispatch(setFilterSub(event.target.value.id))
     console.log("subcategory")
     console.log(event.target.value)
-
   };
   const handleChangeSubCategory = (event) => {
     setsubcategory(event.target.value);
@@ -330,7 +327,6 @@ function BusinessComponent() {
             </Box>
           </Box>
           }
-
           <Branch
             open={open}
             branchName={branchName}
@@ -352,8 +348,6 @@ function BusinessComponent() {
 
           />
         </Grid>
-
-
         <Grid item xs={12} sm={12} md={6}>
           <Box padding={"2px"}>
             <Box mb={"5px"}>
@@ -367,7 +361,6 @@ function BusinessComponent() {
                 onChange={(event, newValue) => {
                   setservicePlace(newValue.name);
                 }}
-                // inputValue={value.name}
                 renderOption={(props, placeName) => (
                   <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
                     {placeName.name}
@@ -440,11 +433,10 @@ function BusinessComponent() {
               onChange={(event) => setAboutService(event.target.value)}
             />
           </Box>
-
         </Grid>
         <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"}>
-            <ButtonComponent buttonText={"Add Business"} onClick={handleSaveBusiness} />
-          </Box>
+          <ButtonComponent buttonText={"Add Business"} onClick={handleSaveBusiness} />
+        </Box>
         <Dialog open={openServiceModal} onClose={handleServiceClose}>
           <DialogTitle>Add Service</DialogTitle>
           <DialogContent>
@@ -462,8 +454,6 @@ function BusinessComponent() {
             <Button onClick={handleServiceSave}>Save</Button>
           </DialogActions>
         </Dialog>
-
-
       </Grid>
     </Box>
   )
