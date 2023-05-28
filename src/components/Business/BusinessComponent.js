@@ -1,4 +1,4 @@
-import { Box, Grid, Chip, Button, TextField } from "@mui/material"
+import { Box, Grid, Chip, useTheme, Avatar, Button, TextField } from "@mui/material"
 import { styled } from '@mui/material/styles';
 import TextFieldComponent from "../global/TextFieldComponent"
 import { useState, useEffect, useRef } from "react";
@@ -16,16 +16,21 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import { Add } from '@mui/icons-material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, } from '@mui/material';
 // import { SwitchComponent } from "../../Utils/SwitchComponent";
 import { CheckBoxOutlined } from "@mui/icons-material";
 import ButtonComponent from "../global/ButtonComponent";
 import Branch from "./Form/Branch";
-
+import Autocomplete from '@mui/material/Autocomplete';
+import { tokens } from '../../theme';
+import { inherits } from "@babel/types";
 function BusinessComponent() {
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
   const sub = useSelector((state) => state.mainCategoryState.sub);
   const [businessName, setbusinessName] = useState('');
+  const [businessImages, setBusinessImages] = useState([]);
   const [fileName, setFileName] = useState('');
   const [mainCategory, setMainCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
@@ -46,17 +51,55 @@ function BusinessComponent() {
   const [selectedMainCategory, setSelectMainCategory] = useState('');
   const [subcategory, setsubcategory] = useState("");
   const [branchChecked, setBranchChecked] = useState(true);
-  const [state, setState] = useState({
-    checkedA: true,
-  });
+  const [servicePlace, setservicePlace] = useState('');
+  const [serviceLocation, setServiceLocation] = useState('');
+  const [serviceTelegram, setServiceTelegram] = useState('');
+  const [aboutService, setAboutService] = useState('');
+  const [openServiceModal, setopenServiceModal] = useState(false);
+  const [serviceName, setServiceName] = useState('');
+  const [servicePhone, setServicePhone] = useState('');
+  const [services, setServices] = useState([]);
+  // const [servicePlace, setservicePlace] = useState('');
+  const [state, setState] = useState({ checkedA: true, });
+  const handleServiceOpen = () => {
+    setopenServiceModal(true);
+  };
+
+  const handleServiceClose = () => {
+    setopenServiceModal(false);
+  };
+
+  const handleServiceSave = () => {
+    setServices([...services, serviceName]);
+    setServiceName('');
+    handleServiceClose();
+  };
+  const handelsetServiceLocation = (e) => {
+    setServiceLocation(e.target.value)
+  }
+  const handelsetServicePhoneNumber = (e) => {
+    setServicePhone(e.target.value)
+  }
+
+  const handleSelectImages = (event) => {
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
+      setBusinessImages((prevImages) => prevImages.concat(fileArray));
+      Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
+    }
+  };
+
+
   // branch
+  const [branches, setBranches] = useState([]);
   const [open, setOpen] = useState(false);
   const [branchName, setBranchName] = useState('');
   const [file, setFile] = useState('');
   const [phone, setPhone] = useState('');
   const [selectplace, setAPlace] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [description, setDescription] = useState('');
+  const [branchTelegramUserName, setBranchTelegramUserName] = useState('');
+  const [branchLocation, setBrachLocation] = useState('');
   const [chips, setChips] = useState([]);
   const handleClickOpen = () => {
     setOpen(true);
@@ -67,21 +110,60 @@ function BusinessComponent() {
   const handleSetPhone = (event) => {
     setPhone(event.target.value)
   }
+  const handleSetTelegramUser = (event) => {
+    setServiceTelegram(event.target.value)
+  }
+
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(selectplace)
+  console.log(aboutService)
+  const handleBranchLocation = (e) => {
+    setBrachLocation(e.target.value)
+  }
+  const handleBranchTelegramUserName = (e) => {
+    setBranchTelegramUserName(e.target.value)
+  }
   const handleSave = () => {
     setChips([...chips, branchName]);
+    setBranches([
+      ...branches,
+      {
+        "branchName": branchName,
+        "file": file,
+        "phone": phone,
+        "selectplace": selectplace,
+        "branchTelegramUserName": branchTelegramUserName,
+        "branchLocation": branchLocation,
+      },
+
+
+
+    ]);
     setOpen(false);
-    setBranchName('');
-    setFile('');
-    setAvatar('');
-    setDescription('');
+
+
   };
 
   //
-
+  const PlaceName = [
+    {
+      id: 1,
+      name: "Saris"
+    },
+    {
+      id: 2,
+      name: "Saris abo"
+    },
+    {
+      id: 3,
+      name: "Sebara Babur"
+    },
+    {
+      id: 4,
+      name: "sebategna"
+    },
+  ]
   const handleSwitchChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
@@ -110,9 +192,31 @@ function BusinessComponent() {
   };
   console.log(subcategory);
   const handlebusinessNameChange = (event) => {
-    setbusinessName(event.target.key.value);
+    setbusinessName(event.target.value);
   };
-  console.log(state.checkedA)
+  console.log(branchName)
+  const data = {
+    "businessName": businessName,
+    "businessImages": businessImages,
+    "selectedMainCategory": selectedMainCategory.name,
+    "businessName": businessName,
+    "subcategory": subcategory,
+    "servicePlace": servicePlace,
+    "servicePhone": servicePhone,
+    "serviceLocation": serviceLocation,
+    "serviceTelegram": serviceTelegram,
+    "aboutService": aboutService,
+    "services": services,
+    "Branchs": branches,
+    "BranchName": chips
+  }
+
+  const handleSaveBusiness = () => {
+    console.log(JSON.stringify(data, undefined, 4))
+
+  }
+
+
   return (
     <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"} bgcolor={"white"} width={"100%"}>
       <Grid container spacing={5}>
@@ -124,7 +228,59 @@ function BusinessComponent() {
             </Box>
             <Lable text="Business Images" />
             <Box mb={"5px"}>
-              <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} />
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  '& > *': {
+                    m: 1,
+                  },
+                }}
+              >
+                <Button variant="contained" component="label" sx={{
+                  "&.MuiButton-root": {
+                    borderRadius: "0px !important",
+                    width: "120px",
+                    height: "inherits",
+                    backgroundColor: "#DADADA",
+                    border: "none !important",
+                    color: "White !important",
+                    textTransform: "none"
+                  },
+                }}>
+                  Select Images
+                  <input type="file" hidden multiple onChange={handleSelectImages} />
+                </Button>
+                <TextField
+                  id="images"
+                  label="Images"
+
+                  InputProps={{
+                    readOnly: true,
+                    startAdornment: (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          '& > *': {
+                            m: 1,
+                          },
+                        }}
+                      >
+                        {businessImages.slice(0,3).map((image) => (
+                          <Avatar key={image} alt="Image" src={image} />
+
+                        ))}
+                        {businessImages.length > 3 && (
+                          <Avatar>
+                            <Box display="flex" alignItems="center" justifyContent={"center"}><Add /><p>{businessImages.slice(3, businessImages.length).length}</p></Box>
+                          </Avatar>
+                        )}
+                      </Box>
+                    ),
+                  }}
+                />
+              </Box>
+              {/* <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
             </Box>
             <Box mb={"5px"}>
               <Lable text="Main Category Name" />
@@ -173,7 +329,7 @@ function BusinessComponent() {
             </Box>
           </Box>
           {state.checkedA && <Box mb={"5px"}>
-            <Lable text="Sub Category Name" />
+            <Lable text="Add Branchs Name" />
             <Box gap={"5px"} display="flex" flexDirection="row" justifyContent="center" alignItems="center">
               <TextField fullWidth disabled placeholder="Add Branch"  /* value={name} */ InputProps={{
                 startAdornment: (
@@ -185,6 +341,10 @@ function BusinessComponent() {
                 ),
               }} />
               <ButtonComponent buttonText={"Add"} onClick={handleClickOpen} isicon={true} startIcon={<Add />} />
+            </Box>
+            <Box mb={"5px"}>
+              <Lable text="Business Phone Number" />
+              <TextFieldComponent label="Business Phone Number" onChange={handelsetServicePhoneNumber} />
             </Box>
           </Box>
           }
@@ -203,16 +363,124 @@ function BusinessComponent() {
             // plcaeName={PlaceName}
             Place={selectplace}
             setAPlace={setAPlace}
+            handleBranchLocation={handleBranchLocation}
+            handleBranchTelegramUserName={handleBranchTelegramUserName}
 
           />
         </Grid>
 
+
         <Grid item xs={12} sm={12} md={6}>
-          <Box bgcolor={"blue"} padding={"2px"}>xc</Box>
+          <Box padding={"2px"}>
+            <Box mb={"5px"}>
+              <Lable text="Business Place" />
+              <Autocomplete
+                id="country-select-deuo"
+                options={PlaceName}
+                autoHighlight
+                getOptionLabel={(PlaceName) => PlaceName.name}
+                value={servicePlace.name}
+                onChange={(event, newValue) => {
+                  setservicePlace(newValue.name);
+                }}
+                // inputValue={value.name}
+                renderOption={(props, placeName) => (
+                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
+                    {placeName.name}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    label="Choose Branch Place"
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                    sx={{
+                      "& .MuiOutlinedInput-root:hover": {
+                        "& > fieldset": {
+                          borderColor: colors.greenAccent[400]
+                        },
+                        width: "100%",
+                      },
+                      "& .MuiTextField-root:focused": {
+                        "& > fieldset": {
+                          borderColor: colors.greenAccent[400]
+                        }
+                      },
+                      flexGrow: 1
+                    }}
+                  />
+                )}
+              />
+            </Box>
+            <Lable text="Business Location" />
+            <TextFieldComponent label="Business Location" onChange={handelsetServiceLocation} />
+            <Box mb={"5px"}>
+              <Lable text=" Add Service" />
+              <Box gap={"5px"} display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+                <TextField
+                  fullWidth
+                  select
+                  label="Select Service"
+                  value={serviceName}
+                  onChange={(event) => setServiceName(event.target.value)}
+                >
+                  {services.map((service) => (
+                    <MenuItem key={service} value={service}>
+                      {service}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <ButtonComponent buttonText={"Add"} onClick={handleServiceOpen} isicon={true} startIcon={<Add />} />
+              </Box>
+            </Box>
+            <Box mb={"5px"}>
+              <Lable text="Telegram  User Name" />
+              <TextFieldComponent label="Telegram  User Name" onChange={handleSetTelegramUser} />
+            </Box>
+          </Box>
+          <Box mb={"5px"}>
+            <Lable text="About Busniness" />
+            <TextField
+              fullWidth
+              id="outlined-multiline-flexible"
+              multiline
+              rows={3}
+              maxRows={4}
+              placeholder="About Busniness"
+              variant="outlined"
+              value={aboutService}
+              onChange={(event) => setAboutService(event.target.value)}
+            />
+          </Box>
+          <Box justifyContent={"flex-end"} alignItems={"end"}>
+            <ButtonComponent buttonText={"Add Business"} onClick={handleSaveBusiness} />
+          </Box>
         </Grid>
 
-      </Grid>
+        <Dialog open={openServiceModal} onClose={handleServiceClose}>
+          <DialogTitle>Add Service</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Service Name"
+              fullWidth
+              value={serviceName}
+              onChange={(event) => setServiceName(event.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleServiceClose}>Cancel</Button>
+            <Button onClick={handleServiceSave}>Save</Button>
+          </DialogActions>
+        </Dialog>
 
+
+      </Grid>
     </Box>
   )
 }

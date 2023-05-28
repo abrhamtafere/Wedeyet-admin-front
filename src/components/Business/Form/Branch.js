@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Grid } from "@mui/material"
-import { Button,useTheme, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Button, useTheme, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Lable from '../../global/Lable';
 import TextFieldComponent from '../../global/TextFieldComponent';
 import { FileChooserButton } from '../../Category/MainCategory/FileChooserButton';
@@ -8,7 +8,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../../theme';
 
 function Branch({ open,
-    branchName,
+    
     setFile,
     setBranchName,
     handleClose,
@@ -17,28 +17,30 @@ function Branch({ open,
     subcategory,
     mainCategory,
     setPhone,
-    
+
     setAPlace,
     Place,
+    handleBranchLocation,
+    handleBranchTelegramUserName
 }) {
     const PlaceName = [
         {
-          id: 1,
-          name: "Saris"
+            id: 1,
+            name: "Saris"
         },
         {
-          id: 2,
-          name: "Saris abo"
+            id: 2,
+            name: "Saris abo"
         },
         {
-          id: 3,
-          name: "Sebara Babur"
+            id: 3,
+            name: "Sebara Babur"
         },
         {
-          id: 4,
-          name: "sebategna"
+            id: 4,
+            name: "sebategna"
         },
-      ]
+    ]
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const fileInputRef = React.useRef(null);
@@ -119,17 +121,14 @@ function Branch({ open,
                                         )}
                                     />
                                 </Box>
-                                <Lable text="Branch Images" />
+
                                 <Box mb={"5px"}>
-                                    <FileChooserButton fileName={file} setFileName={setFile} inputRef={fileInputRef} />
+                                <Lable text="Business Location" />
+                                <TextFieldComponent label="Business Location" onChange={handleBranchLocation} />
                                 </Box>
                                 <Box mb={"5px"}>
-                                    <Lable text="Branch Main Category" />
-                                    <TextFieldComponent label="Branch Main Category" value={mainCategory.name} onChange={setBranchName} />
-                                </Box>
-                                <Box mb={"5px"}>
-                                    <Lable text="Branch Sub Category" />
-                                    <TextFieldComponent label="Branch Sub Category" value={subcategory} onChange={setBranchName} />
+                                    <Lable text="Branch Telegram Address" />
+                                    <TextFieldComponent label="Branch Telegram Address"  onChange={handleBranchTelegramUserName} />
                                 </Box>
                                 <Box mb={"5px"}>
                                     <Lable text="Branch Phone Number" />
