@@ -15,6 +15,8 @@ import ButtonComponent from "../global/ButtonComponent";
 import Branch from "./Form/Branch";
 import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../theme';
+import { setServiceData } from "../../redux/Services";
+import { generateRandomId } from "../../Utils/randomID";
 function BusinessComponent({edit, record}) {
   const theme = useTheme();
   console.log(edit)
@@ -114,18 +116,42 @@ function BusinessComponent({edit, record}) {
   const handleBranchTelegramUserName = (e) => {
     setBranchTelegramUserName(e.target.value)
   }
+  const data = {
+    id:branchName+"_id",
+    businessName: businessName,
+    businessImages: businessImages,
+    selectedMainCategory: selectedMainCategory.name,
+    businessName: businessName,
+    subcategory: subcategory,
+    servicePlace: servicePlace,
+    servicePhone: servicePhone,
+    serviceLocation: serviceLocation,
+    serviceTelegram: serviceTelegram,
+    aboutService: aboutService,
+    services: services,
+    Branchs: branches,
+    BranchName: chips
+  }
+
+  const handleSaveBusiness = () => {
+    dispatch(setServiceData(data))
+    console.log(JSON.stringify(data, undefined, 4))
+
+  }
   const handleSave = () => {
     setChips([...chips, branchName]);
 
     setBranches([
       ...branches,
       {
-        "branchName": branchName,
-        "file": branchImages,
-        "phone": phone,
-        "selectplace": selectplace,
-        "branchTelegramUserName": branchTelegramUserName,
-        "branchLocation": branchLocation,
+        id:Date.now(),
+        serviceId:data?.id,
+        branchName: branchName,
+        file: branchImages,
+        phone: phone,
+        selectplace: selectplace,
+        branchTelegramUserName: branchTelegramUserName,
+        branchLocation: branchLocation,
       },
     ]);
     setOpen(false);
@@ -158,7 +184,7 @@ function BusinessComponent({edit, record}) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setData(categorys))
-  }, [])
+  }, [categorys])
   console.log(subcategory)
   console.log(selectedMainCategory)
   const handleChange = (event) => {
@@ -181,7 +207,7 @@ function BusinessComponent({edit, record}) {
     setbusinessName(event.target.value);
   };
   console.log(branchName)
-  const data = {
+  /* const data = {
     "businessName": businessName,
     "businessImages": businessImages,
     "selectedMainCategory": selectedMainCategory.name,
@@ -195,15 +221,11 @@ function BusinessComponent({edit, record}) {
     "services": services,
     "Branchs": branches,
     "BranchName": chips
-  }
-
-  const handleSaveBusiness = () => {
-    console.log(JSON.stringify(data, undefined, 4))
-
-  }
+  } */
+ 
   return (
-    <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"} bgcolor={"white"} width={"100%"}>
-      <Grid container spacing={5}>
+    <Box mt={"10px"} display="flex" flexDirection="row" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"}  width={"100%"}>
+      <Grid container spacing={5} bgcolor={"white"} p={"10px"}>
         <Grid item xs={12} sm={12} md={6}>
           <Box padding={"2px"}>
             <Box mb={"5px"}>
