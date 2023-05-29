@@ -9,6 +9,7 @@ import authReducer from './redux/auth';
 import mainCategory from './redux/mainCategory';
 import Services from './redux/Services';
 import tab, { tabSlice } from './redux/tab';
+import Faq from './redux/Faq';
 import {
   persistStore,
   persistReducer,
@@ -29,6 +30,7 @@ const rootReducer = {
   // tabstate:tab,
   mainCategoryState: mainCategory,
   serviceState:Services,
+  faqSate:Faq,
   persistedReducer: persistReducer(persistConfig, persistedReducer),
   tabstate: persistReducer(persistConfig, tab),
 };

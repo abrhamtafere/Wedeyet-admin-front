@@ -22,7 +22,7 @@ function BusinessComponent({edit, record}) {
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
   const sub = useSelector((state) => state.mainCategoryState.sub);
   //Busniness Varaible
-  const [businessName, setbusinessName] = useState(edit?record.data.businessName:'');
+  const [businessName, setbusinessName] = useState(edit?record.businessName:'');
   const [businessImages, setBusinessImages] = useState([]);
   const [fileName, setFileName] = useState('');
   const [mainCategory, setMainCategory] = useState('');
