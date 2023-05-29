@@ -15,13 +15,14 @@ import ButtonComponent from "../global/ButtonComponent";
 import Branch from "./Form/Branch";
 import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../theme';
-function BusinessComponent() {
+function BusinessComponent({edit, record}) {
   const theme = useTheme();
+  console.log(edit)
   const colors = tokens(theme.palette.mode);
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
   const sub = useSelector((state) => state.mainCategoryState.sub);
   //Busniness Varaible
-  const [businessName, setbusinessName] = useState('');
+  const [businessName, setbusinessName] = useState(edit?record.data.businessName:'');
   const [businessImages, setBusinessImages] = useState([]);
   const [fileName, setFileName] = useState('');
   const [mainCategory, setMainCategory] = useState('');

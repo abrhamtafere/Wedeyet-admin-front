@@ -1,7 +1,11 @@
 import React from 'react';
 import { Table,Button } from 'antd';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import BusinessComponent from './BusinessComponent';
+import { setServiceData } from '../../redux/Services';
 const initialData  = {
+  "id":1,
     "businessName": "Business Name 1",
     "businessImages": [
         "blob:http://localhost:3000/7486b7bb-40b7-411a-b4bc-84a0546e531e",
@@ -32,58 +36,56 @@ const initialData  = {
             "branchTelegramUserName": "@BranchTelegram",
             "branchLocation": "Branch Location"
         }
-    ],
-};
-const handleEdit = (record) => {
-    console.log('Edit', record);
-  };
+       ] ,}
+  
 
 
-const columns = [
-  {
-    title: 'Business Name',
-    dataIndex: 'businessName',
-  },
-  {
-    title: 'Selected Main Category',
-    dataIndex: 'selectedMainCategory',
-  },
-  {
-    title: 'Subcategory',
-    dataIndex: 'subcategory',
-  },
-  {
-    title: 'Service Place',
-    dataIndex: 'servicePlace',
-  },
-  {
-    title: 'Service Phone',
-    dataIndex: 'servicePhone',
-  },
-  {
-    title: 'Service Location',
-    dataIndex: 'serviceLocation',
-  },
-  {
-    title: 'Service Telegram',
-    dataIndex: 'serviceTelegram',
-  },
-  {
-    title: 'About Service',
-    dataIndex: 'aboutService',
-  },
-  {
-    title: 'Actions',
-    key: 'actions',
-    render: (text, record) => (
-        <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
-        <Button onClick={() => handleEdit(record)} style={{ backgroundColor: 'blue', color: 'white', marginRight: 8 }}>Edit</Button>
-        <Button onClick={() => handleDelete(record)} style={{ backgroundColor: 'red', color: 'white' }}>Delete</Button>
-      </div>
-    ),
-  },
 
-];
+// const columns = [
+//   {
+//     title: 'Business Name',
+//     dataIndex: 'businessName',
+//   },
+//   {
+//     title: 'Selected Main Category',
+//     dataIndex: 'selectedMainCategory',
+//   },
+//   {
+//     title: 'Subcategory',
+//     dataIndex: 'subcategory',
+//   },
+//   {
+//     title: 'Service Place',
+//     dataIndex: 'servicePlace',
+//   },
+//   {
+//     title: 'Service Phone',
+//     dataIndex: 'servicePhone',
+//   },
+//   {
+//     title: 'Service Location',
+//     dataIndex: 'serviceLocation',
+//   },
+//   {
+//     title: 'Service Telegram',
+//     dataIndex: 'serviceTelegram',
+//   },
+//   {
+//     title: 'About Service',
+//     dataIndex: 'aboutService',
+//   },
+//   {
+//     title: 'Actions',
+//     key: 'actions',
+//     render: (text, record) => (
+//         <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+//         <Button onClick={() => handleEdit(record)} style={{ backgroundColor: 'blue', color: 'white', marginRight: 8 }}>Edit</Button>
+//         <Button onClick={() => handleDelete(record)} style={{ backgroundColor: 'red', color: 'white' }}>Delete</Button>
+//       </div>
+//     ),
+//   },
+
+// ];
 
 const expandedRowRender = (record) => {
   const columns = [
@@ -98,19 +100,80 @@ const expandedRowRender = (record) => {
 };
 
 const BusinessTable = () => {
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(setServiceData(initialData))
+  },[])
+  const serviceData=useSelector((state) => state.serviceState.service);
+
     const [data, setData] = useState(initialData);
+
+
+console.log(data)
+    const handleEdit = (record) => {
+      console.log('Edit', record);
+      window.scrollTo(100, 0);
+     <BusinessComponent edit={true} record={record}/>
+   };
+
     const handleDelete = (record) => {
-        if (record.branchName) {
-          // Delete branch
-          setData(prevData => ({
-            ...prevData,
-            Branchs: prevData.Branchs.filter(branch => branch.id !== record.id),
-          }));
-        } else {
-          // Delete business
-          setData(null);
-        }
-      };
+      if (record.branchName) {
+        // Delete branch
+        setData(prevData => ({
+          ...prevData,
+          Branchs: prevData.Branchs.filter(branch => branch.id !== record.id),
+        }));
+      } else {
+        // Delete business
+        setData(null);
+      }
+    };
+    const columns = [
+      {
+        title: 'Business Name',
+        dataIndex: 'businessName',
+      },
+      {
+        title: 'Selected Main Category',
+        dataIndex: 'selectedMainCategory',
+      },
+      {
+        title: 'Subcategory',
+        dataIndex: 'subcategory',
+      },
+      {
+        title: 'Service Place',
+        dataIndex: 'servicePlace',
+      },
+      {
+        title: 'Service Phone',
+        dataIndex: 'servicePhone',
+      },
+      {
+        title: 'Service Location',
+        dataIndex: 'serviceLocation',
+      },
+      {
+        title: 'Service Telegram',
+        dataIndex: 'serviceTelegram',
+      },
+      {
+        title: 'About Service',
+        dataIndex: 'aboutService',
+      },
+      {
+        title: 'Actions',
+        key: 'actions',
+        render: (text, record) => (
+            <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+            <Button onClick={() => handleEdit(record)} style={{ backgroundColor: 'yellow', color: 'white', marginRight: 8 }}>Edit</Button>
+            <Button onClick={() => handleDelete(record)} style={{ backgroundColor: 'red', color: 'white' }}>Delete</Button>
+          </div>
+        ),
+      },
+
+    ];
+
   return (
     <Table
       columns={columns}

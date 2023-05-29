@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import authReducer from './redux/auth';
 import mainCategory from './redux/mainCategory';
+import Services from './redux/Services';
 import tab, { tabSlice } from './redux/tab';
 import {
   persistStore,
@@ -27,6 +28,7 @@ const tabReducer = persistReducer(persistConfig, tab);
 const rootReducer = {
   // tabstate:tab,
   mainCategoryState: mainCategory,
+  serviceState:Services,
   persistedReducer: persistReducer(persistConfig, persistedReducer),
   tabstate: persistReducer(persistConfig, tab),
 };

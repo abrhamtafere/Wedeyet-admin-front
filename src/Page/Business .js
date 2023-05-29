@@ -7,7 +7,7 @@ function Business() {
   return (<>
   <Header title={"Add Business"} />
   <BusinessComponent/>
-    <Box height="100%" width="100%" display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+    <Box mt={"30px"} bgcolor={"white"} width="100%" display="flex" flexDirection="row" justifyContent="center" alignItems="center">
 
       <BusinessTable/>
     </Box>
