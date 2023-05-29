@@ -10,6 +10,7 @@ import mainCategory from './redux/mainCategory';
 import Services from './redux/Services';
 import tab, { tabSlice } from './redux/tab';
 import Faq from './redux/Faq';
+import EmailTemplate from './redux/EmailTemplate';
 import {
   persistStore,
   persistReducer,
@@ -31,6 +32,7 @@ const rootReducer = {
   mainCategoryState: mainCategory,
   serviceState:Services,
   faqSate:Faq,
+  emailState:EmailTemplate,
   persistedReducer: persistReducer(persistConfig, persistedReducer),
   tabstate: persistReducer(persistConfig, tab),
 };

@@ -1,10 +1,14 @@
 import React from 'react'
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import Header from '../components/global/Header';
+import EmailTemplateComponent from '../components/EmailTemplate/EmailTemplateComponent';
 function EmailTemplate() {
   return (
-    <Box height="90%"width="100%" display="flex"flexDirection="row" justifyContent="center" alignItems="center">
- <p style={{fontSize:"30px", fontWeight:"bold"}}> EmailTemplate Page</p>
-     </Box>
+    <><Header title={"Add Email Template"} />
+      <Box width="100%" display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+<EmailTemplateComponent/>
+      </Box>
+    </>
   )
 }
 
