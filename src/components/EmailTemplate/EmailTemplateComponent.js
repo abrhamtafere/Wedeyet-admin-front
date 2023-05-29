@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid, Card, CardContent, TextField, Button, IconButton } from '@mui/material';
+import { Box, Grid, Card, CardContent, TextField, Button, IconButton } from '@mui/material';
 import { AddBox, Edit, Delete } from '@mui/icons-material';
- import { Editor } from 'react-draft-wysiwyg';
- import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { addEmailTemplate, editEmailTemplate, deleteEmailTemplate } from '../../redux/EmailTemplate';
+import Lable from '../global/Lable';
+import ButtonComponent from '../global/ButtonComponent';
 const EmailTemplateComponent = () => {
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState(EditorState.createEmpty());
   const [editMode, setEditMode] = useState(false);
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
-    const templates = useSelector((state) => state.emailState.templates);
+  const templates = useSelector((state) => state.emailState.templates);
   const handleAdd = () => {
     dispatch(addEmailTemplate({ subject, body: body.getCurrentContent().getPlainText() }));
     setSubject('');
@@ -39,9 +42,16 @@ const EmailTemplateComponent = () => {
 
   return (
     <>
-      <TextField label="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
-      <Editor editorState={body} onEditorStateChange={setBody} />
-      <Button onClick={editMode ? handleEdit : handleAdd}>{editMode ? 'Edit' : 'Add'}</Button>
+    <Box mt={"10px"} display="flex" flexDirection="column"  pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"} justifyContent="center" alignItems="center" width={"100%"}>
+      <Box mt={"10px"} bgcolor={"white"}  display="flex" flexDirection="column" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"} width={"50%"}>
+
+        <Box width={"100%"}><Lable text={"Add Subject"} />
+          <TextField fullWidth label="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
+          <Lable text={"Add Body"} />
+          <Box padding={"5px"} width={"100%"} bgcolor={"lightgrey"}><Editor editorState={body} onEditorStateChange={setBody} /></Box></Box>
+          <ButtonComponent onClick={editMode ? handleEdit : handleAdd} buttonText={editMode ? 'Edit' : 'Add'}/>
+        {/* <Button onClick={editMode ? handleEdit : handleAdd}>{editMode ? 'Edit' : 'Add'}</Button> */}
+      </Box>
       <Grid container spacing={2}>
         {/* Replace templates with your actual data */}
         {templates.map((template) => (
@@ -63,6 +73,7 @@ const EmailTemplateComponent = () => {
           </Grid>
         ))}
       </Grid>
+      </Box>
     </>
   );
 };
