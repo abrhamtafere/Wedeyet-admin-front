@@ -1,4 +1,4 @@
-import { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,9 +12,10 @@ import { tokens } from "../../../theme";
 import { editMainCategory, deleteRows } from '../../../redux/mainCategory';
 import { FileChooserButton } from './FileChooserButton';
 import { useDispatch, useSelector } from 'react-redux';
-
-function Actions ({ id, main, name, editRoute, rowData })  {
+import axios from 'axios';
+function Actions({ id, main, name, editRoute, rowData }) {
     const dispatch = useDispatch();
+    const auth = useSelector((state) => state.persistedReducer.user);
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [maindata, setMain] = useState(main);
@@ -34,9 +35,21 @@ function Actions ({ id, main, name, editRoute, rowData })  {
         console.log(id)
         console.log("deleter")
         dispatch(deleteRows(id))
+        axios.delete(`https://wedeyet.herokuapp.com/api/service/delete/${id}` ,{
+            headers: {
+              'Authorization': `Bearer${auth.token}`
+            },
+          } )
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     }
     const editData = {
-        id: rowData.id, name: mainCategoryName,
+        id: rowData?.id, name: mainCategoryName,
         image: fileName,
     }
 
@@ -136,8 +149,8 @@ function Actions ({ id, main, name, editRoute, rowData })  {
             </Dialog>
 
 
-          
-            
+
+
         </>
     );
 };

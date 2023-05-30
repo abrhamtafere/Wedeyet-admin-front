@@ -298,7 +298,7 @@ function BusinessComponent({edit, record}) {
                   label="Select Main Category"
                   onChange={handleChange}
                 >
-                  {maincategoryData.map((main) => <MenuItem key={main.id} value={main}>{main.name}</MenuItem>)}
+                  {maincategoryData?.map((main) => <MenuItem key={main.id} value={main}>{main.name}</MenuItem>)}
                 </Select>
               </FormControl>
             </Box>

@@ -19,20 +19,18 @@ const StyledIcon = styled('div')(({ theme }) => ({
     width: 40,
     height:40,
     justifyContent: 'center',
-
+  
   }));
-function Table() {
+function Table({rowsData}) {
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-//    setRowData(categorys.MainCategories)
-      dispatch(setData(categorys))
-   },[categorys])
-     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
-    // const [rowData, setRowData]= useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-
+    const data = useSelector((state) => state.mainCategoryState.mainCategory);
+    const rowsDatas = rowsData?.Services?.map((service) => ({
+    id: service._id,
+    name: service.name,
+  }));
+console.log(rowsData)
  const columns = [
         {
             field: "id",
@@ -55,13 +53,13 @@ function Table() {
 
                                 }}
                             >
-                                <Iconify icon={params.row?.image} width={30} height={30} />
+                                {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
                             </StyledIcon>
 
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-                            <Box >{params.row.name} </Box> <p ></p>
-                           {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>}
+                            <Box >{params?.row?.name} </Box> <p ></p>
+                           {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
                         </Box>
 
                     </Box>
@@ -85,7 +83,7 @@ function Table() {
 
 
     ];
-    const rows = [];
+   
 
     return (
         <>
@@ -96,7 +94,7 @@ function Table() {
             </Typography>
             <DataGrid
                 // checkboxSelection
-                rows={maincategoryData}
+                rows={rowsData?rowsData:0}
                 columns={columns}
                 pageSize={4}
                 disableSelectIconOnClick

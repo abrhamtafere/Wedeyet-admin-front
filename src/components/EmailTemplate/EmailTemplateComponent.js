@@ -61,13 +61,19 @@ const EmailTemplateComponent = () => {
                 <div>Subject: {template.subject}</div>
                 <div>Body: {template.body}</div>
               </CardContent>
-              <CardContent>
-                <IconButton onClick={() => handleView(template)}>
-                  <Edit />
-                </IconButton>
+              
+              <CardContent >
+              <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
+               <Box display={"flex"} alignItems={"center"} >
                 <IconButton onClick={() => handleDelete(template.id)}>
                   <Delete />
                 </IconButton>
+                <IconButton onClick={() => handleView(template)}>
+                  <Edit />
+                </IconButton>
+                </Box> 
+                <ButtonComponent buttonText={"use"} onClick={{}}/>
+                </Box> 
               </CardContent>
             </Card>
           </Grid>
