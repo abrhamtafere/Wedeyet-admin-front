@@ -21,7 +21,7 @@ function Actions({ id, main, name, editRoute, rowData }) {
     const [maindata, setMain] = useState(main);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [mainCategoryName, setMainCategoryName] = useState(rowData.name)
+     const [mainCategoryName, setMainCategoryName] = useState(rowData.name)
     const [fileName, setFileName] = useState(rowData.image);
     const fileInputRef = useRef(null);
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
@@ -34,11 +34,11 @@ function Actions({ id, main, name, editRoute, rowData }) {
     const deleteHandeler = () => {
         console.log(id)
         console.log("deleter")
-        dispatch(deleteRows(id))
         axios.delete(`https://wedeyet.herokuapp.com/api/service/delete/${id}` ,{
             headers: {
-              'Authorization': `Bearer${auth.token}`
+              'authorization': `Bearer ${auth.token}`
             },
+
           } )
             .then(response => {
                 console.log(response.data);
@@ -46,17 +46,31 @@ function Actions({ id, main, name, editRoute, rowData }) {
             .catch(error => {
                 console.error(error);
             });
+        dispatch(deleteRows(id))
+
 
     }
     const editData = {
-        id: rowData?.id, name: mainCategoryName,
-        image: fileName,
+       ...rowData, id: rowData?.id, name: mainCategoryName,
     }
 
 
     const editHandeler = (e) => {
         e.preventDefault();
-        dispatch(editMainCategory(editData))
+       console.log(mainCategoryName)
+        axios.put(`https://wedeyet.herokuapp.com/api/service/update/${id}`, {
+            headers: {
+                // 'Content-Type': 'application/json',
+                'authorization': `Bearer ${auth.token}`
+            },
+          },/*  {name: mainCategoryName} */)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        // dispatch(editMainCategory(editData))
         setEditOpen(!editOpen)
     }
     return (

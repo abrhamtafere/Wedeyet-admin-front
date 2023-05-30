@@ -19,9 +19,9 @@ const StyledIcon = styled('div')(({ theme }) => ({
     width: 40,
     height:40,
     justifyContent: 'center',
-  
+
   }));
-function Table({rowsData}) {
+function Table({rowsData, setMainCategoryName}) {
     const dispatch = useDispatch();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -75,7 +75,7 @@ console.log(rowsData)
             renderCell: (params) => {
                 return (
 
-                    <Actions editRoute={"w"} id={params.row.id} name={(params.row.name) } rowData={params.row}/>
+                    <Actions setMainCategoryName={setMainCategoryName}editRoute={"w"} id={params.row.id} name={(params.row.name) } rowData={params.row}/>
                 );
             },
         },
@@ -83,7 +83,7 @@ console.log(rowsData)
 
 
     ];
-   
+
 
     return (
         <>

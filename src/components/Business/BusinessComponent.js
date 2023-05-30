@@ -222,7 +222,7 @@ function BusinessComponent({edit, record}) {
     "Branchs": branches,
     "BranchName": chips
   } */
- 
+
   return (
     <Box mt={"10px"} display="flex" flexDirection="row" justifyContent="center" alignItems="center" pt={"10px"} pb={"10px"} pl={"50px"} pr={"50px"} mb={"30px"}  width={"100%"}>
       <Grid container spacing={5} bgcolor={"white"} p={"10px"}>
@@ -298,7 +298,7 @@ function BusinessComponent({edit, record}) {
                   label="Select Main Category"
                   onChange={handleChange}
                 >
-                  {maincategoryData?.map((main) => <MenuItem key={main.id} value={main}>{main.name}</MenuItem>)}
+                  {/* {maincategoryData?.map((main) => <MenuItem key={main.id} value={main}>{main.name}</MenuItem>)} */}
                 </Select>
               </FormControl>
             </Box>

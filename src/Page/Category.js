@@ -26,7 +26,7 @@ function Category() {
     dispatch(setactive(newValue))
   };
   console.log("tab persist")
-  console.log(localStorage.getItem('persist:root').tab)
+ 
   useEffect(() => {
     axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
       headers: {
@@ -51,7 +51,7 @@ function Category() {
     .then(res => {
 
       setMainCategoryData(res?.data);
-    
+
     })
     .catch(err => {
       console.log('err', err);

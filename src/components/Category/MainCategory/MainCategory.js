@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Box, Button, TextField, Avatar,Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, TextField, Avatar, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { FileChooserButton } from './FileChooserButton';
 import Table from './Table';
-import { setMainCategory } from '../../../redux/mainCategory';
+import { addNewMainCategory, setMainCategory } from '../../../redux/mainCategory';
 import Actions from './Actions';
 import { tokens } from "../../../theme";
 import { styled } from '@mui/material/styles';
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { generateRandomId } from '../../../Utils/randomID';
 import ButtonComponent from '../../global/ButtonComponent';
 import { Add } from '@mui/icons-material';
-import axios from 'axios'; 
+import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 
 const StyledIcon = styled('div')(({ theme }) => ({
@@ -22,13 +22,13 @@ const StyledIcon = styled('div')(({ theme }) => ({
   borderRadius: '50%',
   alignItems: 'center',
   width: 40,
-  height:40,
+  height: 40,
   justifyContent: 'center',
 
 }));
 function MainCategory() {
-  const [mainCategory, setMainCategoryData]=useState({})
-  const [branchImages, setBranchImages] = useState([]);
+  const [mainCategory, setMainCategoryData] = useState({})
+  const [branchImages, setBranchImages] = useState( );
   const dispatch = useDispatch();
   const [mainCategoryName, setMainCategoryName] = useState("")
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -37,88 +37,112 @@ function MainCategory() {
   const [fileName, setFileName] = useState('');
   const fileInputRef = React.useRef(null);
   const auth = useSelector((state) => state.persistedReducer.user);
- 
+  console.log(auth.token)
   const data = useSelector((state) => state.mainCategoryState.mainCategory);
   console.log(data)
-  const handleAdd = () => {
-    const data = {
-      id: generateRandomId(),
-      name: mainCategoryName,
-      image: fileName,
-      // subcategories:"dsd"
-    }
+  const datam = {
+    name: mainCategoryName,
+    file:branchImages,
   }
+  const handleAdd = () => {
+    console.log(branchImages)
+    const options = {
+      method: 'POST',
+      headers: {
+        'authorization': `Bearer ${auth.token}`,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datam)
+  };
+  fetch("https://wedeyet.herokuapp.com/api/service/create", options)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+  // axios.post({'https://wedeyet.herokuapp.com/api/service/create', {
+  //     headers: {
+  //       'authorization': `Bearer ${auth.token}`
+  //     },
+  //   },{name:mainCategoryName})
+  //     .then(res => {
+  //       // dispatch(addNewMainCategory(res.data))
+  //       console.log('err', res.data);
+
+  //     })
+  //     .catch(err => {
+  //       console.log('err', err);
+  //     });
+  }
+
   const handleSelectBranchImages = (event) => {
-    if (event.target.files) {
-      const fileArray = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
-      setBranchImages((prevImages) => prevImages.concat(fileArray));
-      Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
+    if (event.target.file) {
+      setBranchImages(event.target.file);
+      // Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
     }
   };
-  
+
   const rowsData = data?.Services?.map((service) => ({
-  id: service._id,
-  name: service.name,
-}));
-console.log(rowsData)
-const columns = [
-      {
-          field: "id",
-          headerName: " ID",
-          minWidth: 50,
-          flex: 0.5,
+    id: service._id,
+    name: service.name,
+  }));
+  console.log(rowsData)
+  const columns = [
+    {
+      field: "id",
+      headerName: " ID",
+      minWidth: 50,
+      flex: 0.5,
+    },
+    {
+      field: "Name",
+      headerName: "Main Catagory",
+      minWidth: 200,
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
+            <Box backgroundColor={"#F3F6F9"} padding={"3px"} borderRadius={"5px"}>
+              <StyledIcon
+                sx={{
+                  color: colors.orange[500],
+
+                }}
+              >
+                {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
+              </StyledIcon>
+
+            </Box>
+            <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
+              <Box >{params?.row?.name} </Box> <p ></p>
+              {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+            </Box>
+
+          </Box>
+        )
       },
-      {
-          field: "Name",
-          headerName: "Main Catagory",
-          minWidth: 200,
-          flex: 1,
-          renderCell: (params) => {
-              return (
-                  <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
-                      <Box backgroundColor={"#F3F6F9"} padding={"3px"}  borderRadius={"5px"}>
-                          <StyledIcon
-                              sx={{
-                                  color: colors.orange[500],
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      minWidth: 100,
+      flex: 0.3,
+      sortable: false,
+      renderCell: (params) => {
+        return (
 
-                              }}
-                          >
-                              {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
-                          </StyledIcon>
-
-                      </Box>
-                      <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-                          <Box >{params?.row?.name} </Box> <p ></p>
-                         {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
-                      </Box>
-
-                  </Box>
-              )
-          },
+          <Actions editRoute={"w"} id={params?.row?.id} name={(params?.row.name)} rowData={params.row} />
+        );
       },
-      {
-          field: "actions",
-          headerName: "Actions",
-          minWidth: 100,
-          flex: 0.3,
-          sortable: false,
-          renderCell: (params) => {
-              return (
-
-                  <Actions editRoute={"w"} id={params?.row?.id} name={(params?.row.name) } rowData={params.row}/>
-              );
-          },
-      },
+    },
 
 
 
   ];
- 
+
   return (
     <>
-   
+
       <Box borderRadius="10px" bgcolor="white" width="40vw" padding=" 1rem 3rem">
-     
+
         <Box
           display="grid"
           gap="10px"
@@ -161,68 +185,64 @@ const columns = [
             Choose Image
           </Typography>
           <Box mb={"5px"}>
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            '& > *': {
-                                                m: 1,
-                                            },
-                                        }}
-                                    >
-                                        <Button variant="contained"  disableElevation={true} component="label" sx={{
-                                            "&.MuiButton-root": {
-                                                borderRadius: "0px !important",
-                                                width: "120px",
-                                                height: "53px",
-                                                backgroundColor: "#DADADA",
-                                                border: "none !important",
-                                                color: "White !important",
-                                                textTransform: "none"
-                                            },
-                                        }}>
-                                            Select Images
-                                            <input type="file" hidden multiple onChange={handleSelectBranchImages} />
-                                        </Button>
-                                        <TextField
-                                            id="images"
-                                            label="Images"
-                                            fullWidth
-                                            InputProps={{
-                                                readOnly: true,
-                                                startAdornment: (
-                                                    <Box
-                                                        sx={{
-                                                            display: 'flex',
-                                                            '& > *': {
-                                                                m: 1,
-                                                            },
-                                                        }}
-                                                    >
-                                                        {branchImages.slice(0, 3).map((image) => (
-                                                            <Avatar key={image} alt="Image" src={image} />
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                '& > *': {
+                  m: 1,
+                },
+              }}
+            >
+              <Button variant="contained" disableElevation={true} component="label" sx={{
+                "&.MuiButton-root": {
+                  borderRadius: "0px !important",
+                  width: "120px",
+                  height: "53px",
+                  backgroundColor: "#DADADA",
+                  border: "none !important",
+                  color: "White !important",
+                  textTransform: "none"
+                },
+              }}>
+                Select Images
+                <input type="file" hidden multiple onChange={handleSelectBranchImages} />
+              </Button>
+              <TextField
+                id="images"
+                label="Images"
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                  startAdornment: (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        '& > *': {
+                          m: 1,
+                        },
+                      }}
+                    >
 
-                                                        ))}
-                                                        {branchImages.length > 3 && (
-                                                            <Avatar>
-                                                                <Box display="flex" alignItems="center" justifyContent={"center"}><Add /><p>{branchImages.slice(3, branchImages.length).length}</p></Box>
-                                                            </Avatar>
-                                                        )}
-                                                    </Box>
-                                                ),
-                                            }}
-                                        />
-                                    </Box>
-                                </Box>
+                        <Avatar  alt="Image" src={branchImages} />
+
+
+
+                    </Box>
+                  ),
+                }}
+              />
+            </Box>
+          </Box>
           {/* <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
-          <ButtonComponent buttonText={"Add"} onClick={handleAdd}/>
+          <ButtonComponent buttonText={"Add"} onClick={handleAdd} />
         </Box>
       </Box>
 
       <Box borderRadius="10px" bgcolor="white" width="40vw" height="400px" marginTop="20px" padding=" 1rem 3rem">
-      <Table rowsData ={rowsData}/>    
-    </Box>
-    
+        <Table rowsData={rowsData} setMainCategoryName={setMainCategoryName} />
+      </Box>
+
     </>
   )
 }
