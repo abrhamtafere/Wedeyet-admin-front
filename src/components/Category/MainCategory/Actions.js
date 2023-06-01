@@ -57,13 +57,14 @@ function Actions({ id, main, name, editRoute, rowData }) {
 
     const editHandeler = (e) => {
         e.preventDefault();
-       console.log(mainCategoryName)
+       console.log(editData)
+       
         axios.put(`https://wedeyet.herokuapp.com/api/service/update/${id}`, {
             headers: {
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
                 'authorization': `Bearer ${auth.token}`
             },
-          },/*  {name: mainCategoryName} */)
+          },editData)
             .then(response => {
                 console.log(response.data);
             })
