@@ -93,15 +93,8 @@ const initialData = {
 
 const BusinessTable = ({ serviceData }) => {
   const dispatch = useDispatch()
-  /*   const dispatch = useDispatch()
-    useEffect(() => {
-      dispatch(setServiceData(initialData))
-    }, [])
-    const serviceData = useSelector((state) => state.serviceState.service); */
-
-  const [data, setData] = useState(serviceData);
   
-
+  const [data, setData] = useState(serviceData);
   const expandedRowRender = (record) => {
     const handleBranchEdit = (record) => {
       if (record.branchName) {

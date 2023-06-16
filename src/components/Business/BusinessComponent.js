@@ -17,6 +17,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { tokens } from '../../theme';
 import { setServiceData } from "../../redux/Services";
 import { generateRandomId } from "../../Utils/randomID";
+
 function BusinessComponent({edit, record}) {
   const theme = useTheme();
   console.log(edit)

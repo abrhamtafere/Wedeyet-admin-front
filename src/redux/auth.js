@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import localStorage from "redux-persist/es/storage";
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import {Cookies} from 'react-cookie';
 let parsedData;
 
 const initialState = {
@@ -9,7 +10,8 @@ const initialState = {
 
 };
 
-
+// remove setted cookie
+const cookies = new Cookies();    
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -21,6 +23,9 @@ export const authSlice = createSlice({
     setLogout: (state) => {
       state.user = null;
       state.token = null;
+      cookies.remove('token', { path: '/' });
+      cookies.remove('user', { path: '/' });
+      cookies.remove('role', { path: '/' });
     }, 
   },
 });

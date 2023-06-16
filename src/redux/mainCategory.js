@@ -3,75 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   TotalServices:null,
   ServiceSubService:[],
-
-  sub: [
-   /*  {
-      "id": 1,
-      "mainID":1,
-      "mainName": " Main Category 1",
-      "name": " sub Category 1",
-      "image": "material-symbols:restaurant",
-      "maincategory": "restaurant"
-    },
-    {
-      "id": 2,
-      "mainID":1,
-      "mainName": " Main Category 1",
-      "name": " sub Category 2",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Shop"
-    },
-    {
-      "id": 3,
-      "mainID":2,
-      "mainName": " Main Category 2",
-      "name": " sub Category 3",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    },
-     {
-      "id": 3,
-      "mainID":2,
-      "mainName": " Main Category 2",
-      "name": " sub Category 4",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    },
-    {
-      "id": 3,
-      "mainID":3,
-      "mainName": " Main Category 3",
-      "name": " sub Category 5",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    },
-    {
-      "id": 3,
-      "mainID":3,
-      "mainName": " Main Category 3",
-      "name": " sub Category 6",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    },
-    {
-      "id": 3,
-      "mainID":4,
-      "mainName": " Main Category 4",
-      "name": " sub Category 7",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    },
-    {
-      "id": 3,
-      "mainID":4,
-      "mainName": " Main Category 4",
-      "name": " sub Category 8",
-      "image": "material-symbols:restaurant",
-      "maincategory": "Home"
-    }
- */
-
-  ],
+  sub: [],
   mainCategory: []
 };
 

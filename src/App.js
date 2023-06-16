@@ -18,13 +18,16 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Unauthorized from "./Page/Unauthorized";
 import { Box, Grid } from "@mui/material";
 import Admins from "./Page/SuperAdminPage/Admins";
+import EditPlacePage from "./Page/EditPlace";
+import DeleteComponent from "./Page/DeletePlace";
+import DeletePlacePage from "./Page/DeletePlace";
 // import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
 
 function App() {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.persistedReducer.user);
   const { _id, token } = isAuth;
-  console.log(isAuth);
+  // console.log(isAuth);
   const ROLES = {
     'ADMIN': 2001,
     'SUPERADMIN': 5150
@@ -35,8 +38,8 @@ function App() {
     if(!token){
       navigate("/login")
     }
-   
-  },[token]);
+  }, [token]);
+  
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -61,6 +64,8 @@ function App() {
                     <Route exact path="/" element={<Category />} />
                     <Route path="/categorys" element={<Category />} />
                     <Route path="/businesses" element={<Business />} />
+                    <Route path="/edit/:id" element={<EditPlacePage />} />
+                    <Route path="/delete/:id" element={<DeletePlacePage />}/>
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/emailtemplate" element={<EmailTemplate />} />
                   </Route>
@@ -81,6 +86,9 @@ function App() {
                     <Route exact path="/" element={<Category />} />
                     <Route path="/categorys" element={<Category />} />
                     <Route path="/businesses" element={<Business />} />
+                      <Route path="/edit/:id" element={<EditPlacePage />} />
+                      <Route path="/delete/:id" element={<DeletePlacePage />}/>
+
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/emailtemplate" element={<EmailTemplate />} />
 

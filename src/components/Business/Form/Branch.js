@@ -50,10 +50,10 @@ function Branch({open,
                         <Grid item xs={12} sm={12} md={6}>
                             <Box padding={"2px"}>
                                 <Box mb={"5px"}>
-                                    <Lable text="Branch Name" />
-                                    <TextFieldComponent label="Business Name" onChange={setBranchName} />
+                                    <Lable text="Name" />
+                                    <TextFieldComponent label="Name" onChange={setBranchName} />
                                 </Box>
-                                <Lable text="Branch Images" />
+                                <Lable text="Images" />
                                 <Box mb={"5px"}>
                                     <Box
                                         sx={{
@@ -109,16 +109,16 @@ function Branch({open,
                                     </Box>
                                 </Box>
                                 <Box mb={"5px"}>
-                                    <Lable text="Branch Main Category" />
-                                    <TextFieldComponent label="Branch Main Category" value={mainCategory.name} onChange={setBranchName} />
+                                    <Lable text="Main Category" />
+                                    <TextFieldComponent label="Main Category" value={mainCategory.name} onChange={setBranchName} />
                                 </Box>
                                 <Box mb={"5px"}>
-                                    <Lable text="Branch Sub Category" />
-                                    <TextFieldComponent label="Branch Sub Category" value={subcategory} onChange={setBranchName} />
+                                    <Lable text="Sub Category" />
+                                    <TextFieldComponent label="Sub Category" value={subcategory} onChange={setBranchName} />
                                 </Box>
                                 <Box mb={"5px"}>
-                                    <Lable text="Branch Phone Number" />
-                                    <TextFieldComponent label="Branch Phone Number" onChange={setPhone} />
+                                    <Lable text="Phone Number" />
+                                    <TextFieldComponent label="Phone Number" onChange={setPhone} />
                                 </Box>
                             </Box>
                         </Grid>

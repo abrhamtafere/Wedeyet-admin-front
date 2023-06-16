@@ -10,6 +10,7 @@ import {
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { useCookies } from "react-cookie";
 import { tokens } from "../../theme";
 import { useNavigate } from "react-router-dom";
  import { useDispatch } from "react-redux";
@@ -33,6 +34,7 @@ const LoginForm = () => {
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [cookies, setCookies, removeCookie] = useCookies();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const login = async (values, onSubmitProps) => {
@@ -42,7 +44,10 @@ const LoginForm = () => {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
-    console.log(loggedIn);
+    // console.log(loggedIn);
+    setCookies("token", loggedIn.User.token);
+    setCookies("role", loggedIn.User.role);
+    setCookies("id", loggedIn.User._id);
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(

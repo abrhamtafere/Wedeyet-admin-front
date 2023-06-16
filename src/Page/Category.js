@@ -30,7 +30,7 @@ function Category() {
   useEffect(() => {
     axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
       headers: {
-        'Authorization': `Bearer${auth.token}`
+        'Authorization': `Bearer ${auth.token}`
       },
     })
       .then(res => {
@@ -45,7 +45,7 @@ function Category() {
   useEffect(() => {
     axios.get('https://wedeyet.herokuapp.com/api/service/all', {
       headers: {
-        'Authorization': `Bearer${auth.token}`
+        'Authorization': `Bearer  ${auth.token}`
       },
     })
     .then(res => {

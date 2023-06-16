@@ -34,7 +34,7 @@ function Table({ main }) {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const sub = useSelector((state) => state.mainCategoryState.sub);
-    console.log(sub)
+    console.log(sub,maincategoryData)
 
     const columns = [
         {
