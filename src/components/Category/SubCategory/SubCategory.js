@@ -31,8 +31,8 @@ function SubCategory() {
   const [inputValue, setInputValue] = useState('');
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
   const handleAddSubCategory = () => {
+    console.log(" Handle Add Sub Category ")
     const data = {
-      id: generateRandomId(),
       mainID:value.id,
       name: value.name,
       image: fileName,
@@ -40,7 +40,6 @@ function SubCategory() {
       // subcategories:"dsd"
     }
     dispatch(addNewSubCategory(data))
-    console.log(data)
     // console.log(maincategoryData)
     console.log(maincategoryData)
   }

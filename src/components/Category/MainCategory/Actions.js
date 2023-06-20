@@ -22,7 +22,8 @@ function Actions({ id, main, name, editRoute, rowData }) {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
      const [mainCategoryName, setMainCategoryName] = useState(rowData.name)
-    const [fileName, setFileName] = useState(rowData.image);
+    const [fileName, setFileName] = useState();
+    const [branchImages, setBranchImages] = useState();
     const fileInputRef = useRef(null);
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const handleClose = () => {
@@ -32,13 +33,11 @@ function Actions({ id, main, name, editRoute, rowData }) {
         setEditOpen(!editOpen)
     }
     const deleteHandeler = () => {
-        console.log(id)
-        console.log("deleter")
-        axios.delete(`https://wedeyet.herokuapp.com/api/service/delete/${id}` ,{
+        console.log("Delete Hanlder ID ",id)
+        axios.delete(`https://wedeyet.herokuapp.com/api/service/delete/${id}`,{
             headers: {
-              'authorization': `Bearer ${auth.token}`
-            },
-
+              'Authorization': `Bearer ${auth.token}`,
+            }
           } )
             .then(response => {
                 console.log(response.data);
@@ -47,26 +46,36 @@ function Actions({ id, main, name, editRoute, rowData }) {
                 console.error(error);
             });
         dispatch(deleteRows(id))
-
-
     }
-    const editData = {
-       ...rowData, id: rowData?.id, name: mainCategoryName,
+    const handleSelectBranchImages = (event) => {   
+        if (event.target.files) {
+         setBranchImages(event.target.files[0]);
+        }
     }
 
-
+    const updateData = () => {
+        var editData = {}
+        if (branchImages) { 
+            editData.image = branchImages
+        }
+        if(mainCategoryName){
+            editData.name = mainCategoryName
+        }
+        return editData
+    }
+    
+    const editData = updateData()
     const editHandeler = (e) => {
         e.preventDefault();
-       console.log(editData)
-       
-        axios.put(`https://wedeyet.herokuapp.com/api/service/update/${id}`, {
+    //    console.log(" Edit Data ",editData , "Update ID : ",id)
+       axios.put(`https://wedeyet.herokuapp.com/api/service/update/${id}`,editData, {
             headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${auth.token}`
+                'Authorization': `Bearer ${auth.token}`,
+                'Content-Type': 'multipart/form-data'
             },
-          },editData)
+          })
             .then(response => {
-                console.log(response.data);
+                console.log(response.data.Service);
             })
             .catch(error => {
                 console.error(error);
@@ -139,8 +148,9 @@ function Actions({ id, main, name, editRoute, rowData }) {
                             >
                                 Choose Image
                             </Typography>
+                            <input type="file"  onChange={handleSelectBranchImages} />
 
-                            <FileChooserButton edit={true} value={fileName} fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} />
+                            {/* <FileChooserButton edit={true} value={fileName} fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
                             <Button variant="text" sx={{
                                 "&.MuiButton-root": {
                                     borderRadius: "4px !important",

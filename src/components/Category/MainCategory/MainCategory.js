@@ -42,40 +42,29 @@ function MainCategory() {
   console.log(data)
   const datam = {
     name: mainCategoryName,
-    file:branchImages,
+    image: branchImages,
   }
   const handleAdd = () => {
-    console.log(branchImages)
-    const options = {
-      method: 'POST',
+    axios.post('https://wedeyet.herokuapp.com/api/service/create',
+      datam, {
       headers: {
-        'authorization': `Bearer ${auth.token}`,
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(datam)
-  };
-  fetch("https://wedeyet.herokuapp.com/api/service/create", options)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-  // axios.post({'https://wedeyet.herokuapp.com/api/service/create', {
-  //     headers: {
-  //       'authorization': `Bearer ${auth.token}`
-  //     },
-  //   },{name:mainCategoryName})
-  //     .then(res => {
-  //       // dispatch(addNewMainCategory(res.data))
-  //       console.log('err', res.data);
-
-  //     })
-  //     .catch(err => {
-  //       console.log('err', err);
-  //     });
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'multipart/form-data'
+       },
+    }).then(res => {
+        dispatch(addNewMainCategory(res.data.Service))
+        console.log(' Response ', res.data);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   }
 
   const handleSelectBranchImages = (event) => {
-    if (event.target.file) {
-      setBranchImages(event.target.file);
+    // console.log("File")
+    // console.log(event.target.files[0],event.target.file)
+    if (event.target.files) {
+      setBranchImages(event.target.files[0]);
       // Array.from(event.target.files).map((file) => URL.revokeObjectURL(file));
     }
   };
@@ -107,7 +96,7 @@ function MainCategory() {
 
                 }}
               >
-                {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
+                <Iconify icon={params.row?.image} width={30} height={30} />
               </StyledIcon>
 
             </Box>

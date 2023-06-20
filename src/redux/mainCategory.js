@@ -35,13 +35,14 @@ export const mainCategorySlice = createSlice({
 
     },
     setFilterSub: (state, action) => {
-
       state.sub= state.sub.filter((d) => d.mainID === action.payload)
   // state.sub=action.payload.sub;
     },
     editMainCategory(state, action) {
       const index = state.mainCategory.Services.findIndex((d) => d._id === action.payload.id)
+      console.log(" Index ",index)
       if (index !== -1) {
+        console.log("Update Data ",action.payload)
         state.mainCategory.Services[index] = action.payload
       }
     },

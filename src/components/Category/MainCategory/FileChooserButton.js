@@ -6,6 +6,8 @@ export function FileChooserButton(props) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const handleFileChange = (event) => {
+    console.log(event.target.files ?
+      event.target.files[0].name : event.target.value)
     props.setFileName(event.target.files[0].name);
   };
 

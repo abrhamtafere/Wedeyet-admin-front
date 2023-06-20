@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
@@ -80,6 +79,7 @@ function SuperAdmin() {
   const [ServiceSubService, setServiceSubService] = useState([]);
   const [AllCategory, setAllCategory] = useState([]);
   const [AllSubCategory, setAllSubCategory] = useState([]);
+  const [FilteredSubCategory, setFilteredSubCategory] = useState([]);
   const [cookies, setCookies, removeCookie] = useCookies();
   const [open, setOpen] = React.useState(true);
   
@@ -102,7 +102,16 @@ function SuperAdmin() {
     const inputArray = input.slice(1, -1);
     return inputArray.split(',').map(Number);
   }
- 
+
+  const handleCategoryChange = (e) => { 
+    const selectedCategory = e.target.value;
+    console.log("Selected Category ", selectedCategory,
+      " All SubCategory ", AllSubCategory)
+    setCategory(selectedCategory); 
+    const subCategoryList = AllSubCategory.filter((item) => item.category.id == selectedCategory);
+    console.log("Sub Category List ", subCategoryList)
+    setFilteredSubCategory(subCategoryList);
+  }
 
   const handleAddPlace = () => {
     const data = { name, area, phoneNumber, website, telegram, category, subCategory, description, location, address }
@@ -248,7 +257,7 @@ function SuperAdmin() {
           value={category}
               label="Category"
               autoWidth
-          onChange={(e)=>setCategory(e.target.value)}
+              onChange={handleCategoryChange}
             >   
           {AllCategory.map((cat) => (
             <MenuItem key={cat._id} value={cat._id}>
@@ -265,7 +274,13 @@ function SuperAdmin() {
           autoWidth
           onChange={(e)=>setSubCategory(e.target.value)}
             >   
-          {AllSubCategory.map((cat) => (
+              {FilteredSubCategory.length == 0 ?
+                AllSubCategory.map((cat) => (
+            <MenuItem key={cat._id} value={cat._id}>
+              {cat.name}
+            </MenuItem>
+          )) :
+          FilteredSubCategory.map((cat) => (
             <MenuItem key={cat._id} value={cat._id}>
               {cat.name}
             </MenuItem>
