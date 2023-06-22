@@ -4,13 +4,14 @@ import { DataGrid } from '@mui/x-data-grid';
 // import MainCatData from "../../../data/MainCatData.json"
 import categorys from "../../../data/category.json"
 import subcategorys from "../../../data/category.json"
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, tableSortLabelClasses, useTheme } from "@mui/material";
 import Actions from './Actions';
 import { tokens } from "../../../theme";
 import { alpha, styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, deleteRows } from '../../../redux/mainCategory';
+import axios from 'axios'
 
 const StyledIcon = styled('div')(({ theme }) => ({
     margin: 'auto',
@@ -25,17 +26,39 @@ const StyledIcon = styled('div')(({ theme }) => ({
 function Table({ main }) {
     const dispatch = useDispatch();
     const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
+    const [allSubService, setAllSubService] = useState([])
     useEffect(() => {
         //    setRowData(categorys.MainCategories)
         dispatch(setData(subcategorys))
     }, [subcategorys])
+    var testAllSubService
     //  const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const [rowData, setRowData] = useState([])
+    const auth = useSelector((state) => state.persistedReducer.user);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const sub = useSelector((state) => state.mainCategoryState.sub);
-    console.log(sub,maincategoryData)
-
+    const all = useSelector((state) => state.mainCategoryState);
+    console.log("Table Data SubCategory ", sub, all, maincategoryData)
+    axios.get('https://wedeyet.herokuapp.com/api/subservice/all/', {
+        headers:
+        {
+            "Authorization": "Bearer " + auth.token,
+            "Content-Type": "application/json",
+        }
+    }).then(res => {
+        // console.log("Res ", res)
+        console.log(" Response Data ", res.data.SubServices)
+        testAllSubService = res.data.SubServices
+        testAllSubService =testAllSubService.map((item) => ({
+            ...item,
+            id: item._id,
+         }));
+        console.log(" Computed  Data ", testAllSubService)
+        setAllSubService(testAllSubService)
+    }).catch(err => { 
+        console.error("Error ",err)
+    })
     const columns = [
         {
             field: "id",
@@ -44,40 +67,20 @@ function Table({ main }) {
             flex: 0.3,
         },
         {
-            field: "subName",
-            headerName: "Sub Catagory",
+            field: "name",
+            headerName: "Name",
             minWidth: 100,
             flex: 1,
-            renderCell: (params) => {
-
-                return (
-                    <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
-                        <Box backgroundColor={"#F3F6F9"} padding={"3px"} borderRadius={"5px"}>
-                            <StyledIcon
-                                sx={{
-                                    color: colors.orange[500],
-                                }}
-                            >
-                                <Iconify icon={params.row?.image} width={30} height={30} />
-                            </StyledIcon>
-
-                        </Box>
-                        <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-
-                            <Box >{params.row.subcategoriename}</Box> <p ></p>
-                            {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
-                        </Box>
-
-                    </Box>
-                )
-            },
         },
         {
-            field: "Name",
+            field: "category",
             headerName: "Main Catagory",
             minWidth: 200,
             flex: 0.5,
             renderCell: (params) => {
+                const category = params.row.category;
+                const categoryName = category ? category.name : '';
+                const categoryID = category ? category.id : '';
                 return (
                     <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
                         <Box backgroundColor={"#F3F6F9"} padding={"3px"} borderRadius={"5px"}>
@@ -86,13 +89,12 @@ function Table({ main }) {
                                     color: colors.orange[500],
                                 }}
                             >
-                                <Iconify icon={params.row?.image} width={30} height={30} />
+                                {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
                             </StyledIcon>
 
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
-                            <Box >{params.row.name} </Box> <p ></p>
-                            {/* {main.name===params.row.name? <p> {`${main.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+                            <Box value={categoryID}>{categoryName} </Box> <p ></p>
                         </Box>
 
                     </Box>
@@ -120,16 +122,11 @@ function Table({ main }) {
 
     return (
         <>
-            <Typography variant="h5"
-                color={colors.grey[100]}
-                fontWeight="500">
-                Main Catagory
-            </Typography>
+            
             <DataGrid
-                // checkboxSelection
-                rows={sub}
+                rows={allSubService}
                 columns={columns}
-                pageSize={4}
+                pageSize={8}
                 groupModel={{
                     field: 'subName',
                 }}
@@ -143,6 +140,11 @@ function Table({ main }) {
                     },
                 }}
             />
+            {/* <Typography variant="h5"
+                color={colors.grey[100]}
+                fontWeight="500">
+                Main Catagory
+            </Typography> */}
         </>
     )
 }

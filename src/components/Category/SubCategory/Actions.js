@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import { styled } from '@mui/material/styles';
 import Iconify from '../../../Utils/Iconify';
+import axios from 'axios';
 import { editSubCategory, deleteSubCategory } from '../../../redux/mainCategory';
 const StyledIcon = styled('div')(() => ({
     display: 'flex',
@@ -35,7 +36,9 @@ function Actions({ id, main, name, editRoute, rowData }) {
     const [subCategoryName, setSubCategoryName] = useState(rowData.subcategoriename)
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const [branchImages, setBranchImages] = useState();
     const [mainCategoryName, setMainCategoryName] = useState(name)
+    const auth = useSelector((state) => state.persistedReducer.user);
     const [fileName, setFileName] = useState(rowData.image);
     const fileInputRef = React.useRef(null);
     const handleClose = () => {
@@ -44,22 +47,55 @@ function Actions({ id, main, name, editRoute, rowData }) {
     const handleEditClose = () => {
         setEditOpen(!editOpen)
     }
+    const editSubService = (id,editData)=>{
+        axios.put(`https://wedeyet.herokuapp.com/api/subservice/update/${id}`, editData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer '+auth.token
+            }
+        }).then((response) => {
+            console.log(" Edit Response : ",response,response.data)    
+        }).catch((error) => { 
+            console.error(" Edit Error : ",error.message)
+        })
+    }
+    const deleteSubServices = (id) => {
+        axios.delete(`https://wedeyet.herokuapp.com/api/subservice/delete/${id}`, {
+            headers: {
+                'Authorization': 'Bearer '+auth.token
+            }
+        }).then((response) => {
+            console.log(" Delete Response  : ",response,response.data)    
+        }).catch((error) => { 
+            console.error(" Edit Error : ",error)
+        })
+    }
     const deleteHandeler = () => {
         // setData((prevData) => prevData.filter((item) => !maindata.includes(item.id)));
         dispatch(deleteSubCategory(id))
         // main.filter(item => item.id==!id)
-        console.log(id)
-        console.log("deleter")
+        console.log(" Delete SubService : ", id)
+        deleteSubServices(id)
+        
     }
-    const editData = {
-        id: rowData.id, subcategoriename: subCategoryName,
-        image: fileName,
-        name: value
+    const handleSelectBranchImages = (event) => {   
+        if (event.target.files) {
+         setBranchImages(event.target.files[0]);
+        }
     }
-
+  
 
     const editHandeler = (e) => {
+        var editData={};
+        if (branchImages) { 
+            editData.image = branchImages
+        }
+        if (subCategoryName) {
+            editData.name = subCategoryName
+        }
         e.preventDefault();
+        console.log(" Edit Data : ", editData, " ID: ", id)
+        editSubService(id,editData)
         dispatch(editSubCategory(editData))
         setEditOpen(!editOpen)
 
@@ -67,7 +103,6 @@ function Actions({ id, main, name, editRoute, rowData }) {
     return (
         <>
             <Box display={"flex"} justifyContent="flex-left" alignItems="center" gap={"3px"}>
-
 
                 <Box onClick={() => handleEditClose()} bgcolor={"#F3F6F9"} p={"4px"} display={"flex"} justifyContent="flex-left" alignItems="center" borderRadius={"3px"} sx={{ cursor: "pointer" }}>
                     <EditIcon color="warning" />
@@ -93,81 +128,24 @@ function Actions({ id, main, name, editRoute, rowData }) {
                             gridTemplateColumns="repeat(1, minmax(0, 1fr))"
 
                         >
-                            <Typography
+                            {/* <Typography
                                 variant="h6"
                                 color={colors.grey[100]}
                                 fontWeight="600"
                             >
                                 Main Category Name
-                            </Typography>
-                            <Autocomplete
-                                id="country-select-demo"
-
-                                options={maincategoryData}
-                                autoHighlight
-                                getOptionLabel={(maincategoryData) => maincategoryData.name}
-                                value={value}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                }}
-                                inputValue={value}
-
-
-                                renderOption={(props, maincategoryData) => (
-                                    <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
-                                        {/* <img
-                  loading="lazy"
-                  width="20"
-                  src={}
-                  alt=""
-                /> */}
-
-                                        <StyledIcon
-                                            sx={{
-                                                color: colors.orange[500],
-                                            }}
-                                        >
-                                            <Iconify icon={maincategoryData.image} width={30} height={30} />
-                                        </StyledIcon>
-                                        {maincategoryData.name} {/* ({option.code}) +{option.phone} */}
-                                    </Box>
-                                )}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        fullWidth
-                                        label="Choose a Main Category"
-                                        inputProps={{
-                                            ...params.inputProps,
-                                            autoComplete: 'new-password', // disable autocomplete and autofill
-                                        }}
-                                        sx={{
-                                            "& .MuiOutlinedInput-root:hover": {
-                                                "& > fieldset": {
-                                                    borderColor: colors.greenAccent[400]
-                                                },
-                                                width: "100%",
-                                            },
-                                            "& .MuiTextField-root:focused": {
-                                                "& > fieldset": {
-                                                    borderColor: colors.greenAccent[400]
-                                                }
-                                            },
-                                            flexGrow: 1
-                                        }}
-                                    />
-                                )}
-                            />
+                            </Typography> */}
+                            
                             <Typography
                                 variant="h6"
                                 color={colors.grey[100]}
                                 fontWeight="600"
                             >
-                                Sub Category Name
+                                Name
                             </Typography>
                             <TextField
                                 fullWidth
-                                label="sub Category Name"
+                                label="Name"
                                 value={subCategoryName}
                                 onChange={(e) => setSubCategoryName(e.target.value)}
                                 sx={{
@@ -194,8 +172,8 @@ function Actions({ id, main, name, editRoute, rowData }) {
                             >
                                 Choose Image
                             </Typography>
-
-                            <FileChooserButton edit={true} value={fileName} fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} />
+                            <input type="file"  onChange={handleSelectBranchImages} />
+                            {/* <FileChooserButton edit={true} value={fileName} fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
                             <Button variant="text" sx={{
                                 "&.MuiButton-root": {
                                     borderRadius: "4px !important",

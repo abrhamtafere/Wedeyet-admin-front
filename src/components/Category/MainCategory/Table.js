@@ -74,14 +74,10 @@ console.log(rowsData)
             sortable: false,
             renderCell: (params) => {
                 return (
-
                     <Actions setMainCategoryName={setMainCategoryName}editRoute={"w"} id={params.row.id} name={(params.row.name) } rowData={params.row}/>
                 );
             },
         },
-
-
-
     ];
 
 

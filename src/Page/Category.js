@@ -49,9 +49,7 @@ function Category() {
       },
     })
     .then(res => {
-
       setMainCategoryData(res?.data);
-
     })
     .catch(err => {
       console.log('err', err);

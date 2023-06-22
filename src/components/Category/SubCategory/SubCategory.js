@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { tokens } from "../../../theme";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Box, Button, TextField, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { FileChooserButton } from './FileChooserButton';
 import Table from './Table';
@@ -10,6 +12,7 @@ import { generateRandomId } from '../../../Utils/randomID';
 import Iconify from '../../../Utils/Iconify';
 import { styled } from '@mui/material/styles';
 import Autocomplete from '@mui/material/Autocomplete';
+import axios from 'axios';
 const StyledIcon = styled('div')(() => ({
   display: 'flex',
   borderRadius: '50%',
@@ -28,24 +31,36 @@ function SubCategory() {
   const [fileName, setFileName] = useState('');
   const fileInputRef = React.useRef(null);
   const [value, setValue] = useState("");
+  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("")
+  const [branchImages, setBranchImages] = useState("");
   const [inputValue, setInputValue] = useState('');
+  const auth = useSelector((state) => state.persistedReducer.user);
   const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
+  const Service = useSelector((state) => state.mainCategoryState.ServiceSubService);
+
   const handleAddSubCategory = () => {
-    console.log(" Handle Add Sub Category ")
     const data = {
-      mainID:value.id,
-      name: value.name,
-      image: fileName,
-      subcategoriename:subCategoryName
-      // subcategories:"dsd"
+      category,
+      name: subCategoryName,
+      image: branchImages
     }
-    dispatch(addNewSubCategory(data))
-    // console.log(maincategoryData)
-    console.log(maincategoryData)
+    console.log(" Handle Add Sub Category ", data)
+    //  axios post with image data
+    axios.post('https://wedeyet.herokuapp.com/api/subservice/create/', data, {
+      headers: {
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(res => {
+      console.log(" Response ", res.data.SubService)
+      dispatch(addNewSubCategory(res.data.SubService))
+    }).catch(err => {
+      console.log("Error ", err)
+     })
+
   }
-
-
-
+  
   return (
     <>
       <Box borderRadius="10px" bgcolor="white" width="40vw" padding=" 1rem 3rem">
@@ -60,63 +75,23 @@ function SubCategory() {
             color={colors.grey[100]}
             fontWeight="600"
           >
-            Main Category Name
+          Main Category
+          <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={category}
+              label="Category"
+              autoWidth
+              onChange={(e)=>{setCategory(e.target.value)}}
+            >   
+          {Service?.map((cat) => (
+            <MenuItem key={cat._id} value={cat._id}>
+              {cat.name}
+            </MenuItem>
+          ))}
+         </Select>
           </Typography>
-          <Autocomplete
-            id="country-select-demo"
-            options={maincategoryData}
-            autoHighlight
-            getOptionLabel={(maincategoryData) => maincategoryData.name}
-            value={value.name}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-            // inputValue={value.name}
-             renderOption={(props, maincategoryData) => (
-              <Box sx={{ display: "flex",/* bgcolor:colors.greenAccent[500] */ alignItems: "center", justifyContent: "flex-start !important" }} {...props}>
-                {/* <img
-                  loading="lazy"
-                  width="20"
-                  src={}
-                  alt=""
-                /> */}
-
-                <StyledIcon
-                  sx={{
-                    color: colors.orange[500],
-                  }}
-                >
-                  <Iconify icon={maincategoryData.image} width={30} height={30} />
-                </StyledIcon>
-                {maincategoryData.name} {/* ({option.code}) +{option.phone} */}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                label="Choose a Main Category"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: 'new-password', // disable autocomplete and autofill
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root:hover": {
-                    "& > fieldset": {
-                      borderColor: colors.greenAccent[400]
-                    },
-                    width: "100%",
-                  },
-                  "& .MuiTextField-root:focused": {
-                    "& > fieldset": {
-                      borderColor: colors.greenAccent[400]
-                    }
-                  },
-                  flexGrow: 1
-                }}
-              />
-            )}
-          />
+          
           <Typography
             variant="h6"
             color={colors.grey[100]}
@@ -153,8 +128,8 @@ function SubCategory() {
           >
             Choose Image
           </Typography>
-
-          <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} />
+          <input type="file"  onChange={(e) => setBranchImages(e.target.files[0])} />
+          {/* <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
           <Button variant="text" sx={{
             "&.MuiButton-root": {
               borderRadius: "4px !important",
