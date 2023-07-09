@@ -45,7 +45,7 @@ function MainCategory() {
     image: branchImages,
   }
   const handleAdd = () => {
-    axios.post('https://wedeyet.herokuapp.com/api/service/create',
+    axios.post('https://wedeyet.herokuapp.com/api/service/create/',
       datam, {
       headers: {
         'Authorization': `Bearer ${auth.token}`,

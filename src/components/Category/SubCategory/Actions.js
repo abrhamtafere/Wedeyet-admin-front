@@ -98,7 +98,6 @@ function Actions({ id, main, name, editRoute, rowData }) {
         editSubService(id,editData)
         dispatch(editSubCategory(editData))
         setEditOpen(!editOpen)
-
     }
     return (
         <>
