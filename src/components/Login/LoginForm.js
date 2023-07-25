@@ -6,23 +6,29 @@ import {
   useMediaQuery,
   Typography,
   useTheme,
+  InputAdornment,
+  IconButton,
+  FormControlLabel,
+  Checkbox,
+  Grid,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
 import { useCookies } from "react-cookie";
 import { tokens } from "../../theme";
-import { useNavigate } from "react-router-dom";
- import { useDispatch } from "react-redux";
- import { setLogin } from "../../redux/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../redux/auth";
 
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
 });
-
-
 
 const initialValuesLogin = {
   email: "",
@@ -30,6 +36,9 @@ const initialValuesLogin = {
 };
 
 const LoginForm = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
@@ -37,12 +46,22 @@ const LoginForm = () => {
   const [cookies, setCookies, removeCookie] = useCookies();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const handleRememberMeChange = (event) => {
+    setRememberMe(event.target.checked);
+  };
+  const togglePasswordShow = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("https://wedeyet.herokuapp.com/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    const loggedInResponse = await fetch(
+      "https://wedeyet.herokuapp.com/api/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
     const loggedIn = await loggedInResponse.json();
     // console.log(loggedIn);
     setCookies("token", loggedIn.User.token);
@@ -53,7 +72,6 @@ const LoginForm = () => {
       dispatch(
         setLogin({
           user: loggedIn.User,
-
         })
       );
       navigate("/categorys");
@@ -61,14 +79,17 @@ const LoginForm = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-   await login(values, onSubmitProps);
+    await login(values, onSubmitProps);
+  };
 
+  const LinkStyle = {
+    textDecoration: "none",
   };
 
   return (
     <Formik
       onSubmit={handleFormSubmit}
-      initialValues={ initialValuesLogin }
+      initialValues={initialValuesLogin}
       validationSchema={loginSchema}
     >
       {({
@@ -82,6 +103,7 @@ const LoginForm = () => {
         resetForm,
       }) => (
         <form onSubmit={handleSubmit}>
+          {/* {console.log(values.password) } */}
           <Box
             display="grid"
             gap="30px"
@@ -90,25 +112,23 @@ const LoginForm = () => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
-
             <TextField
               label="Email"
               id="outlined-search"
               type="search"
-              sx={{ "& .MuiOutlinedInput-root:hover": {
-                "& > fieldset": {
-                  borderColor: colors.greenAccent[400]
-
-                }
-              },
-              "& .MuiOutlinedInput-root:Mui-focused": {
-                "& > fieldset": {
-                  borderColor: colors.greenAccent[400]
-
-                }
-              },
-              gridColumn: "span 4"
-            }}
+              sx={{
+                "& .MuiOutlinedInput-root:hover": {
+                  "& > fieldset": {
+                    borderColor: colors.greenAccent[400],
+                  },
+                },
+                "& .MuiOutlinedInput-root:Mui-focused": {
+                  "& > fieldset": {
+                    borderColor: colors.greenAccent[400],
+                  },
+                },
+                gridColumn: "span 4",
+              }}
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
@@ -117,34 +137,75 @@ const LoginForm = () => {
               helperText={touched.email && errors.email}
               // sx={{ gridColumn: "span 4" }}
             />
+
             <TextField
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {values.password !== "" && (
+                      <IconButton
+                        // we can do simple hostage for the button
+                        onMouseDown={togglePasswordShow}
+                        onMouseUp={togglePasswordShow}
+                      >
+                        {passwordShown ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffTwoToneIcon />
+                        )}
+                      </IconButton>
+                    )}
+                  </InputAdornment>
+                ),
+              }}
               label="Password"
-              type="password"
+              type={passwordShown ? "text" : "password"}
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.password}
               name="password"
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
-              sx={{ "& .MuiOutlinedInput-root:hover": {
-                "& > fieldset": {
-                  borderColor: colors.greenAccent[400]
-
-                }
-              },
-              "& .MuiOutlinedInput-root:Mui-focused": {
-                "& > fieldset": {
-                  borderColor: colors.greenAccent[400]
-
-                }
-              },
-              gridColumn: "span 4"
-            }}
+              sx={{
+                "& .MuiOutlinedInput-root:hover": {
+                  "& > fieldset": {
+                    borderColor: colors.greenAccent[400],
+                  },
+                },
+                "& .MuiOutlinedInput-root:Mui-focused": {
+                  "& > fieldset": {
+                    borderColor: colors.greenAccent[400],
+                  },
+                },
+                gridColumn: "span 4",
+              }}
             />
           </Box>
-          <Typography textAlign="right" mt="2px" variant="h6"  color={colors.grey[500]}>
-              Forgot Password
-          </Typography>
+
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={rememberMe}
+                    onChange={handleRememberMeChange}
+                    color="primary"
+                  />
+                }
+                label="Remember me"
+              />
+            </Grid>
+            <Grid item xs />
+            <Grid item>
+              <Typography
+                component={Link}
+                to="/forgot-password"
+                style={LinkStyle}
+              >
+                Forgot Password?
+              </Typography>
+            </Grid>
+          </Grid>
 
           <Box>
             <Button
@@ -154,13 +215,28 @@ const LoginForm = () => {
                 m: "2rem 0",
                 p: "1rem",
                 backgroundColor: colors.greenAccent[500],
-                 color: colors.white[100],
-                "&:hover": { color:colors.white[100] ,backgroundColor: colors.greenAccent[400] },
+                color: colors.white[100],
+                "&:hover": {
+                  color: colors.white[100],
+                  backgroundColor: colors.greenAccent[400],
+                },
               }}
             >
-           Login
-           </Button>
-
+              Login
+            </Button>
+            <Box color={colors.grey[500]} textAlign="center">
+              Don't have an account?&nbsp;
+              <Link
+                to="/signup"
+                style={{
+                  textDecoration: "none",
+                  color: "primary",
+                  fontWeight: "bold",
+                }}
+              >
+                Sign Up
+              </Link>
+            </Box>
           </Box>
         </form>
       )}

@@ -5,6 +5,7 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import wedeyetLogo from "./wedeyetLogo.png"
 import LoginForm from "../components/Login/LoginForm";
 import { tokens } from "../theme";
+
 const LoginPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -13,17 +14,18 @@ const LoginPage = () => {
   return (
     <>
       <Box
-        width="100%"
+        width="10%"
         p="1rem 6%"
         textAlign="left"
-
       >
-        <Box display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center">
-          <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+        <Box display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center" >
+          <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center"
+          >
             <img
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               alt="profile-user"
               width="50px"
-              height="50px"
+              height="50px" 
               object-fit="cover"
               src={wedeyetLogo}
               style={{ cursor: "pointer", borderRadius: "50%" }}
