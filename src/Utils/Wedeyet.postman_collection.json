@@ -1,0 +1,3473 @@
+{
+	"info": {
+		"_postman_id": "0cd15069-8215-4800-87e3-8c6f923f709a",
+		"name": "Wedeyet",
+		"description": "**Wedyet - Navigation Web App**\n\nWedyet is a web application designed to help users navigate through Addis Ababa, Ethiopia.\n\n- The app allows users to search for different places such as shops, cafes, hospitals, and more.\n- Each place is displayed on a map and provides important details such as image, title, description,  \n    services, open hours, phone number, Telegram account, and directions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28081719",
+		"_collection_link": "https://martian-spaceship-991346.postman.co/workspace/My-Workspace~24e82525-46a1-4a54-8211-fe7dc9a560bf/collection/15412777-0cd15069-8215-4800-87e3-8c6f923f709a?action=share&creator=28081719&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk2NTYyNiwiZXhwIjoxNjg0MDUyMDI2fQ.AybcRgqt1Mn1OtcfKyUwJLRE2_O7uTo4cbYNvi4wQjU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Nahom\",\r\n    \"lastName\": \"R\",\r\n    \"phoneNumber\": \"910011210\",\r\n    \"email\": \"nahom@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "### Register Route\n\n- JSON Data for all required ones\n- Only SuperAdmin can create Admin - superAdmin token must be added as token"
+					},
+					"response": [
+						{
+							"name": "Register SUPER ADMIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Elsa\",\r\n    \"lastName\": \"Solomon\",\r\n    \"phoneNumber\": \"910111210\",\r\n    \"email\": \"elsa@gmail.com\",\r\n    \"role\": \"SUPERADMIN\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "584"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"248-gpG42LU39gy5LlmuGc/dsPYJUqQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 May 2023 08:17:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"firstName\": \"Elsa\",\n        \"lastName\": \"Solomon\",\n        \"phoneNumber\": \"910111210\",\n        \"email\": \"elsa@gmail.com\",\n        \"password\": \"$2b$10$bN7q450b4fy3AYEaEIaVi.xaGNlaDTib.0k/GUdi3u/BejW9D.Kcy\",\n        \"role\": \"SUPERADMIN\",\n        \"_id\": \"645f479a6b83d7df7a3245e9\",\n        \"createdAt\": \"2023-05-13T08:17:30.273Z\",\n        \"updatedAt\": \"2023-05-13T08:17:30.273Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ1ZjQ3OWE2YjgzZDdkZjdhMzI0NWU5IiwiZW1haWwiOiJlbHNhQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk2NTg1MCwiZXhwIjoxNjg0MDUyMjUwfQ.aeJbVv82BfpWaWQKPeZl2nddotqn2auBPMkfuUKRNiQ\"\n    },\n    \"message\": \"Account Created Saved Succesfully !\"\n}"
+						},
+						{
+							"name": "Register ADMIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Nahom\",\r\n    \"lastName\": \"R\",\r\n    \"phoneNumber\": \"910011210\",\r\n    \"email\": \"nahom@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "576"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"240-h3y97N6bww/qjAFA3QVYWUkXRTY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 May 2023 08:18:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"firstName\": \"Nahom\",\n        \"lastName\": \"R\",\n        \"phoneNumber\": \"910011210\",\n        \"email\": \"nahom@gmail.com\",\n        \"password\": \"$2b$10$4ydLfURudgTGUlnPM3PltuStMOg4ysvZsTClBn1GCskUx9kU7Leva\",\n        \"role\": \"ADMIN\",\n        \"_id\": \"645f47dd6b83d7df7a3245ee\",\n        \"createdAt\": \"2023-05-13T08:18:37.828Z\",\n        \"updatedAt\": \"2023-05-13T08:18:37.828Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ1ZjQ3ZGQ2YjgzZDdkZjdhMzI0NWVlIiwiZW1haWwiOiJuYWhvbUBnbWFpbC5jb20iLCJpYXQiOjE2ODM5NjU5MTcsImV4cCI6MTY4NDA1MjMxN30.EJ2AA6goNoTVVD10zvX2DFIVbEP79CP-7CtzjCyepA4\"\n    },\n    \"message\": \"Account Created Saved Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4ODk5MjU3OCwiZXhwIjoxNjg5MDc4OTc4fQ.B2KFhN9lU6ByMwuX6j6d4qCPKOwzGAmZXxSiXHTFQXo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nuna@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "### Login Route\n\n- use \\[email, password\\] OR \\[phoneNumber, password\\] to authenticate"
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nuna@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "544"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"220-rDPtSQLk6p8HctvTiQUptG7nTTk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 May 2023 08:14:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"User\": {\n        \"_id\": \"644a1b15785284eba0662969\",\n        \"firstName\": \"Updated Name\",\n        \"lastName\": \"Wedeyet\",\n        \"phoneNumber\": \"966565659\",\n        \"email\": \"nuna@gmail.com\",\n        \"password\": \"$2b$10$BXPRtkBQiE3sjDtMV0C7bO4m6IFt6w53zu6y8iBEeA9l5mz8VkRsy\",\n        \"role\": \"SUPERADMIN\",\n        \"createdAt\": \"2023-04-27T06:49:57.503Z\",\n        \"updatedAt\": \"2023-05-13T08:13:46.302Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk2NTYyNiwiZXhwIjoxNjg0MDUyMDI2fQ.AybcRgqt1Mn1OtcfKyUwJLRE2_O7uTo4cbYNvi4wQjU\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk2NTYyNiwiZXhwIjoxNjg0MDUyMDI2fQ.AybcRgqt1Mn1OtcfKyUwJLRE2_O7uTo4cbYNvi4wQjU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Updated Name\",\r\n    \"phoneNumber\": \"966565659\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/update/644a1b15785284eba0662969",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"update",
+								"644a1b15785284eba0662969"
+							]
+						},
+						"description": "## Update Route\n\n- Must be Authenticated\n- Only user can update his account only except superadmin"
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Updated Name\",\r\n    \"phoneNumber\": \"966565659\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/update/644a1b15785284eba0662969",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"update",
+										"644a1b15785284eba0662969"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "593"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"251-k1C1lc7bzFRsO7CtftRR0R9PMrI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 07:10:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"updatedUser\": {\n        \"_id\": \"644a1b15785284eba0662969\",\n        \"firstName\": \"Updated Name\",\n        \"lastName\": \"Wedeyet\",\n        \"phoneNumber\": \"966565659\",\n        \"email\": \"nuna@gmail.com\",\n        \"password\": \"$2b$10$BXPRtkBQiE3sjDtMV0C7bO4m6IFt6w53zu6y8iBEeA9l5mz8VkRsy\",\n        \"role\": \"SUPERADMIN\",\n        \"createdAt\": \"2023-04-27T06:49:57.503Z\",\n        \"updatedAt\": \"2023-04-27T07:10:44.932Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g\"\n    },\n    \"message\": \"Profile Updated Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/current/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"current",
+								""
+							]
+						},
+						"description": "## Current User\n\n- must be authenticated\n- get current signed in user"
+					},
+					"response": [
+						{
+							"name": "Current User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/auth/current/",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"current",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "470"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d6-pNx40z5/+fyxeMAlM/zWC0WR3hE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 07:11:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"User\": {\n        \"_id\": \"644a1b15785284eba0662969\",\n        \"firstName\": \"Updated Name\",\n        \"lastName\": \"Wedeyet\",\n        \"phoneNumber\": \"966565659\",\n        \"email\": \"nuna@gmail.com\",\n        \"role\": \"SUPERADMIN\",\n        \"createdAt\": \"2023-04-27T06:49:57.503Z\",\n        \"updatedAt\": \"2023-04-27T07:10:44.932Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/get/644a1b15785284eba0662969",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"get",
+								"644a1b15785284eba0662969"
+							]
+						},
+						"description": "## Get User\n\n- must be authenticated\n- get user by id"
+					},
+					"response": [
+						{
+							"name": "Get User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/auth/get/644a1b15785284eba0662969",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"get",
+										"644a1b15785284eba0662969"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "567"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"237-U7WZiMW9UK61dD4dLCfRYjq57R4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 07:13:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"User\": {\n        \"_id\": \"644a1b15785284eba0662969\",\n        \"firstName\": \"Updated Name\",\n        \"lastName\": \"Wedeyet\",\n        \"phoneNumber\": \"966565659\",\n        \"email\": \"nuna@gmail.com\",\n        \"password\": \"$2b$10$BXPRtkBQiE3sjDtMV0C7bO4m6IFt6w53zu6y8iBEeA9l5mz8VkRsy\",\n        \"role\": \"SUPERADMIN\",\n        \"createdAt\": \"2023-04-27T06:49:57.503Z\",\n        \"updatedAt\": \"2023-04-27T07:10:44.932Z\",\n        \"__v\": 0,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g\"\n    },\n    \"message\": \" Success !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk2NTYyNiwiZXhwIjoxNjg0MDUyMDI2fQ.AybcRgqt1Mn1OtcfKyUwJLRE2_O7uTo4cbYNvi4wQjU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/get/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"get",
+								""
+							]
+						},
+						"description": "## Get All Users\n\n- must be authenticated\n- ADMIN - only gets all admins\n- SUPERADMIN - gets All"
+					},
+					"response": [
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/auth/get/",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"get",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-Q6U5XxC5cdss8+Q4AGgLontlo0M\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 07:14:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Require SuperAdmin role only!!\"\n}"
+						},
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/auth/get/",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"get",
+										""
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1086"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43e-s7ZBbSHXrtK+pjBxzt4vblxFjr8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 07:15:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalUsers\": 2,\n    \"Users\": [\n        {\n            \"_id\": \"644a1b15785284eba0662969\",\n            \"firstName\": \"Updated Name\",\n            \"lastName\": \"Wedeyet\",\n            \"phoneNumber\": \"966565659\",\n            \"email\": \"nuna@gmail.com\",\n            \"password\": \"$2b$10$BXPRtkBQiE3sjDtMV0C7bO4m6IFt6w53zu6y8iBEeA9l5mz8VkRsy\",\n            \"role\": \"SUPERADMIN\",\n            \"createdAt\": \"2023-04-27T06:49:57.503Z\",\n            \"updatedAt\": \"2023-04-27T07:10:44.932Z\",\n            \"__v\": 0,\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4MjU3OTQwMywiZXhwIjoxNjgyNjY1ODAzfQ.sQTrDAautGUvPRYUIc0gnaI1UlhUkjZle7ToWkQx26g\"\n        },\n        {\n            \"_id\": \"644a1d6a5b00b3ad9d7780a9\",\n            \"firstName\": \"Jacky\",\n            \"lastName\": \"Wedeyet\",\n            \"phoneNumber\": \"911111210\",\n            \"email\": \"jacky@nuna.com\",\n            \"password\": \"$2b$10$RTgHAwkCe867vCGhfD3uh.jM3h1W2/yYbIrSgLewkmHYKIdxeP/FS\",\n            \"role\": \"ADMIN\",\n            \"createdAt\": \"2023-04-27T06:59:54.365Z\",\n            \"updatedAt\": \"2023-04-27T07:14:29.429Z\",\n            \"__v\": 0,\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFkNmE1YjAwYjNhZDlkNzc4MGE5IiwiZW1haWwiOiJqYWNreUBudW5hLmNvbSIsImlhdCI6MTY4MjU3OTY2OSwiZXhwIjoxNjgyNjY2MDY5fQ.Gqyx6ICxiXf1AkzfgR4KTMseyR049Sr-yvEm3JHzDLo\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lakIjoiNjQ0MjY5ZTBjYWUzODc3NjI0OWQwMWExIiwiaWF0IjoxNjgyMDc0NTcyLCJleHAiOjE2ODIxNjA5NzJ9.UV1QSesBg8LjzP1Oc9YOWh8fdG38GySh1lto3Feq8XI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/delete/64426a07cae38776249d01a5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"delete",
+								"64426a07cae38776249d01a5"
+							]
+						},
+						"description": "## Delete User\n\n- must be authenticated\n- the user delete his own account only except SUPERADMIN"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0MjY5ZTBjYWUzODc3NjI0OWQwMWExIiwiaWF0IjoxNjgyMDc0NTcyLCJleHAiOjE2ODIxNjA5NzJ9.UV1QSesBg8LjzP1Oc9YOWh8fdG38GySh1lto3Feq8XI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						},
+						"description": "### Logout route"
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/auth/logout",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-4MYaCOtJfT6DiEe0eYY4/wFOdTA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Apr 2023 11:18:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logged Out Successfully.\",\n    \"Token\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "{{URL}}/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nuna@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "### Authentication Module\n\nUser Model\n\n- firstName - required\n- lastName - required\n- phoneNumber - required , must be Unique\n- email - required, must be Unique\n- password - required , minimum - 8\n- role - Must be one of them \\[\"ADMIN\" ,\"SUPERADMIN\" \\]"
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "Add Place",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDQxMzYwMywiZXhwIjoxNjg0NTAwMDAzfQ.1KUC7zlLDYoPdDW9gHSp0b0KvSR_fqxwPPjHod2Jg4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Unity University\",\r\n    \"description\": \"Private University in ethiopia\",\r\n    \"area\": \"Gerji\",\r\n    \"phoneNumber\": \"+25196298154\",\r\n    \"category\": \"646ba8a9297ceba50caf4bbf\",\r\n    \"subCategory\": \"646bb89bde58f876364a1136\",\r\n    \"address\": \"Near Gerji\",\r\n    \"telegram\": \"Unity_University\",\r\n    \"website\": \"http://unityuniversity.edu.et/\",\r\n    \"location\": {\r\n        \"type\": \"Point\",\r\n        \"coordinates\": [\r\n            9.0011084,\r\n            38.8052223\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/place/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"create"
+							]
+						},
+						"description": "Create Place\n\nadd required fields to create new place"
+					},
+					"response": [
+						{
+							"name": "Add Place",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"School of Tomorrow\",\r\n    \"description\": \"High school near Bole Michael\",\r\n    \"area\": \"Bole Michael\",\r\n    \"phoneNumber\": \"+251910170000\",\r\n    \"category\": \"646ba8a9297ceba50caf4bba\",\r\n    \"subCategory\":\"646bb89bde58f876364a1103\",\r\n    \"address\": \"Near Airport Road\",\r\n    \"telegram\": \"school_of_tomorrow\",\r\n    \"website\": \"http://www.schooloftomorrow-edu.com/\",\r\n    \"location\": {\r\n        \"type\": \"Point\",\r\n        \"coordinates\": [8.9849351,38.7795179]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/place/create",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "48"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "851"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "785"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"311-7knoQceS/AXwl4Vcnh9cJO77GBw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 10:49:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Place\": {\n        \"name\": \"School of Tomorrow\",\n        \"description\": \"High school near Bole Michael\",\n        \"area\": \"Bole Michael\",\n        \"phoneNumber\": \"+251910170000\",\n        \"category\": \"646ba8a9297ceba50caf4bba\",\n        \"subCategory\": \"646bb89bde58f876364a1103\",\n        \"address\": \"Near Airport Road\",\n        \"telegram\": \"school_of_tomorrow\",\n        \"website\": \"http://www.schooloftomorrow-edu.com/\",\n        \"location\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n                8.9849351,\n                38.7795179\n            ]\n        },\n        \"images\": [],\n        \"openHours\": {\n            \"Monday\": \"8:30AM - 5:30PM\",\n            \"Tuesday\": \"8:30AM - 5:30PM\",\n            \"Wednsday\": \"8:30AM - 5:30PM\",\n            \"Thursday\": \"8:30AM - 5:30PM\",\n            \"Friday\": \"8:30AM - 5:30PM\",\n            \"Saturday\": \"8:30AM - 12:30PM\",\n            \"Sunday\": \"Closed\"\n        },\n        \"_id\": \"646c9a2caf355032adab2328\",\n        \"branches\": [],\n        \"createdAt\": \"2023-05-23T10:49:16.350Z\",\n        \"updatedAt\": \"2023-05-23T10:49:16.350Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Place Created Saved Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Place",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk3NTU5NCwiZXhwIjoxNjg0MDYxOTk0fQ.R_3vgv3z-PKqdH9bW0aq_SWA--8gXORC5aLjZ2k_JMc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\":\"646ba8a9297ceba50caf4bbf\",\r\n    \"subCategory\":\"646bb89bde58f876364a1134\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/place/update/646c9cbd13a956afc311f67a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"update",
+								"646c9cbd13a956afc311f67a"
+							]
+						},
+						"description": "Update Place\n\n- update place info"
+					},
+					"response": [
+						{
+							"name": "Update Place",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phoneNumber\":\"0918459118\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/place/update/646c94cec7c9fd2807c4f7ef",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"update",
+										"646c94cec7c9fd2807c4f7ef"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "892"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-/BmivbmvdQT6VjvSA5UhSZMsLWA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 10:48:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Place Updated Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Place",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4ODk5MjU3OCwiZXhwIjoxNjg5MDc4OTc4fQ.B2KFhN9lU6ByMwuX6j6d4qCPKOwzGAmZXxSiXHTFQXo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/place/get/unity university",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"get",
+								"unity university"
+							]
+						},
+						"description": "Get Place\n\n- get Place by ID"
+					},
+					"response": [
+						{
+							"name": "Get Place",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/place/get/646c9a2caf355032adab2328",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"get",
+										"646c9a2caf355032adab2328"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "887"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "831"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33f-uXS75i4y9LAGPovkFYuC0Y0hVS0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 10:53:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Place\": [\n        {\n            \"_id\": \"646c9a2caf355032adab2328\",\n            \"name\": \"School of Tomorrow\",\n            \"description\": \"High school near Bole Michael\",\n            \"area\": \"Bole Michael\",\n            \"phoneNumber\": \"+251910170000\",\n            \"telegram\": \"school_of_tomorrow\",\n            \"website\": \"http://www.schooloftomorrow-edu.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9849351,\n                    38.7795179\n                ]\n            },\n            \"images\": [\n                \"https://res.cloudinary.com/dqednriao/image/upload/v1684839061/X.jpg\",\n                \"https://res.cloudinary.com/dqednriao/image/upload/v1684839063/Image.jpg\"\n            ],\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Place by Name , Category , Area , SubCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/place/search?category=Accomodation and Recreation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "university",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Accomodation and Recreation"
+								},
+								{
+									"key": "area",
+									"value": "gerji",
+									"disabled": true
+								},
+								{
+									"key": "subCategory",
+									"value": "universities",
+									"disabled": true
+								}
+							]
+						},
+						"description": "## Search Place\n\n- name - name of the place\n- category - places category\n- subcategory - places subcategory\n- area - places area\n    \n\nReturn the most related place with inserted query"
+					},
+					"response": [
+						{
+							"name": "Search Place by Name , Category , Area",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/place/search?category=Accomodation and Recreation",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "university",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "Accomodation and Recreation"
+										},
+										{
+											"key": "area",
+											"value": "gerji",
+											"disabled": true
+										},
+										{
+											"key": "subCategory",
+											"value": "universities",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "42"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "632"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2856"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b28-rLmRvsYIzCtEJfYhmptFK/2pDwg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:30:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"SearchResult\": 4,\n    \"Place\": [\n        {\n            \"_id\": \"646c9348035dee8d2cbe625d\",\n            \"name\": \"Ethiopian Skylight Hotel\",\n            \"description\": \"5 Star hotel in addis ababa , ethiopia\",\n            \"area\": \"Bole airport\",\n            \"phoneNumber\": \"+25115170000\",\n            \"telegram\": \"skylight_hotel\",\n            \"website\": \"https://www.ethiopianskylighthotel.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9879768,\n                    38.7843152\n                ]\n            },\n            \"images\": [],\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        },\n        {\n            \"_id\": \"646bbecd2c2719fecfade6e3\",\n            \"name\": \"Ramada Hotel\",\n            \"description\": \"4 Star hotel in addis ababa , ethiopia\",\n            \"area\": \"Bole bras\",\n            \"phoneNumber\": \"+251215170000\",\n            \"telegram\": \"hilton_hotel\",\n            \"website\": \"https://ramada-hotel.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9918625,\n                    38.7802608\n                ]\n            },\n            \"images\": [],\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        },\n        {\n            \"_id\": \"646c9a2caf355032adab2328\",\n            \"name\": \"School of Tomorrow\",\n            \"description\": \"High school near Bole Michael\",\n            \"area\": \"Bole Michael\",\n            \"phoneNumber\": \"+251910170000\",\n            \"telegram\": \"school_of_tomorrow\",\n            \"website\": \"http://www.schooloftomorrow-edu.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9849351,\n                    38.7795179\n                ]\n            },\n            \"images\": [\n                \"https://res.cloudinary.com/dqednriao/image/upload/v1684839061/X.jpg\",\n                \"https://res.cloudinary.com/dqednriao/image/upload/v1684839063/Image.jpg\"\n            ],\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        },\n        {\n            \"_id\": \"646c9cbd13a956afc311f67a\",\n            \"name\": \"Dandi Boru School\",\n            \"description\": \"High school near Wollo Sefer\",\n            \"area\": \"Wolo sefer\",\n            \"phoneNumber\": \"+251115529486\",\n            \"telegram\": \"Dandi_Boru_School\",\n            \"website\": \"http://dandiiboru.net/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9903717,\n                    38.7755331\n                ]\n            },\n            \"images\": [],\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Nearby  Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/place/?category=Education&subCategory=School&location=[8.8518625,38.792608]",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Mall",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Education"
+								},
+								{
+									"key": "subCategory",
+									"value": "School"
+								},
+								{
+									"key": "location",
+									"value": "[8.8518625,38.792608]"
+								}
+							]
+						},
+						"description": "## Search Nearby Place\n\n- name - name of the place\n- category - places category\n- subcategory - places subcategory\n- location - user's current location in latitude , longitude form\n    \n\nReturn the nearest place with distance"
+					},
+					"response": [
+						{
+							"name": "Search Nearby  Location",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/place/?category=Education&location=[8.8518625,38.792608]",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Mall",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "Education"
+										},
+										{
+											"key": "subCategory",
+											"value": "Hotels",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "[8.8518625,38.792608]"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "43"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "711"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1529"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f9-GIpyeQX7y3zqanJvtj9j03HunLM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:39:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"SearchResult\": 2,\n    \"Place\": [\n        {\n            \"_id\": \"646c9cbd13a956afc311f67a\",\n            \"name\": \"Dandi Boru School\",\n            \"description\": \"High school near Wollo Sefer\",\n            \"area\": \"Wolo sefer\",\n            \"phoneNumber\": \"+251115529486\",\n            \"telegram\": \"Dandi_Boru_School\",\n            \"website\": \"http://dandiiboru.net/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9903717,\n                    38.7755331\n                ]\n            },\n            \"images\": [],\n            \"dist\": {\n                \"calculated\": 12168.420237140208,\n                \"location\": {\n                    \"type\": \"Point\",\n                    \"coordinates\": [\n                        8.9903717,\n                        38.7755331\n                    ]\n                }\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1134\",\n                \"name\": \"Schools\",\n                \"category\": \"646ba8a9297ceba50caf4bbf\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n            }\n        },\n        {\n            \"_id\": \"646ca31ccaed20a05fc0cd8f\",\n            \"name\": \"Unity University\",\n            \"description\": \"Private University in ethiopia\",\n            \"area\": \"Gerji\",\n            \"phoneNumber\": \"+25196298154\",\n            \"telegram\": \"Unity_University\",\n            \"website\": \"http://unityuniversity.edu.et/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    9.0011084,\n                    38.8052223\n                ]\n            },\n            \"images\": [],\n            \"dist\": {\n                \"calculated\": 13023.944427880448,\n                \"location\": {\n                    \"type\": \"Point\",\n                    \"coordinates\": [\n                        9.0011084,\n                        38.8052223\n                    ]\n                }\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1136\",\n                \"name\": \"Universities\",\n                \"category\": \"646ba8a9297ceba50caf4bbf\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Search Nearby  Location",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/place/?category=Education&subCategory=Universities&location=[8.8518625,38.792608]",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Mall",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "Education"
+										},
+										{
+											"key": "subCategory",
+											"value": "Universities"
+										},
+										{
+											"key": "location",
+											"value": "[8.8518625,38.792608]"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "42"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "676"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "782"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30e-R6ej1LTnzpOYkWkrEt8BpzT2y4Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:39:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"SearchResult\": 1,\n    \"Place\": [\n        {\n            \"_id\": \"646ca31ccaed20a05fc0cd8f\",\n            \"name\": \"Unity University\",\n            \"description\": \"Private University in ethiopia\",\n            \"area\": \"Gerji\",\n            \"phoneNumber\": \"+25196298154\",\n            \"telegram\": \"Unity_University\",\n            \"website\": \"http://unityuniversity.edu.et/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    9.0011084,\n                    38.8052223\n                ]\n            },\n            \"images\": [],\n            \"dist\": {\n                \"calculated\": 13023.944427880448,\n                \"location\": {\n                    \"type\": \"Point\",\n                    \"coordinates\": [\n                        9.0011084,\n                        38.8052223\n                    ]\n                }\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1136\",\n                \"name\": \"Universities\",\n                \"category\": \"646ba8a9297ceba50caf4bbf\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Places",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4OTQwMDE3NywiZXhwIjoxNjg5NDg2NTc3fQ.uetMuHR6cJvNQlfo5u8v3WN8mfzJ15TC3cn0qgUtQg8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/place/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"all"
+							]
+						},
+						"description": "## Get All Places\n\n- Return all registered places"
+					},
+					"response": [
+						{
+							"name": "Get All Places",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/place/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"all"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "894"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2019"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e3-O5L5IemT/ytBvT2sUVTrUdCBQKI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 10:44:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalPlaces\": 3,\n    \"Places\": [\n        {\n            \"_id\": \"646c9348035dee8d2cbe625d\",\n            \"name\": \"Ethiopian Skylight Hotel\",\n            \"description\": \"5 Star hotel in addis ababa , ethiopia\",\n            \"area\": \"Bole airport\",\n            \"phoneNumber\": \"+25115170000\",\n            \"telegram\": \"skylight_hotel\",\n            \"website\": \"https://www.ethiopianskylighthotel.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9879768,\n                    38.7843152\n                ]\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        },\n        {\n            \"_id\": \"646c94cec7c9fd2807c4f7ef\",\n            \"name\": \"School of Tomorrow\",\n            \"description\": \"High school near Bole Michael\",\n            \"area\": \"Bole Michael\",\n            \"phoneNumber\": \"+251910170000\",\n            \"telegram\": \"school_of_tomorrow\",\n            \"website\": \"http://www.schooloftomorrow-edu.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9849351,\n                    38.7795179\n                ]\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        },\n        {\n            \"_id\": \"646bbecd2c2719fecfade6e3\",\n            \"name\": \"Ramada Hotel\",\n            \"description\": \"4 Star hotel in addis ababa , ethiopia\",\n            \"area\": \"Bole bras\",\n            \"phoneNumber\": \"+251215170000\",\n            \"telegram\": \"hilton_hotel\",\n            \"website\": \"https://ramada-hotel.com/\",\n            \"location\": {\n                \"type\": \"Point\",\n                \"coordinates\": [\n                    8.9918625,\n                    38.7802608\n                ]\n            },\n            \"category\": {\n                \"_id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n                \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n            },\n            \"subCategory\": {\n                \"_id\": \"646bb89bde58f876364a1103\",\n                \"name\": \"Hotels\",\n                \"category\": \"646ba8a9297ceba50caf4bba\",\n                \"__v\": 0,\n                \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n                \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Place",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk3NTU5NCwiZXhwIjoxNjg0MDYxOTk0fQ.R_3vgv3z-PKqdH9bW0aq_SWA--8gXORC5aLjZ2k_JMc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/place/delete/645f7517a3153f6a42ee7f16",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"delete",
+								"645f7517a3153f6a42ee7f16"
+							]
+						},
+						"description": "## Delete Place by ID\n\n- Delete place with id"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Images",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4Mzk3NTU5NCwiZXhwIjoxNjg0MDYxOTk0fQ.R_3vgv3z-PKqdH9bW0aq_SWA--8gXORC5aLjZ2k_JMc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HULU/Pictures/X.jpg"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HULU/Pictures/Image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/place/upload/646c9a2caf355032adab2328",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"place",
+								"upload",
+								"646c9a2caf355032adab2328"
+							]
+						},
+						"description": "#### **Upload Multiple Images to Place**\n\n- dont't forget to insert places ID\n- upload images of place to cloud\n- Max image size must be below 3 MB\n- can upload upto 4 images"
+					},
+					"response": [
+						{
+							"name": "Upload Images",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/HULU/Pictures/X.jpg"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/HULU/Pictures/Image.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/place/upload/646c9a2caf355032adab2328",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"place",
+										"upload",
+										"646c9a2caf355032adab2328"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "840"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "214"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d6-5Z2IZ3ubr4Ofh+1cGtFAmfWNimc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 10:51:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ImageURL\": [\n        \"https://res.cloudinary.com/dqednriao/image/upload/v1684839061/X.jpg\",\n        \"https://res.cloudinary.com/dqednriao/image/upload/v1684839063/Image.jpg\"\n    ],\n    \"message\": \"Place Image has been Uploaded Succesfully !\"\n}"
+						}
+					]
+				}
+			],
+			"description": "**Place Route**\n\nKEY **? means Optional field**\n\n- name\n- description\n- area - like \\['\"Bole bras\",\"Megenagna\"\\]\n- phoneNumber - unique\n- category :\"Category\" OR \"Service\" module\n- subCategory : \"SubCategory\" OR \"SubService\" module\n- address : descriptive address in relative condition\n- website : required\n- telegram: required username excluding @ symbol\n- location : lat, long\n- branchs **?** optional\n- openHours: **?** optional Object for Each Days start and end time like {\"Monday\":\"8:30AM-05:30PM\"} by default it sets most common used monday to friday 8:30-5:30 and saturday 8:30 - 12:00\n- images **?** optional"
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Create Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDA2MDM0MiwiZXhwIjoxNjg0MTQ2NzQyfQ.Crih15oF0_gVPBqzMHL5BjRV0tNqPsgNCbJ1_8-RpzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "akanji",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HULU/Pictures/aastu.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/service/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"create"
+							]
+						},
+						"description": "## Create Service\n\n- create service by indicating it's unique name only\n    \n\nreturns created service on success"
+					},
+					"response": [
+						{
+							"name": "Create Service",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Religious Places\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/service/create",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "46"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "810"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "200"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c8-kkgj1qEyzeTy/cjX8d9KMvBfIwg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:48:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Service\": {\n        \"name\": \"Religious Places\",\n        \"_id\": \"646ca7ff6beb48ef78e1df62\",\n        \"createdAt\": \"2023-05-23T11:48:15.795Z\",\n        \"updatedAt\": \"2023-05-23T11:48:15.795Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Service Created Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTA4MiwiZXhwIjoxNjg0MjYxNDgyfQ.C2gSWbuBifb2xVbhooFugcCZFEPE8YMAdiw55JspwYM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/get/646ba8a9297ceba50caf4bb9",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"get",
+								"646ba8a9297ceba50caf4bb9"
+							]
+						},
+						"description": "## Get Place by Id\n\n- id - insert existing id\n    \n\nReturn existing service by it's id if exisst"
+					},
+					"response": [
+						{
+							"name": "Get Service",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/service/get/646ba8a9297ceba50caf4bc2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"get",
+										"646ba8a9297ceba50caf4bc2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "48"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "872"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9e-R5bCBMqL+FYuf9dc8rALEKo72/k\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:47:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Service\": {\n        \"_id\": \"646ba8a9297ceba50caf4bc2\",\n        \"name\": \"Religious Places\",\n        \"__v\": 0,\n        \"createdAt\": \"2023-05-22T17:38:49.766Z\",\n        \"updatedAt\": \"2023-05-22T17:38:49.766Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get  All  SubService By Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTA4MiwiZXhwIjoxNjg0MjYxNDgyfQ.C2gSWbuBifb2xVbhooFugcCZFEPE8YMAdiw55JspwYM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/category/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"category",
+								"all"
+							]
+						},
+						"description": "## Get All SubServices By Category\n\nReturn all services with it's subservices"
+					},
+					"response": [
+						{
+							"name": "Get All Subservice by Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/service/category/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"category",
+										"all"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "48"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "889"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2623"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a3f-JfuJ5acYJGiH5ciXsG/SL7h2wp4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 18:14:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalServices\": 10,\n    \"ServiceSubService\": [\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbf\",\n            \"name\": \"Education\",\n            \"subServices\": [\n                \"Schools\",\n                \"Colleges\",\n                \"Universities\"\n            ],\n            \"totalSubService\": 3\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbc\",\n            \"name\": \"Health and Emergency\",\n            \"subServices\": [\n                \"Pharmacies\",\n                \"Specialized Hospitals\",\n                \"Police Stations\",\n                \"Dental Clinics\",\n                \"Veterinary Clinics\",\n                \"General Hospitals\",\n                \"Clinics\",\n                \"Fire Stations\"\n            ],\n            \"totalSubService\": 8\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bb9\",\n            \"name\": \"Food and Drink\",\n            \"subServices\": [\n                \"Traditional food\",\n                \"Restaurants\",\n                \"Cafes and Coffee shops\",\n                \"Juice Bars\",\n                \"International Restaurants\",\n                \"Fast Food\"\n            ],\n            \"totalSubService\": 6\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bba\",\n            \"name\": \"Accomodation and Recreation\",\n            \"subServices\": [\n                \"Traditional Guesthouses\",\n                \"Modern Guesthouses\",\n                \"Homestays\",\n                \"Resorts\",\n                \"Bed and Breakfasts\",\n                \"Lodges in Natural Settings\",\n                \"Hotels\",\n                \"Parks\"\n            ],\n            \"totalSubService\": 8\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc1\",\n            \"name\": \"Entertainment\",\n            \"subServices\": [\n                \"Theaters\",\n                \"Cinemas\",\n                \"Music Venues\",\n                \"Nightclubs\"\n            ],\n            \"totalSubService\": 4\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc3\",\n            \"name\": \"Professional Services\",\n            \"subServices\": [\n                \"Post Offices\",\n                \"Garage\",\n                \"Event planners\",\n                \"Immigration offices\",\n                \"Cleaning services\",\n                \"Photography\",\n                \"Accounting services\",\n                \"IT services\",\n                \"Spas and wellness center\",\n                \"Catering services\",\n                \"Internet Cafes\",\n                \"Consilting services\",\n                \"Beauty salons and barbershops\",\n                \"Ticket offices\",\n                \"Legal services\",\n                \"Engineering services\",\n                \"Logistics\",\n                \"Decor services\",\n                \"Travel agencies\",\n                \"Sports and fitness\",\n                \"Advertising companies\",\n                \"Embassy and consulate offices\",\n                \"Electronics maintenance\",\n                \"Telecom offices\",\n                \"Architecture\"\n            ],\n            \"totalSubService\": 25\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbe\",\n            \"name\": \"Finance\",\n            \"subServices\": [\n                \"Development bank\",\n                \"Insurance\",\n                \"Currency Exchange Services\",\n                \"Banks\",\n                \"Microfinances\",\n                \"ATMs\",\n                \"Mobile Money Services\"\n            ],\n            \"totalSubService\": 7\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bb8\",\n            \"name\": \"Transportation\",\n            \"subServices\": [\n                \"Vehicle Rental\",\n                \"Parking\",\n                \"Bus Stops\",\n                \"Train Stations\",\n                \"Gas Stations\"\n            ],\n            \"totalSubService\": 5\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbb\",\n            \"name\": \"Shopping\",\n            \"subServices\": [\n                \"Art Galleries\",\n                \"Supermarkets\",\n                \"Jewelry store\",\n                \"Local Markets\",\n                \"Bookstores\",\n                \"Cosmetics and Beauty Stores\",\n                \"Shopping Malls\",\n                \"Building material shops\",\n                \"Craft Markets\",\n                \"Clothing Stores\",\n                \"Electronics Stores\",\n                \"Textile Markets\",\n                \"Furniture shops\"\n            ],\n            \"totalSubService\": 13\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbd\",\n            \"name\": \"Tourism and Sightseeing\",\n            \"subServices\": [\n                \"Ancient Ruins\",\n                \"Hiking Routes\",\n                \"Viewpoints\",\n                \"Waterfalls\",\n                \"Rock-Hewn Churches\",\n                \"Cultural Museums\",\n                \"Castles and Forts\",\n                \"Galleries\",\n                \"Mountains\",\n                \"National Museums\",\n                \"Wildlife Sanctuaries\",\n                \"Statues and Landmarks\",\n                \"Camping Sites\"\n            ],\n            \"totalSubService\": 13\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get  All SubService By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTA4MiwiZXhwIjoxNjg0MjYxNDgyfQ.C2gSWbuBifb2xVbhooFugcCZFEPE8YMAdiw55JspwYM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/category/646ba8a9297ceba50caf4bbf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"category",
+								"646ba8a9297ceba50caf4bbf"
+							]
+						},
+						"description": "## Get All SubServices By ID\n\nReturn all subservices with service ID"
+					},
+					"response": [
+						{
+							"name": "Get Service By Category Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/service/category/646ba8a9297ceba50caf4bbf",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"category",
+										"646ba8a9297ceba50caf4bbf"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "47"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "769"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "181"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b5-zGP570ozlrxQUoKGSd+dkSZTM5w\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 May 2023 12:12:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Education Subservices\",\n    \"ServiceSubService\": {\n        \"_id\": \"646ba8a9297ceba50caf4bbf\",\n        \"name\": \"Education\",\n        \"subServices\": [\n            \"Schools\",\n            \"Colleges\",\n            \"Universities\"\n        ],\n        \"totalSubService\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUxNDEwMiwiZXhwIjoxNjg1NjAwNTAyfQ.KCl65pxQv0NhLnFSHiBaNjMU9KdMI9GUafjWLHzLP9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"all"
+							]
+						},
+						"description": "## Get All Services\n\nReturn all services"
+					},
+					"response": [
+						{
+							"name": "Get All Services",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/service/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"all"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "895"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1785"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6f9-C7z7Lv+9KHCYRfiTQx7M87KbjmU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:46:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalServices\": 12,\n    \"Services\": [\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bb8\",\n            \"name\": \"Transportation\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.762Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.762Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bb9\",\n            \"name\": \"Food and Drink\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.763Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.763Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bba\",\n            \"name\": \"Accomodation and Recreation\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbb\",\n            \"name\": \"Shopping\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbc\",\n            \"name\": \"Health and Emergency\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbd\",\n            \"name\": \"Tourism and Sightseeing\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.764Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.764Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbe\",\n            \"name\": \"Finance\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bbf\",\n            \"name\": \"Education\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc0\",\n            \"name\": \"Services\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc1\",\n            \"name\": \"Entertainment\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.765Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.765Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc2\",\n            \"name\": \"Religious Places\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.766Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.766Z\"\n        },\n        {\n            \"_id\": \"646ba8a9297ceba50caf4bc3\",\n            \"name\": \"Professional Services\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T17:38:49.766Z\",\n            \"updatedAt\": \"2023-05-22T17:38:49.766Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUxNDEwMiwiZXhwIjoxNjg1NjAwNTAyfQ.KCl65pxQv0NhLnFSHiBaNjMU9KdMI9GUafjWLHzLP9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Accomodation and Recreation",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HULU/Pictures/Slow Capture.PNG"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/service/update/646ba8a9297ceba50caf4bba",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"update",
+								"646ba8a9297ceba50caf4bba"
+							]
+						},
+						"description": "## Update Services\n\n- id - id of the place\n- name - name of the place"
+					},
+					"response": [
+						{
+							"name": "Update Service",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Religious Place\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/service/update/646ca7ff6beb48ef78e1df62",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"update",
+										"646ca7ff6beb48ef78e1df62"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "45"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "637"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "199"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c7-ylI3GHRxGMZgst0ClFnFksgdZTM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:51:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Service\": {\n        \"_id\": \"646ca7ff6beb48ef78e1df62\",\n        \"name\": \"Religious Place\",\n        \"createdAt\": \"2023-05-23T11:48:15.795Z\",\n        \"updatedAt\": \"2023-05-23T11:51:09.289Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Service Updated Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFkNmE1YjAwYjNhZDlkNzc4MGE5IiwiZW1haWwiOiJqYWNreUBudW5hLmNvbSIsImlhdCI6MTY4MzIyNDU3NCwiZXhwIjoxNjgzMzEwOTc0fQ.FzzvySP5bu2qBalAJIXc9Tu0S_STEOJHalvUbFwLn1c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/delete/646ba8a9297ceba50caf4bc2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"delete",
+								"646ba8a9297ceba50caf4bc2"
+							]
+						},
+						"description": "## Delete Service\n\n- id - id of the place"
+					},
+					"response": [
+						{
+							"name": "Delete Service",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/service/delete/646ba8a9297ceba50caf4bc2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"service",
+										"delete",
+										"646ba8a9297ceba50caf4bc2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "47"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "849"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-KjolCO+L2r7UpyXaiH+ofL2q55g\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:47:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Service has been Deleted Succesfully !\"\n}"
+						}
+					]
+				}
+			],
+			"description": "### Service\n\n- name - must be unique service name must be descriptive and can add sub services to it"
+		},
+		{
+			"name": "Sub Service",
+			"item": [
+				{
+					"name": "Create  SubService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NzMzNDgzNSwiZXhwIjoxNjg3NDIxMjM1fQ.ixneSaZjmpBcua-yHJhPNnsQbFTWus4qysgg2hqO-LI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Log",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "646ba8a9297ceba50caf4bc3",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/HULU/Pictures/Data Capture.PNG"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/subservice/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subservice",
+								"create"
+							]
+						},
+						"description": "## Create Subservice\n\n- name - name of sub service\n- category - subservices category OR service\n    \n\nReturn the newly created subservice"
+					},
+					"response": [
+						{
+							"name": "Create  SubService",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Logistics\",\r\n    \"category\": \"646ba8a9297ceba50caf4bc3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/subservice/create",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"subservice",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "46"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "696"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "225"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e1-8dUqbYKiNTKjaRy+2Yrf/xP5HT4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:58:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"SubService\": {\n        \"name\": \"Logistics\",\n        \"category\": \"646ba8a9297ceba50caf4bc3\",\n        \"_id\": \"646caa74fe7c4260164788bf\",\n        \"createdAt\": \"2023-05-23T11:58:44.370Z\",\n        \"updatedAt\": \"2023-05-23T11:58:44.370Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Sub Service Created!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Test Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFkNmE1YjAwYjNhZDlkNzc4MGE5IiwiZW1haWwiOiJqYWNreUBudW5hLmNvbSIsImlhdCI6MTY4MzIyNDU3NCwiZXhwIjoxNjgzMzEwOTc0fQ.FzzvySP5bu2qBalAJIXc9Tu0S_STEOJHalvUbFwLn1c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/service/test",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"service",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  SubService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTA4MiwiZXhwIjoxNjg0MjYxNDgyfQ.C2gSWbuBifb2xVbhooFugcCZFEPE8YMAdiw55JspwYM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/subservice/get/646bb89bde58f876364a10f8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subservice",
+								"get",
+								"646bb89bde58f876364a10f8"
+							]
+						},
+						"description": "## Get Subservice\n\n- id - id of sub service\n    \n\nReturn the existing subservice this id"
+					},
+					"response": [
+						{
+							"name": "Get  SubService",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/subservice/get/646bb89bde58f876364a10f8",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"subservice",
+										"get",
+										"646bb89bde58f876364a10f8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "894"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-D0tcIEL+eh2f981u2RcUvBdyLV0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 12:08:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Service\": {\n        \"_id\": \"646bb89bde58f876364a10f8\",\n        \"name\": \"Gas Stations\",\n        \"category\": {\n            \"id\": \"646ba8a9297ceba50caf4bb8\",\n            \"name\": \"Transportation\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All  SubServices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDc0MDQxOSwiZXhwIjoxNjg0ODI2ODE5fQ.T5ysdTKZD81gHbaby2ciU24-MUoH0NHGzINz2JFleoQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/subService/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subService",
+								"all"
+							]
+						},
+						"description": "## Get All Subservices\n\nReturn all subServices"
+					},
+					"response": [
+						{
+							"name": "Get All  SubServices",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/subService/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"subService",
+										"all"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "49"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "884"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "17452"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"442c-vMwwojryqSaxZRHBTn7KMzjH+HE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:55:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalSubServices\": 95,\n    \"SubServices\": [\n        {\n            \"_id\": \"646bb89bde58f876364a10f8\",\n            \"name\": \"Gas Stations\",\n            \"category\": \"646ba8a9297ceba50caf4bb8\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.500Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.500Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10f9\",\n            \"name\": \"Parking\",\n            \"category\": \"646ba8a9297ceba50caf4bb8\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.502Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.502Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fa\",\n            \"name\": \"Vehicle Rental\",\n            \"category\": \"646ba8a9297ceba50caf4bb8\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.502Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.502Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fb\",\n            \"name\": \"Bus Stops\",\n            \"category\": \"646ba8a9297ceba50caf4bb8\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.503Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.503Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fc\",\n            \"name\": \"Train Stations\",\n            \"category\": \"646ba8a9297ceba50caf4bb8\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.510Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.510Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fd\",\n            \"name\": \"Restaurants\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.511Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.511Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fe\",\n            \"name\": \"Traditional food\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.513Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.513Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10ff\",\n            \"name\": \"International Restaurants\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.513Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.513Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1100\",\n            \"name\": \"Cafes and Coffee shops\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.514Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.514Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1101\",\n            \"name\": \"Fast Food\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.514Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.514Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1102\",\n            \"name\": \"Juice Bars\",\n            \"category\": \"646ba8a9297ceba50caf4bb9\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1103\",\n            \"name\": \"Hotels\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.515Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.515Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1104\",\n            \"name\": \"Bed and Breakfasts\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.516Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.516Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1105\",\n            \"name\": \"Resorts\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.516Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.516Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1106\",\n            \"name\": \"Traditional Guesthouses\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.517Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.517Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1107\",\n            \"name\": \"Modern Guesthouses\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.517Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.517Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1108\",\n            \"name\": \"Parks\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.517Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.517Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1109\",\n            \"name\": \"Lodges in Natural Settings\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.518Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.518Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110a\",\n            \"name\": \"Homestays\",\n            \"category\": \"646ba8a9297ceba50caf4bba\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.518Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.518Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110b\",\n            \"name\": \"Shopping Malls\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.518Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.518Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110c\",\n            \"name\": \"Clothing Stores\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.518Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.518Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110d\",\n            \"name\": \"Electronics Stores\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.519Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.519Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110e\",\n            \"name\": \"Supermarkets\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.519Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.519Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110f\",\n            \"name\": \"Bookstores\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.519Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.519Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1110\",\n            \"name\": \"Cosmetics and Beauty Stores\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.519Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.519Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1111\",\n            \"name\": \"Furniture shops\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.519Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.519Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1112\",\n            \"name\": \"Building material shops\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.520Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.520Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1113\",\n            \"name\": \"Local Markets\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.520Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.520Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1114\",\n            \"name\": \"Craft Markets\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.520Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.520Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1115\",\n            \"name\": \"Textile Markets\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.521Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.521Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1116\",\n            \"name\": \"Art Galleries\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.521Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.521Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1117\",\n            \"name\": \"Jewelry store\",\n            \"category\": \"646ba8a9297ceba50caf4bbb\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.521Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.521Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1118\",\n            \"name\": \"General Hospitals\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.522Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.522Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1119\",\n            \"name\": \"Specialized Hospitals\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.522Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.522Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111a\",\n            \"name\": \"Pharmacies\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.523Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.523Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111b\",\n            \"name\": \"Clinics\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.524Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.524Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111c\",\n            \"name\": \"Police Stations\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.524Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.524Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111d\",\n            \"name\": \"Fire Stations\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.525Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.525Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111e\",\n            \"name\": \"Dental Clinics\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.525Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.525Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111f\",\n            \"name\": \"Veterinary Clinics\",\n            \"category\": \"646ba8a9297ceba50caf4bbc\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.525Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.525Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1120\",\n            \"name\": \"Ancient Ruins\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.525Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.525Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1121\",\n            \"name\": \"Castles and Forts\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.526Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.526Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1122\",\n            \"name\": \"Rock-Hewn Churches\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.526Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.526Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1123\",\n            \"name\": \"Wildlife Sanctuaries\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.526Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.526Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1124\",\n            \"name\": \"Hiking Routes\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.526Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.526Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1125\",\n            \"name\": \"Camping Sites\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.527Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.527Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1126\",\n            \"name\": \"National Museums\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.527Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.527Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1127\",\n            \"name\": \"Cultural Museums\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.527Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.527Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1128\",\n            \"name\": \"Galleries\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.528Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.528Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1129\",\n            \"name\": \"Statues and Landmarks\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.528Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.528Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112a\",\n            \"name\": \"Viewpoints\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.529Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.529Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112b\",\n            \"name\": \"Waterfalls\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.529Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.529Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112c\",\n            \"name\": \"Mountains\",\n            \"category\": \"646ba8a9297ceba50caf4bbd\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112d\",\n            \"name\": \"Banks\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112e\",\n            \"name\": \"Development bank\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112f\",\n            \"name\": \"Microfinances\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1130\",\n            \"name\": \"ATMs\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1131\",\n            \"name\": \"Currency Exchange Services\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.530Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.530Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1132\",\n            \"name\": \"Mobile Money Services\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1133\",\n            \"name\": \"Insurance\",\n            \"category\": \"646ba8a9297ceba50caf4bbe\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1134\",\n            \"name\": \"Schools\",\n            \"category\": \"646ba8a9297ceba50caf4bbf\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1135\",\n            \"name\": \"Colleges\",\n            \"category\": \"646ba8a9297ceba50caf4bbf\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1136\",\n            \"name\": \"Universities\",\n            \"category\": \"646ba8a9297ceba50caf4bbf\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.531Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.531Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1137\",\n            \"name\": \"Post Offices\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.532Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.532Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1138\",\n            \"name\": \"Internet Cafes\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.532Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.532Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1139\",\n            \"name\": \"Sports and fitness\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.532Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.532Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113a\",\n            \"name\": \"Beauty salons and barbershops\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.532Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.532Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113b\",\n            \"name\": \"Spas and wellness center\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.532Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.532Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113c\",\n            \"name\": \"Electronics maintenance\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.533Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.533Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113d\",\n            \"name\": \"Cleaning services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.533Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.533Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113e\",\n            \"name\": \"Decor services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.533Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.533Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113f\",\n            \"name\": \"Garage\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.533Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.533Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1140\",\n            \"name\": \"Event planners\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1141\",\n            \"name\": \"Catering services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1142\",\n            \"name\": \"Photography\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1143\",\n            \"name\": \"Immigration offices\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1144\",\n            \"name\": \"Embassy and consulate offices\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1145\",\n            \"name\": \"Telecom offices\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.534Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.534Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1146\",\n            \"name\": \"Travel agencies\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1147\",\n            \"name\": \"Ticket offices\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1148\",\n            \"name\": \"Cinemas\",\n            \"category\": \"646ba8a9297ceba50caf4bc1\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1149\",\n            \"name\": \"Theaters\",\n            \"category\": \"646ba8a9297ceba50caf4bc1\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114a\",\n            \"name\": \"Nightclubs\",\n            \"category\": \"646ba8a9297ceba50caf4bc1\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114b\",\n            \"name\": \"Music Venues\",\n            \"category\": \"646ba8a9297ceba50caf4bc1\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.535Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.535Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114c\",\n            \"name\": \"Churches\",\n            \"category\": \"646ba8a9297ceba50caf4bc2\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.536Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.536Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114d\",\n            \"name\": \"Mosques\",\n            \"category\": \"646ba8a9297ceba50caf4bc2\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.536Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.536Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114e\",\n            \"name\": \"Temples\",\n            \"category\": \"646ba8a9297ceba50caf4bc2\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.539Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.539Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114f\",\n            \"name\": \"Legal services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.539Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.539Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1150\",\n            \"name\": \"Consilting services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.539Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.539Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1151\",\n            \"name\": \"Logistics\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.540Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.540Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1152\",\n            \"name\": \"IT services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.540Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.540Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1153\",\n            \"name\": \"Accounting services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.540Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.540Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1154\",\n            \"name\": \"Architecture\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.540Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.540Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1155\",\n            \"name\": \"Advertising companies\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.540Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.540Z\"\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1156\",\n            \"name\": \"Engineering services\",\n            \"category\": \"646ba8a9297ceba50caf4bc3\",\n            \"__v\": 0,\n            \"createdAt\": \"2023-05-22T18:46:51.541Z\",\n            \"updatedAt\": \"2023-05-22T18:46:51.541Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All  SubServices",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/subService/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"subService",
+										"all"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "48"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "840"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "12161"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f81-IBVyXYa/vD1C0O8qKq8U8ck4eSg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 12:11:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalSubServices\": 92,\n    \"SubServices\": [\n        {\n            \"_id\": \"646bb89bde58f876364a10f8\",\n            \"name\": \"Gas Stations\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb8\",\n                \"name\": \"Transportation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10f9\",\n            \"name\": \"Parking\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb8\",\n                \"name\": \"Transportation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fa\",\n            \"name\": \"Vehicle Rental\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb8\",\n                \"name\": \"Transportation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fb\",\n            \"name\": \"Bus Stops\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb8\",\n                \"name\": \"Transportation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fc\",\n            \"name\": \"Train Stations\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb8\",\n                \"name\": \"Transportation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fd\",\n            \"name\": \"Restaurants\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10fe\",\n            \"name\": \"Traditional food\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a10ff\",\n            \"name\": \"International Restaurants\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1100\",\n            \"name\": \"Cafes and Coffee shops\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1101\",\n            \"name\": \"Fast Food\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1102\",\n            \"name\": \"Juice Bars\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bb9\",\n                \"name\": \"Food and Drink\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1103\",\n            \"name\": \"Hotels\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1104\",\n            \"name\": \"Bed and Breakfasts\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1105\",\n            \"name\": \"Resorts\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1106\",\n            \"name\": \"Traditional Guesthouses\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1107\",\n            \"name\": \"Modern Guesthouses\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1108\",\n            \"name\": \"Parks\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1109\",\n            \"name\": \"Lodges in Natural Settings\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110a\",\n            \"name\": \"Homestays\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bba\",\n                \"name\": \"Accomodation and Recreation\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110b\",\n            \"name\": \"Shopping Malls\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110c\",\n            \"name\": \"Clothing Stores\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110d\",\n            \"name\": \"Electronics Stores\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110e\",\n            \"name\": \"Supermarkets\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a110f\",\n            \"name\": \"Bookstores\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1110\",\n            \"name\": \"Cosmetics and Beauty Stores\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1111\",\n            \"name\": \"Furniture shops\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1112\",\n            \"name\": \"Building material shops\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1113\",\n            \"name\": \"Local Markets\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1114\",\n            \"name\": \"Craft Markets\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1115\",\n            \"name\": \"Textile Markets\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1116\",\n            \"name\": \"Art Galleries\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1117\",\n            \"name\": \"Jewelry store\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbb\",\n                \"name\": \"Shopping\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1118\",\n            \"name\": \"General Hospitals\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1119\",\n            \"name\": \"Specialized Hospitals\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111a\",\n            \"name\": \"Pharmacies\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111b\",\n            \"name\": \"Clinics\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111c\",\n            \"name\": \"Police Stations\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111d\",\n            \"name\": \"Fire Stations\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111e\",\n            \"name\": \"Dental Clinics\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a111f\",\n            \"name\": \"Veterinary Clinics\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbc\",\n                \"name\": \"Health and Emergency\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1120\",\n            \"name\": \"Ancient Ruins\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1121\",\n            \"name\": \"Castles and Forts\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1122\",\n            \"name\": \"Rock-Hewn Churches\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1123\",\n            \"name\": \"Wildlife Sanctuaries\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1124\",\n            \"name\": \"Hiking Routes\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1125\",\n            \"name\": \"Camping Sites\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1126\",\n            \"name\": \"National Museums\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1127\",\n            \"name\": \"Cultural Museums\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1128\",\n            \"name\": \"Galleries\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1129\",\n            \"name\": \"Statues and Landmarks\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112a\",\n            \"name\": \"Viewpoints\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112b\",\n            \"name\": \"Waterfalls\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112c\",\n            \"name\": \"Mountains\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbd\",\n                \"name\": \"Tourism and Sightseeing\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112d\",\n            \"name\": \"Banks\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112e\",\n            \"name\": \"Development bank\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a112f\",\n            \"name\": \"Microfinances\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1130\",\n            \"name\": \"ATMs\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1131\",\n            \"name\": \"Currency Exchange Services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1132\",\n            \"name\": \"Mobile Money Services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1133\",\n            \"name\": \"Insurance\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbe\",\n                \"name\": \"Finance\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1134\",\n            \"name\": \"Schools\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1135\",\n            \"name\": \"Colleges\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1136\",\n            \"name\": \"Universities\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bbf\",\n                \"name\": \"Education\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1137\",\n            \"name\": \"Post Offices\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1138\",\n            \"name\": \"Internet Cafes\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1139\",\n            \"name\": \"Sports and fitness\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113a\",\n            \"name\": \"Beauty salons and barbershops\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113b\",\n            \"name\": \"Spas and wellness center\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113c\",\n            \"name\": \"Electronics maintenance\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113d\",\n            \"name\": \"Cleaning services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113e\",\n            \"name\": \"Decor services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a113f\",\n            \"name\": \"Garage\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1140\",\n            \"name\": \"Event planners\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1141\",\n            \"name\": \"Catering services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1142\",\n            \"name\": \"Photography\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1143\",\n            \"name\": \"Immigration offices\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1144\",\n            \"name\": \"Embassy and consulate offices\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1145\",\n            \"name\": \"Telecom offices\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1146\",\n            \"name\": \"Travel agencies\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1147\",\n            \"name\": \"Ticket offices\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1148\",\n            \"name\": \"Cinemas\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc1\",\n                \"name\": \"Entertainment\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1149\",\n            \"name\": \"Theaters\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc1\",\n                \"name\": \"Entertainment\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114a\",\n            \"name\": \"Nightclubs\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc1\",\n                \"name\": \"Entertainment\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114b\",\n            \"name\": \"Music Venues\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc1\",\n                \"name\": \"Entertainment\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a114f\",\n            \"name\": \"Legal services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1150\",\n            \"name\": \"Consilting services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1152\",\n            \"name\": \"IT services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1153\",\n            \"name\": \"Accounting services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1154\",\n            \"name\": \"Architecture\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1155\",\n            \"name\": \"Advertising companies\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646bb89bde58f876364a1156\",\n            \"name\": \"Engineering services\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        },\n        {\n            \"_id\": \"646caa74fe7c4260164788bf\",\n            \"name\": \"Logistics\",\n            \"category\": {\n                \"id\": \"646ba8a9297ceba50caf4bc3\",\n                \"name\": \"Professional Services\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update SubService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFkNmE1YjAwYjNhZDlkNzc4MGE5IiwiZW1haWwiOiJqYWNreUBudW5hLmNvbSIsImlhdCI6MTY4MzIyNDU3NCwiZXhwIjoxNjgzMzEwOTc0fQ.FzzvySP5bu2qBalAJIXc9Tu0S_STEOJHalvUbFwLn1c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"Laundary houses\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/subservice/update/645402005b3cd8b7b3271525",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subservice",
+								"update",
+								"645402005b3cd8b7b3271525"
+							]
+						},
+						"description": "## Update Subservice\n\n- id - id of sub service\n- name - name of sub service\n- category - subservices category OR service\n    \n\nReturn the newly updated subservice"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete  SubService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NzMzNDgzNSwiZXhwIjoxNjg3NDIxMjM1fQ.ixneSaZjmpBcua-yHJhPNnsQbFTWus4qysgg2hqO-LI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/subservice/delete/6492bd752271a46830989aea",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subservice",
+								"delete",
+								"6492bd752271a46830989aea"
+							]
+						},
+						"description": "## Delete Subservice\n\n- id- idof sub service"
+					},
+					"response": [
+						{
+							"name": "Delete  SubService",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/subservice/delete/646bb89bde58f876364a1151",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"subservice",
+										"delete",
+										"646bb89bde58f876364a1151"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "47"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "704"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-aKCSus7Xa6ZhAxLorGtEGfGq/tg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 May 2023 11:58:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Sub Service has been Deleted Succesfully !\"\n}"
+						}
+					]
+				}
+			],
+			"description": "## Subservice\n\n- name - name of subservice\n- category - where it belongs to Category | Service"
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "Get Feedback",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTYyOSwiZXhwIjoxNjg0MjYyMDI5fQ.V_5eJ_L1UdlyAj_s8AioERtbpvgLdPXYWLyVbvUwwnk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/feedback//get/64637a1bc3d87158b5e546e0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"feedback",
+								"",
+								"get",
+								"64637a1bc3d87158b5e546e0"
+							]
+						},
+						"description": "## Get Feedback by id"
+					},
+					"response": [
+						{
+							"name": "Get Feedback",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/feedback//get/64637a1bc3d87158b5e546e0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"feedback",
+										"",
+										"get",
+										"64637a1bc3d87158b5e546e0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Ratelimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "Ratelimit-Remaining",
+									"value": "42"
+								},
+								{
+									"key": "Ratelimit-Reset",
+									"value": "290"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "199"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c7-dK4y3SWVJFnf4puvjGiDcJE0kjM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 12:45:08 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Feedback\": {\n        \"_id\": \"64637a1bc3d87158b5e546e0\",\n        \"name\": \"Mike Adane\",\n        \"email\": \"mike@gmail.com\",\n        \"message\": \"Nice app\",\n        \"createdAt\": \"2023-05-16T12:42:03.134Z\",\n        \"updatedAt\": \"2023-05-16T12:42:03.134Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Feedback",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTYyOSwiZXhwIjoxNjg0MjYyMDI5fQ.V_5eJ_L1UdlyAj_s8AioERtbpvgLdPXYWLyVbvUwwnk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/feedback/get",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"feedback",
+								"get"
+							]
+						},
+						"description": "## Get All Feedbacks\n\nReturn the all existing Feedbacks"
+					},
+					"response": [
+						{
+							"name": "Get All Feedback",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/feedback/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"feedback",
+										"get"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Ratelimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "Ratelimit-Remaining",
+									"value": "46"
+								},
+								{
+									"key": "Ratelimit-Reset",
+									"value": "59"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "620"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"26c-cvolGsiTmuGslwCMjz5P2r7Xbs0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 12:48:59 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TotalFeedbacks\": 3,\n    \"Feedbacks\": [\n        {\n            \"_id\": \"646379fdc3d87158b5e546dd\",\n            \"name\": \"Mike Adane\",\n            \"email\": \"mike@gmail.com\",\n            \"message\": \"Nice app\",\n            \"createdAt\": \"2023-05-16T12:41:33.176Z\",\n            \"updatedAt\": \"2023-05-16T12:41:33.176Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64637b12c3d87158b5e546e9\",\n            \"name\": \"Jeff D\",\n            \"email\": \"jeff@gmail.com\",\n            \"message\": \"please update the app regularly\",\n            \"createdAt\": \"2023-05-16T12:46:10.296Z\",\n            \"updatedAt\": \"2023-05-16T12:46:10.296Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64637b68c3d87158b5e546ec\",\n            \"name\": \"Henok A\",\n            \"email\": \"henokakalu@gmail.com\",\n            \"message\": \"what an app\",\n            \"createdAt\": \"2023-05-16T12:47:36.326Z\",\n            \"updatedAt\": \"2023-05-16T12:47:36.326Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Henok A\",\r\n    \"email\": \"henokakalu@gmail.com\",\r\n    \"message\": \"what an app\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/feedback/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"feedback",
+								"create"
+							]
+						},
+						"description": "## Create Feedback\n\n- name\n- email\n- message\n- phoneNumber : OPTIONAL\n    \n\nReturn the newly created feedback"
+					},
+					"response": [
+						{
+							"name": "Add Feedback",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mike Adane\",\r\n    \"email\": \"mike@gmail.com\",\r\n    \"message\": \"Nice app\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/feedback/create",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"feedback",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Ratelimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "Ratelimit-Remaining",
+									"value": "47"
+								},
+								{
+									"key": "Ratelimit-Reset",
+									"value": "475"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "239"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ef-6e4NqLJslbV2Fy6PHmzkIU0osfo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 12:42:03 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Feedback\": {\n        \"name\": \"Mike Adane\",\n        \"email\": \"mike@gmail.com\",\n        \"message\": \"Nice app\",\n        \"_id\": \"64637a1bc3d87158b5e546e0\",\n        \"createdAt\": \"2023-05-16T12:42:03.134Z\",\n        \"updatedAt\": \"2023-05-16T12:42:03.134Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Feedback sent Succesfully !\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/feedback/update/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"feedback",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Feedback",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQ0YTFiMTU3ODUyODRlYmEwNjYyOTY5IiwiZW1haWwiOiJudW5hQGdtYWlsLmNvbSIsImlhdCI6MTY4NDE3NTYyOSwiZXhwIjoxNjg0MjYyMDI5fQ.V_5eJ_L1UdlyAj_s8AioERtbpvgLdPXYWLyVbvUwwnk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/feedback/delete/64637a1bc3d87158b5e546e0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"feedback",
+								"delete",
+								"64637a1bc3d87158b5e546e0"
+							]
+						},
+						"description": "## Delete Feedback\n\n- id - id of feedback"
+					},
+					"response": [
+						{
+							"name": "Delete Feedback",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/feedback/delete/64637a1bc3d87158b5e546e0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"feedback",
+										"delete",
+										"64637a1bc3d87158b5e546e0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Ratelimit-Limit",
+									"value": "50"
+								},
+								{
+									"key": "Ratelimit-Remaining",
+									"value": "47"
+								},
+								{
+									"key": "Ratelimit-Reset",
+									"value": "76"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"35-ixmA/Tf2drAavdZ/IYuwnGdMynw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 12:48:42 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Feedback has been Deleted Succesfully !\"\n}"
+						}
+					]
+				}
+			],
+			"description": "## Feedback\n\n- name\n- email\n- phoneNumber : OPTIONAL\n- message"
+		}
+	]
+}
