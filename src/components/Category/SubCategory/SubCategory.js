@@ -53,7 +53,7 @@ function SubCategory() {
         'Content-Type': 'multipart/form-data'
       }
     }).then(res => {
-      console.log(" Response ", res.data.SubService)
+      console.log(" Response ", res.data)
       dispatch(addNewSubCategory(res.data.SubService))
     }).catch(err => {
       console.log("Error ", err)

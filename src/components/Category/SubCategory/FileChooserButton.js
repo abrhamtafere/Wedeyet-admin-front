@@ -22,9 +22,9 @@ export function FileChooserButton(props) {
         },
       }}
         onClick={() => props.inputRef.current.click()}>
-        Choose SVG
+        Choose Image
       </Button>
-      <TextField  placeholder='Choose SVG' value={!props.edit?props.fileName:props.value} label="Selected file" style={{ flexGrow: 1 } } sx={{  "& .MuiOutlinedInput-root:hover": {
+      <TextField  placeholder='Choose Image' value={!props.edit?props.fileName:props.value} label="Selected file" style={{ flexGrow: 1 } } sx={{  "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
                 borderColor: colors.greenAccent[400]
               },

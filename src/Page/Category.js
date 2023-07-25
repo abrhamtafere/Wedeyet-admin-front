@@ -34,7 +34,7 @@ function Category() {
       },
     })
       .then(res => {
-
+        
         setMCategory(res.data);
 
       })
@@ -48,7 +48,8 @@ function Category() {
         'Authorization': `Bearer  ${auth.token}`
       },
     })
-    .then(res => {
+      .then(res => {
+      console.log(" Sub Cate ",res.data)
       setMainCategoryData(res?.data);
     })
     .catch(err => {
