@@ -11,6 +11,7 @@ import {
   FormControlLabel,
   Checkbox,
   Grid,
+  Alert,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
@@ -38,6 +39,7 @@ const initialValuesLogin = {
 const LoginForm = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -62,6 +64,15 @@ const LoginForm = () => {
         body: JSON.stringify(values),
       }
     );
+
+    if (loggedInResponse.status !== 200) {
+      setLoginError(true);
+      setTimeout(()=>{
+        setLoginError(false)
+      }, 6000)
+      return;
+    }
+
     const loggedIn = await loggedInResponse.json();
     // console.log(loggedIn);
     setCookies("token", loggedIn.User.token);
@@ -99,11 +110,18 @@ const LoginForm = () => {
         handleBlur,
         handleChange,
         handleSubmit,
+        isSubmitting,
         setFieldValue,
         resetForm,
       }) => (
-        <form onSubmit={handleSubmit}>
-          {/* {console.log(values.password) } */}
+      <>
+      {loginError && (
+    <Alert severity="error" sx={{ marginBottom: '8px' }}>Incorrect credentials!</Alert>
+  )}
+      
+        <form onSubmit={handleSubmit} className=''>
+ {/* {console.log(values.password) } */}
+
           <Box
             display="grid"
             gap="30px"
@@ -149,9 +167,9 @@ const LoginForm = () => {
                         onMouseUp={togglePasswordShow}
                       >
                         {passwordShown ? (
-                          <VisibilityIcon />
-                        ) : (
                           <VisibilityOffTwoToneIcon />
+                          ) : (
+                          <VisibilityIcon />
                         )}
                       </IconButton>
                     )}
@@ -211,6 +229,7 @@ const LoginForm = () => {
             <Button
               fullWidth
               type="submit"
+              disabled={isSubmitting}
               sx={{
                 m: "2rem 0",
                 p: "1rem",
@@ -222,7 +241,8 @@ const LoginForm = () => {
                 },
               }}
             >
-              Login
+              {isSubmitting ? 'Processing...' : 'Login'} 
+              {/* Submitting*/}
             </Button>
             <Box color={colors.grey[500]} textAlign="center">
               Don't have an account?&nbsp;
@@ -239,6 +259,7 @@ const LoginForm = () => {
             </Box>
           </Box>
         </form>
+        </>
       )}
     </Formik>
   );

@@ -23,7 +23,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
-
+import 'tailwindcss/tailwind.css';//for test
 const persistConfig =
 {
   key: "root",

@@ -34,3 +34,14 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #61CE70;
 }
+/* .divide{
+display: flex;
+flex-direction: row;
+clear: right;
+justify-content: center;
+}
+.divide .divide-in{
+display: flex;
+flex-direction: column;
+
+}  */

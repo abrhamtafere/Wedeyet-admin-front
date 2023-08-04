@@ -55,7 +55,12 @@ const handleLogout=()=>{
           <PersonOutlinedIcon />
         </IconButton> */}
         <Box onClick={()=>handleLogout()} padding="10px !important" display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.greenAccent[400]} color="white"
-          borderRadius="3px">
+          borderRadius="3px" sx={{
+            cursor: 'pointer',
+            '&:hover': {
+              // Additional styles on hover
+            },
+          }}>
           logout
         </Box>
       </Box>
