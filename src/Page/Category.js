@@ -26,7 +26,8 @@ function Category() {
     dispatch(setactive(newValue))
   };
   console.log("tab persist")
- 
+  // axios.get('https://wedeyet.herokuapp.com/api/service/all', {
+   
   useEffect(() => {
     axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
       headers: {

@@ -45,16 +45,15 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Grid container spacing={10}>
-           {token && isSidebarOn ? <Grid item xs={12} sm={3} md={2}>
+          <Grid container spacing={2} >
+           {token && isSidebarOn ? <Grid item xs={12} sm={3} md={2} marginRight={isSidebarOn ? '50px' : ''}>
+             {/* here to push the main content to right when sidebar is on: marginRight={isSidebarOn ? '50px' : '' */}
               <Sidebar isSidebarOn={isSidebarOn} setIsSidebar={setIsSidebar} />
             </Grid> :token && <Grid item xs={12} sm={3} md={1}>
               { <Sidebar setIsSidebar={setIsSidebar} />}
             </Grid>}
 
-
-
-            {isSidebarOn ? <Grid item xs={12} sm={9} md={10}>
+            {isSidebarOn ? <Grid item xs={12} sm={9} md={isSidebarOn ? 9 : 11} >
               <main className="content">
                 {token && <Topbar setIsSidebar={setIsSidebar} />}
                 <Routes>
@@ -76,7 +75,7 @@ function App() {
 
                 </Routes>
               </main>
-            </Grid> : <Grid item xs={12} sm={9} md={11}>
+            </Grid> : <Grid item xs={12} sm={9} md={10}>
               <main className="content">
                 {token && <Topbar setIsSidebar={setIsSidebar} />}
                 <Routes>

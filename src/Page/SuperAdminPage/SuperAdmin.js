@@ -13,7 +13,21 @@ import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
 import { Link } from "react-router-dom";
-import "tailwindcss/tailwind.css";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TablePagination,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+} from "@mui/material"; //Link
+//
 
 const Area = [
   "Abacoran sefer",
@@ -175,11 +189,44 @@ const StyledTextarea = styled(TextareaAutosize)(
     }
   `
 );
-const BlueLinkStyle = {
-  color: "blue",
+// const BlueLinkStyle = {
+//   color: "blue",
+//   textDecoration: 'none',
+// };
+
+const tableCellStyle = {
+  fontSize: "15px", // Adjust the font size as needed
 };
+
+const tableHeadStyle = {
+  fontSize: "18px", // Adjust the font size as needed
+  fontWeight: "600",
+};
+
+const BlueLinkStyle = {
+  color: "white",
+  backgroundColor: "#3979E4",
+  textDecoration: "none",
+  padding: "8px 16px",
+  borderRadius: "4px",
+  border: "none",
+  cursor: "pointer",
+  transition: "background-color 0.3s ease-in-out",
+};
+
+const BlueButtonHoverStyle = {
+  backgroundColor: "#1851AD", // New background color for hover
+};
+
 const RedLinkStyle = {
-  color: "red",
+  color: "white",
+  backgroundColor: "#FD4646",
+  textDecoration: "none",
+  padding: "8px 16px",
+  borderRadius: "4px",
+  border: "none",
+  cursor: "pointer",
+  transition: "background-color 0.3s ease-in-out",
 };
 const editPlace = (params) => {
   const linkUrl = `/edit/place/${params.getValue("_id")}`;
@@ -205,6 +252,23 @@ function SuperAdmin() {
   const [FilteredSubCategory, setFilteredSubCategory] = useState([]);
   const [cookies, setCookies, removeCookie] = useCookies();
   const [open, setOpen] = React.useState(true);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [deletingItemId, setDeletingItemId] = useState(null);
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, places.length - page * rowsPerPage);
 
   // Form Data
   const token = cookies.token;
@@ -368,8 +432,55 @@ function SuperAdmin() {
       });
   }, []);
 
+  //delete
+  const handleDelete = (id) => {
+    // Perform your delete logic here
+    console.log(" Place Delete!");
+    // axios delete request
+    axios
+      .delete(`https://wedeyet.herokuapp.com/api/place/delete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // ...
+    console.log(` Place with ID ${id} Deleted!`);
+  };
+
+  const handleDeleteClick = (itemId) => {
+    setDeletingItemId(itemId);
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDelete(deletingItemId);
+    setShowConfirmation(false);
+    setPlaces((prevs) => prevs.filter((place) => place._id !== deletingItemId));
+    console.log("removed: ", deletingItemId, "id rem", places._id);
+    setDeletingItemId(null);
+    // navigate('/superAdminPage');
+  };
+
+  const handleCancelDelete = () => {
+    console.log(" Place Delete Cancel!");
+    setDeletingItemId(null);
+    setShowConfirmation(false);
+  };
+
   return (
     <div className="bg-indigo-400 border p-24 m-8">
+      <Typography
+        variant="h1"
+        component="h2"
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        Add Place
+      </Typography>
+      ;
       <Box
         component="form"
         sx={{
@@ -520,151 +631,112 @@ function SuperAdmin() {
           </div>
         )}
       </Box>
-      {/* <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div>
-          <TextField
-            required
-            id="outlined-required"
-            label="Name"
-            placeholder="Admas University"
-            onChange={(e) => setName(e.target.value)}
-          />
-
-          <InputLabel id="demo-simple-select-label">Area</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={area}
-            label="Area"
-            autoWidth
-            onChange={(e) => setArea(e.target.value)}
-          >
-            {Area.map((cat, index) => (
-              <MenuItem key={index} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
-          </Select>
-          <div>
-            <div></div>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={category}
-              label="Category"
-              autoWidth
-              onChange={handleCategoryChange}
-            >
-              {AllCategory.map((cat) => (
-                <MenuItem key={cat._id} value={cat._id}>
-                  {cat.name}
-                </MenuItem>
+      <Box component="div" sx={{ height: 500 }}>
+        <TableContainer
+          style={{ height: 500, width: "100%", paddingRight: "20px" }}
+        >
+          <h2>All Places</h2>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell style={tableHeadStyle}>Name</TableCell>
+                <TableCell style={tableHeadStyle}>Area</TableCell>
+                <TableCell style={tableHeadStyle}>Category</TableCell>
+                <TableCell style={tableHeadStyle}>SubCategory</TableCell>
+                <TableCell style={tableHeadStyle}>Phone</TableCell>
+                <TableCell style={tableHeadStyle}>Telegram</TableCell>
+                <TableCell style={tableHeadStyle}>Website</TableCell>
+                <TableCell style={tableHeadStyle} align="center" colSpan={2}>
+                  Action
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(rowsPerPage > 0
+                ? places.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : places
+              ).map((item) => (
+                <TableRow key={item._id}>
+                  <TableCell style={tableCellStyle}>{item.name}</TableCell>
+                  <TableCell style={tableCellStyle}>{item.area}</TableCell>
+                  <TableCell style={tableCellStyle}>{item.category}</TableCell>
+                  <TableCell style={tableCellStyle}>
+                    {item.subCategory}
+                  </TableCell>
+                  <TableCell style={tableCellStyle}>
+                    {item.phoneNumber}
+                  </TableCell>
+                  <TableCell style={tableCellStyle}>{item.telegram}</TableCell>
+                  <TableCell>
+                    <Link
+                      to={item.website}
+                      target="_blank"
+                      style={{ textDecoration: "none" }}
+                    >
+                      {item.website}
+                    </Link>
+                  </TableCell>
+                  <TableCell>
+                    <Link
+                      to={`/edit/${item._id}`}
+                      style={BlueLinkStyle}
+                      sx={{
+                        "&:hover": BlueButtonHoverStyle, // Apply hover style when hovering the button
+                      }}
+                    >
+                      Edit
+                    </Link>
+                  </TableCell>
+                  <TableCell>
+                    <p style={RedLinkStyle} onClick={() => handleDeleteClick(item._id)}>
+                      Delete
+                    </p>
+                  </TableCell>
+                    <Dialog
+                      open={showConfirmation}
+                      onClose={handleCancelDelete}
+                    >
+                      <DialogTitle>Confirm Delete</DialogTitle>
+                      <DialogContent>
+                        Are you sure you want to delete this item?
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleCancelDelete} color="primary">
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={handleConfirmDelete}
+                          color="error"
+                          autoFocus
+                        >
+                          Delete
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                </TableRow>
               ))}
-            </Select>
-            <InputLabel id="demo-simple-select-label">SubCategory</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={subCategory}
-              label="SubCCategory"
-              autoWidth
-              onChange={(e) => setSubCategory(e.target.value)}
-            >
-              {FilteredSubCategory.length == 0
-                ? AllSubCategory.map((cat) => (
-                    <MenuItem key={cat._id} value={cat._id}>
-                      {cat.name}
-                    </MenuItem>
-                  ))
-                : FilteredSubCategory.map((cat) => (
-                    <MenuItem key={cat._id} value={cat._id}>
-                      {cat.name}
-                    </MenuItem>
-                  ))}
-            </Select>
-          </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              label="Telegram"
-              variant="outlined"
-              placeholder="@nahoo_tv"
-              onChange={(e) => setTelegram(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Website"
-              variant="outlined"
-              placeholder="https://malta.com"
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Phone Number"
-              variant="outlined"
-              placeholder="09xxxxxxxx"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-            <TextField 
-              id="outlined-basic"
-              label="Address"
-              variant="outlined"
-              placeholder="Near Edna Mall"
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              label="Location"
-              variant="outlined"
-              placeholder="[9.88353,32.0910]"
-              onChange={(e) => setLocation(e.target.value)}
-            />
-            <StyledTextarea
-              aria-label="minimum height"
-              minRows={2}
-              placeholder="Place Description"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddPlace}
-            >
-              <SaveIcon />
-              Add Place
-            </Button>
-          </div>
-          <div>
-            {addPlaceResponse && (
-              <div>
-                {" "}
-                <h3>Form Submission Successful!</h3>
-                <pre>{JSON.stringify(addPlaceResponse, null, 2)}</pre>
-              </div>
-            )}
-            {error && (
-              <div>
-                {" "}
-                <h3>Form Submission Failed!</h3>
-                <pre>{JSON.stringify(error, null, 2)}</pre>
-              </div>
-            )}
-          </div> 
-        </div>
-      </Box> */}
-      <div style={{ height: 400, width: "100%" }}>
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={9} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={places.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </Box>
+      {/* <div style={{ height: 400, width: "100%" }}>
         <h2>All Places</h2>
         <table>
           <thead>
@@ -708,7 +780,9 @@ function SuperAdmin() {
             ))}
           </tbody>
         </table>
-      </div>
+        <h2>All Places for new</h2>
+
+      </div> */}
     </div>
   );
 }

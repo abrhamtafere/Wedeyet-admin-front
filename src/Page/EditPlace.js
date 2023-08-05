@@ -48,6 +48,7 @@ const convertLocation = (input) => {
   const inputArray = input.slice(1, -1);
   return inputArray.split(',').map(Number);
 }
+
 function EditPlacePage() {
   const navigate = useNavigate();
   const [places, setPlaces] = useState([])
@@ -157,100 +158,155 @@ function EditPlacePage() {
 
   return (
     <div>
-      <h2>Edit Place {formData.name}</h2>
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-      >
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Name"
-            placeholder={formData.name}
-            // value={formData.name}
-            onChange={(e) => setName(e.target.value)}
-        />
-  
-        <InputLabel id="demo-simple-select-label">Area</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-            // value={formData.area}
-            placeholder={formData.area}
-              label="Area"
-              autoWidth
-          onChange={(e)=>setArea(e.target.value)}
-            >   
-          {Area.map((cat,index) => (
-            <MenuItem key={index} value={cat} defaultValue={formData.area}>
-              {cat}
-            </MenuItem>
-          ))}
-        </Select>
-          <div>
-            <div>
-      </div>
-        <InputLabel id="demo-simple-select-label">Category</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          placeholder={formData.category}
-              label="Category"
-              autoWidth
-          onChange={(e)=>setCategory(e.target.value)}
-            >   
-          {AllCategory.map((cat) => (
-            <MenuItem key={cat._id} value={cat._id}>
-              {cat.name}
-            </MenuItem>
-          ))}
-        </Select>
-        <InputLabel id="demo-simple-select-label">SubCategory</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="SubCategory"
-          autoWidth
-          onChange={(e)=>setSubCategory(e.target.value)}
-            >   
-          {AllSubCategory.map((cat) => (
-            <MenuItem key={cat._id} value={cat._id}>
-              {cat.name}
-            </MenuItem>
-          ))}
-         </Select>
-          </div>
-          <div>
-            <TextField id="outlined-basic" label="Telegram" variant="outlined" placeholder={formData.telegram} onChange={ (e)=>setTelegram(e.target.value)} />
-            <TextField id="outlined-basic" label="Website" variant="outlined" placeholder={formData.website} onChange={ (e)=>setWebsite(e.target.value)}/>
-            <TextField id="outlined-basic" label="Phone Number" variant="outlined" placeholder={formData.phoneNumber} onChange={ (e)=>setPhoneNumber(e.target.value)}/>
-            <TextField id="outlined-basic" label="Address" variant="outlined"  placeholder={formData.address}  onChange={ (e)=>setAddress(e.target.value)}/>
-          </div>
-          <div>
-            <TextField id="outlined-basic" label="Location" variant="outlined" placeholder={formData.location ? formData.location.coordinates : formData.location}  onChange={ (e)=>setLocation(e.target.value)} />
-            <StyledTextarea   aria-label="minimum height"   minRows={2}   placeholder={formData.description} onChange={ (e)=>setDescription(e.target.value)} />
-          </div>
-          <div>
-            <Button variant="contained" color="primary" onClick={handleEditPlace} >Save Changes</Button>
-          </div>
-          <div>
-            {response && (<div>   <h3>response</h3>
-            </div>)
-            }
-            {error && (<div>   <h3>error</h3>
-              </div>)
-              }
-          </div>
+  <h2>Edit Place {formData.name}</h2>
+  <Box
+    component="form"
+    sx={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '0.1rem', 
+      justifyContent: 'center', // Align content horizontally to the center
+      alignItems: 'center', 
+      '& .MuiTextField-root': { width: '70%' },
+    }}
+    noValidate
+    autoComplete="off"
+  >
+    <div>
+      <TextField
+        required
+        id="outlined-required"
+        label="Name"
+        placeholder={formData.name}
+        onChange={(e) => setName(e.target.value)}
+        sx={{ marginBottom: '1rem' }}
+      />
 
-          
-      </div>
-    </Box> 
+      <InputLabel id="demo-simple-select-label">Area</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        placeholder={formData.area}
+        label="Area"
+        autoWidth
+        onChange={(e) => setArea(e.target.value)}
+        sx={{ width: '70%', marginBottom: '1rem' }}
+      >
+        {Area.map((cat, index) => (
+          <MenuItem key={index} value={cat} defaultValue={formData.area}>
+            {cat}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <InputLabel id="demo-simple-select-label">Category</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        placeholder={formData.category}
+        label="Category"
+        autoWidth
+        onChange={(e) => setCategory(e.target.value)}
+        sx={{ width: '70%', marginBottom: '1rem' }}
+      >
+        {AllCategory.map((cat) => (
+          <MenuItem key={cat._id} value={cat._id}>
+            {cat.name}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <InputLabel id="demo-simple-select-label">SubCategory</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        label="SubCategory"
+        autoWidth
+        onChange={(e) => setSubCategory(e.target.value)}
+        sx={{ width: '70%', marginBottom: '1rem' }}
+      >
+        {AllSubCategory.map((cat) => (
+          <MenuItem key={cat._id} value={cat._id}>
+            {cat.name}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <TextField
+        id="outlined-basic"
+        label="Location"
+        variant="outlined"
+        placeholder={
+          formData.location ? formData.location.coordinates : formData.location
+        }
+        onChange={(e) => setLocation(e.target.value)}
+        sx={{ width: '100%', marginBottom: '1rem' }}
+      />
     </div>
+
+    <div>
+      <TextField
+        id="outlined-basic"
+        label="Telegram"
+        variant="outlined"
+        placeholder={formData.telegram}
+        onChange={(e) => setTelegram(e.target.value)}
+        sx={{ width: '100%', marginBottom: '1rem' }}
+      />
+      <TextField
+        id="outlined-basic"
+        label="Website"
+        variant="outlined"
+        placeholder={formData.website}
+        onChange={(e) => setWebsite(e.target.value)}
+        sx={{ width: '100%', marginBottom: '1rem' }}
+      />
+      <TextField
+        id="outlined-basic"
+        label="Phone Number"
+        variant="outlined"
+        placeholder={formData.phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        sx={{ width: '100%', marginBottom: '1rem' }}
+      />
+      <TextField
+        id="outlined-basic"
+        label="Address"
+        variant="outlined"
+        placeholder={formData.address}
+        onChange={(e) => setAddress(e.target.value)}
+        sx={{ width: '100%', marginBottom: '1rem' }}
+      />
+
+<StyledTextarea
+        aria-label="minimum height"
+        minRows={2}
+        placeholder={formData.description}
+        onChange={(e) => setDescription(e.target.value)}
+        sx={{ width: '70%', marginBottom: '1rem' }}
+      />
+    </div>
+
+    <div></div>
+    <div sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Button variant="contained" color="primary" onClick={handleEditPlace} sx={{ width: '50%' }}>
+        Save Changes
+      </Button>
+    </div>
+    <div>
+      {response && (
+        <div>
+          <h3>response</h3>
+        </div>
+      )}
+      {error && (
+        <div>
+          <h3>error</h3>
+        </div>
+      )}
+  </div>
+  </Box>
+</div>
   );
 };
 

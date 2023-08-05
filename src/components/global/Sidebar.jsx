@@ -145,7 +145,6 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
                   variant="h5"
                   color={colors.grey[100]}
                   fontWeight="bold"
-
                 >
                   Wedeyet
                 </Typography>
