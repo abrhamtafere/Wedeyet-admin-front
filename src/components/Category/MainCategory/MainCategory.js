@@ -117,7 +117,7 @@ function MainCategory() {
       sortable: false,
       renderCell: (params) => {
         return (
-
+  
           <Actions editRoute={"w"} id={params?.row?.id} name={(params?.row.name)} rowData={params.row} />
         );
       },
@@ -228,7 +228,7 @@ function MainCategory() {
         </Box>
       </Box>
 
-      <Box borderRadius="10px" bgcolor="white" width="40vw" height="400px" marginTop="20px" padding=" 1rem 3rem">
+      <Box borderRadius="10px" bgcolor="white" width="70vw" height="400px" marginTop="20px" padding=" 1rem 3rem">
         <Table rowsData={rowsData} setMainCategoryName={setMainCategoryName} />
       </Box>
 

@@ -14,7 +14,7 @@ import { setData, deleteRows } from '../../../redux/mainCategory';
 import axios from 'axios'
 
 const StyledIcon = styled('div')(({ theme }) => ({
-    margin: 'auto',
+    margin: 'auto',d
     display: 'flex',
     borderRadius: '50%',
     alignItems: 'center',

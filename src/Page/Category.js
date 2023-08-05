@@ -57,6 +57,7 @@ function Category() {
       console.log('err', err);
     });
   }, []);
+  
   dispatch(setMainCategory(mainCategory))
   dispatch(setData(mCategory))
   const data = useSelector((state) => state.mainCategoryState.ServiceSubService);
