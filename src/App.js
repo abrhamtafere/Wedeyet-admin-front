@@ -8,7 +8,7 @@ import Category from "./Page/Category";
 import Business from "./Page/Business ";
 import Faq from "./Page/Faq";
 import EmailTemplate from "./Page/EmailTemplate";
-import './App.css';
+import './App.css'; 
 import LoginPage from "./Page/LoginPage";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,30 +18,34 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Unauthorized from "./Page/Unauthorized";
 import { Box, Grid } from "@mui/material";
 import Admins from "./Page/SuperAdminPage/Admins";
+import ProfilePage from './components/ProfilePage';
 import EditPlacePage from "./Page/EditPlace";
 import DeleteComponent from "./Page/DeletePlace";
 import DeletePlacePage from "./Page/DeletePlace";
 // import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
-
+ 
 function App() {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.persistedReducer.user);
   const { _id, token } = isAuth;
   // console.log(isAuth);
+  
   const ROLES = {
     'ADMIN': 2001,
     'SUPERADMIN': 5150
   }
+
   const [isSidebarOn, setIsSidebar] = useState(true);
-  const [theme, colorMode] = useMode();
-  useEffect(() => {
-    if(!token){
+  const [theme, colorMode] = useMode(); 
+  useEffect(() => { 
+    if(!token){ 
       navigate("/login")
     }
   }, [token]);
   
   return (
     <ColorModeContext.Provider value={colorMode}>
+      {/* <h1 className='text-3xl bg-blue-300 underline'>Hellow world</h1> */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
@@ -61,6 +65,7 @@ function App() {
                   <Route path="/unauthorized" element={<Unauthorized />} />
                   <Route element={<ProtectedRoute allowedRoles={["ADMIN", "SUPERADMIN"]} />}>
                     <Route exact path="/" element={<Category />} />
+                    <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/categorys" element={<Category />} />
                     <Route path="/businesses" element={<Business />} />
                     <Route path="/edit/:id" element={<EditPlacePage />} />

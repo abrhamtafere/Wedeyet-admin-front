@@ -14,7 +14,7 @@ import { setData, deleteRows } from '../../../redux/mainCategory';
 import axios from 'axios'
 
 const StyledIcon = styled('div')(({ theme }) => ({
-    margin: 'auto',d
+    margin: 'auto',
     display: 'flex',
     borderRadius: '50%',
     alignItems: 'center',
@@ -31,7 +31,7 @@ function Table({ main }) {
         //    setRowData(categorys.MainCategories)
         dispatch(setData(subcategorys))
     }, [subcategorys])
-    var testAllSubService
+    var testAllSubService 
     //  const maincategoryData = useSelector((state) => state.mainCategoryState.mainCategory);
     const [rowData, setRowData] = useState([])
     const auth = useSelector((state) => state.persistedReducer.user);

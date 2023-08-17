@@ -32,12 +32,12 @@ function Table({rowsData, setMainCategoryName}) {
   }));
 console.log(rowsData)
  const columns = [
-        {
-            field: "id",
-            headerName: " ID",
-            minWidth: 50,
-            flex: 0.3,
-        },
+        // {
+        //     field: "id",
+        //     headerName: " ID",
+        //     minWidth: 50,
+        //     flex: 0.3,
+        // },
         {
             field: "Name",
             headerName: "Main Catagory",

@@ -130,7 +130,7 @@ function MainCategory() {
   return (
     <>
 
-      <Box borderRadius="10px" bgcolor="white" width="40vw" padding=" 1rem 3rem">
+      <Box display="flex" borderRadius="10px" bgcolor="white" width="70vw" padding=" 1rem 3rem" alignItems="center" justifyContent="center">
 
         <Box
           display="grid"
@@ -214,8 +214,6 @@ function MainCategory() {
                     >
 
                         <Avatar  alt="Image" src={branchImages} />
-
-
 
                     </Box>
                   ),
