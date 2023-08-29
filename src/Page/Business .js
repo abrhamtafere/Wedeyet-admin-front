@@ -6,9 +6,10 @@ import BusinessTable from '../components/Business/BusinessTable';
 import { useState,useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { setServiceData } from '../redux/Services';
+import SuperAdmin from './SuperAdminPage/SuperAdmin';
 const initialData  = {
   "id":1,
-    "businessName": "Business Name 1",
+    "businessName": "Business Name 2",
     "businessImages": [
         "blob:http://localhost:3000/7486b7bb-40b7-411a-b4bc-84a0546e531e",
         "blob:http://localhost:3000/3bfb50fc-eaad-471f-ae10-91ea2861e13a",
@@ -28,7 +29,7 @@ const initialData  = {
     "Branchs": [
         {
             "id": 1,
-            "branchName": "Branch Name 1",
+            "branchName": "Branch Name 10",
             "file": [
                 "blob:http://localhost:3000/a32c26fb-89a2-46c2-825f-93c9901feeaf",
                 "blob:http://localhost:3000/3fae755b-c65a-434c-b8fb-c359a1f370da"
@@ -39,22 +40,24 @@ const initialData  = {
             "branchLocation": "Branch Location"
         }
        ] ,}
+
 function Business() {
   const dispatch=useDispatch()
-  // useEffect(()=>{
-  //   dispatch(setServiceData(initialData))
-  // },[])
+  useEffect(()=>{
+    dispatch(setServiceData(initialData))
+  },[])
   const serviceData=useSelector((state) => state.serviceState.service);
 
   return (<>
-  <Header title={"Add Business"} />
-  <BusinessComponent/>
-    <Box mt={"30px"} /* bgcolor={"white"} */ width="100%" display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-
-      <BusinessTable serviceData={serviceData}/>
-    </Box>
+  <Header title={"Add Place"} />
+    <SuperAdmin />
   </>
   )
 }
 
-export default Business
+export default Business  
+// the bussiness add page 
+{/* <BusinessComponent/> */}
+    {/* <Box mt={"30px"} width="100%" display="flex" flexDirection="row" justifyContent="center" alignItems="center"> */}
+      {/* <BusinessTable serviceData={serviceData}/> */}
+    {/* </Box> */}

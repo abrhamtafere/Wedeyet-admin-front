@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     service: [{
         "id": 1,
-        "businessName": "Business Name 1",
+        "businessName": "Business Name 111",
         "businessImages": [
             "https://th.bing.com/th/id/OIP.vrHPw23IMemjVWaAI6C1xAHaDl?w=332&h=169&c=7&r=0&o=5&dpr=1.3&pid=1.7",
             "blob:http://localhost:3000/3bfb50fc-eaad-471f-ae10-91ea2861e13a",

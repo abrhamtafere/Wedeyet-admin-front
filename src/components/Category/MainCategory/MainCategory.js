@@ -72,6 +72,7 @@ function MainCategory() {
   const rowsData = data?.Services?.map((service) => ({
     id: service._id,
     name: service.name,
+    image: service.image,
   }));
   console.log(rowsData)
   const columns = [
@@ -96,7 +97,7 @@ function MainCategory() {
 
                 }}
               >
-                <Iconify icon={params.row?.image} width={30} height={30} />
+                <img src={params.row?.image} width={30} height={30} />
               </StyledIcon>
 
             </Box>

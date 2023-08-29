@@ -7,7 +7,7 @@ const ProtectedRoute = ({ allowedRoles }) => {
     const {_id, token, role} = auth;
     const location = useLocation();
     const allowroute = allowedRoles.includes(role)
-    
+
     console.log(allowroute)
     return (
         allowroute

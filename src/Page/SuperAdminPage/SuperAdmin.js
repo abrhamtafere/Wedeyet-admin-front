@@ -26,7 +26,11 @@ import {
   DialogContent,
   DialogActions,
   Typography,
+  Icon,
+  Modal,
 } from "@mui/material"; //Link
+import AddIcon from "@mui/icons-material/Add";
+import EditPlacePage from '../../Page/EditPlace';
 //
 
 const Area = [
@@ -244,6 +248,7 @@ const columns = [
   { field: "website", headerName: "Website", width: 130 },
   { field: "telegram", headerName: "Telegram", width: 130 },
 ];
+
 function SuperAdmin() {
   const [places, setPlaces] = useState([]);
   const [ServiceSubService, setServiceSubService] = useState([]);
@@ -258,8 +263,18 @@ function SuperAdmin() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -284,6 +299,15 @@ function SuperAdmin() {
   const [address, setAddress] = useState("");
   const [addPlaceResponse, setAddPlaceResponse] = useState("");
   const [error, setError] = useState("");
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const handleOpen = () => {
+    setOpenEdit(true);
+  };
+
+  const handleClose = () => {
+    setOpenEdit(false);
+  };
 
   const convertLocation = (input) => {
     const inputArray = input.slice(1, -1);
@@ -298,6 +322,8 @@ function SuperAdmin() {
       " All SubCategory ",
       AllSubCategory
     );
+    console.log("Sub Category List AA ", selectedCategory);
+
     setCategory(selectedCategory);
     const subCategoryList = AllSubCategory.filter(
       (item) => item.category.id == selectedCategory
@@ -331,12 +357,14 @@ function SuperAdmin() {
       })
       .then((response) => {
         const result = response.data.Place;
+        console.log("result: ", data);
         console.log("result: ", result);
         const lastId = places[places.length - 1].id;
         const place = { ...result, id: lastId + 1 };
         setAddPlaceResponse(place.name + " Added Successfully");
         setError(null);
-        console.log(place);
+
+        console.log("place ", place);
         setPlaces([...places, place]);
         setName("");
         setArea("");
@@ -423,7 +451,7 @@ function SuperAdmin() {
       })
       .then((response) => {
         const data = response.data.SubServices;
-        // console.log("Sub CAtegory ",data)
+        console.log("Sub CAtegory ", data);
         setAllSubCategory(data);
       })
       .catch((error) => {
@@ -442,7 +470,7 @@ function SuperAdmin() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -472,165 +500,185 @@ function SuperAdmin() {
   };
 
   return (
-    <div className="bg-indigo-400 border p-24 m-8">
-      <Typography
-        variant="h1"
-        component="h2"
-        sx={{ display: "flex", justifyContent: "center" }}
-      >
-        Add Place
-      </Typography>
-      ;
-      <Box
-        component="form"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          maxWidth: "400px",
-          margin: "0 auto",
-          backgroundColor: "#fff",
-          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-          padding: "1rem",
-          borderRadius: "4px",
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          required
-          id="outlined-required"
-          label="Name"
-          placeholder="Admas University"
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <div>
-          <InputLabel id="demo-simple-select-label">Area</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={area}
-            label="Area"
-            autoWidth
-            onChange={(e) => setArea(e.target.value)}
-            sx={{ width: "100%" }}
-          >
-            {Area.map((cat, index) => (
-              <MenuItem key={index} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-
-        <div>
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={category}
-            label="Category"
-            autoWidth
-            onChange={handleCategoryChange}
-            sx={{ width: "100%" }}
-          >
-            {AllCategory.map((cat) => (
-              <MenuItem key={cat._id} value={cat._id}>
-                {cat.name}
-              </MenuItem>
-            ))}
-          </Select>
-
-          <InputLabel id="demo-simple-select-label">SubCategory</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={subCategory}
-            label="SubCCategory"
-            autoWidth
-            onChange={(e) => setSubCategory(e.target.value)}
-            sx={{ width: "100%" }}
-          >
-            {FilteredSubCategory.length === 0
-              ? AllSubCategory.map((cat) => (
-                  <MenuItem key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </MenuItem>
-                ))
-              : FilteredSubCategory.map((cat) => (
-                  <MenuItem key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </MenuItem>
-                ))}
-          </Select>
-        </div>
-
-        <TextField
-          id="outlined-basic"
-          label="Telegram"
-          variant="outlined"
-          placeholder="@nahoo_tv"
-          onChange={(e) => setTelegram(e.target.value)}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Website"
-          variant="outlined"
-          placeholder="https://malta.com"
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Phone Number"
-          variant="outlined"
-          placeholder="09xxxxxxxx"
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Address"
-          variant="outlined"
-          placeholder="Near Edna Mall"
-          onChange={(e) => setAddress(e.target.value)}
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Location"
-          variant="outlined"
-          placeholder="[9.88353,32.0910]"
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <StyledTextarea
-          aria-label="minimum height"
-          minRows={2}
-          placeholder="Place Description"
-          onChange={(e) => setDescription(e.target.value)}
-          sx={{ width: "100%" }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleAddPlace}
-          sx={{ alignSelf: "center" }}
+    <div className="bg-400 border p-24 m-8">
+      <div className="flex justify-end pb-2 pr-2">
+        <button
+          onClick={openModal}
+          className="flex text-2xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center 
+       "
         >
-          <SaveIcon />
-          Add Place
-        </Button>
-        {addPlaceResponse && (
-          <div>
-            <h3>Form Submission Successful!</h3>
-            <pre>{JSON.stringify(addPlaceResponse, null, 2)}</pre>
+          <AddIcon className="mr-2" fontSize="large" />
+          Add New
+        </button>
+      </div>
+
+      <Modal open={isModalOpen} onClose={closeModal} className="m-4">
+        <div className="flex justify-center items-center ">
+          <div className="bg-white shadow-md rounded-md p-4 space-y-4 w-full md:w-2/4">
+            <h1>Add Place here</h1>
+            <form className="flex flex-col justify-center items-center ">
+              <div className="flex flex-row gap-6">
+                <div className="flex flex-col w-1/2 gap-2">
+                  <TextField
+                    required
+                    id="outlined-required"
+                    label="Name"
+                    placeholder="Admas University"
+                    onChange={(e) => setName(e.target.value)}
+                    className="col-span-2"
+                  />
+
+                  <div>
+                    <InputLabel id="demo-simple-select-label">Area</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={area}
+                      label="Area"
+                      autoWidth
+                      onChange={(e) => setArea(e.target.value)}
+                      className="w-full"
+                    >
+                      {Area.map((cat, index) => (
+                        <MenuItem key={index} value={cat}>
+                          {cat}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </div>
+
+                  <div>
+                    <InputLabel id="demo-simple-select-label">
+                      Category
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={category}
+                      label="Category"
+                      autoWidth
+                      onChange={handleCategoryChange}
+                      className="w-full"
+                    >
+                      {AllCategory.map((cat) => (
+                        <MenuItem key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </div>
+                  <div>
+                    <InputLabel id="demo-simple-select-label">
+                      SubCategory
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={subCategory}
+                      label="SubCCategory"
+                      autoWidth
+                      onChange={(e) => setSubCategory(e.target.value)}
+                      className="w-full"
+                    >
+                      {FilteredSubCategory.length === 0
+                        ? AllSubCategory.map((cat) => (
+                            <MenuItem key={cat._id} value={cat._id}>
+                              {cat.name}
+                            </MenuItem>
+                          ))
+                        : FilteredSubCategory.map((cat) => (
+                            <MenuItem key={cat._id} value={cat._id}>
+                              {cat.name}
+                            </MenuItem>
+                          ))}
+                    </Select>
+                  </div>
+                  <TextField
+                    id="outlined-basic"
+                    label="Telegram"
+                    variant="outlined"
+                    placeholder="@nahoo_tv"
+                    onChange={(e) => setTelegram(e.target.value)}
+                    className="col-span-2 w-full"
+                  />
+                </div>
+                <div className="flex flex-col  w-1/2 gap-5">
+                  <TextField
+                    id="outlined-basic"
+                    label="Website"
+                    variant="outlined"
+                    placeholder="https://malta.com"
+                    onChange={(e) => setWebsite(e.target.value)}
+                    className="col-span-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Phone Number"
+                    variant="outlined"
+                    placeholder="09xxxxxxxx"
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="col-span-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Address"
+                    variant="outlined"
+                    placeholder="Near Edna Mall"
+                    onChange={(e) => setAddress(e.target.value)}
+                    className="col-span-2"
+                  />
+
+                  <TextField
+                    id="outlined-basic"
+                    label="Location"
+                    variant="outlined"
+                    placeholder="[9.88353,32.0910]"
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="col-span-2"
+                  />
+                  <StyledTextarea
+                    aria-label="minimum height"
+                    minRows={2}
+                    placeholder="Place Description"
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="col-span-2 w-full border"
+                  />
+                </div>
+              </div>
+
+              <div
+                className="mt-4"
+                // onClick={closeModal}
+              >
+                <Button
+                  // onClick={closeModal}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddPlace}
+                  className="col-span-2 self-center"
+                >
+                  <SaveIcon />
+                  Add Place
+                </Button>
+              </div>
+
+              {addPlaceResponse && (
+                <div>
+                  <h3>Form Submission Successful!</h3>
+                  <pre>{JSON.stringify(addPlaceResponse, null, 2)}</pre>
+                </div>
+              )}
+              {error && (
+                <div>
+                  <h3>Form Submission Failed!</h3>
+                  <pre>{JSON.stringify(error, null, 2)}</pre>
+                </div>
+              )}
+            </form>
           </div>
-        )}
-        {error && (
-          <div>
-            <h3>Form Submission Failed!</h3>
-            <pre>{JSON.stringify(error, null, 2)}</pre>
-          </div>
-        )}
-      </Box>
+        </div>
+      </Modal>
+      {/* place informations */}
       <Box component="div" sx={{ height: 500 }}>
         <TableContainer
           style={{ height: 500, width: "100%", paddingRight: "20px" }}
@@ -682,6 +730,7 @@ function SuperAdmin() {
                   <TableCell>
                     <Link
                       to={`/edit/${item._id}`}
+                      onClick={() => handleOpen()}
                       style={BlueLinkStyle}
                       sx={{
                         "&:hover": BlueButtonHoverStyle, // Apply hover style when hovering the button
@@ -689,33 +738,36 @@ function SuperAdmin() {
                     >
                       Edit
                     </Link>
+                    {/* <Modal open={openEdit} onClose={handleClose}>
+                      <EditPlacePage editId={item._id} handleClose={handleClose} />
+                    </Modal> */}
                   </TableCell>
                   <TableCell>
-                    <p style={RedLinkStyle} onClick={() => handleDeleteClick(item._id)}>
+                    <p
+                      style={RedLinkStyle}
+                      onClick={() => handleDeleteClick(item._id)}
+                    >
                       Delete
                     </p>
                   </TableCell>
-                    <Dialog
-                      open={showConfirmation}
-                      onClose={handleCancelDelete}
-                    >
-                      <DialogTitle>Confirm Delete</DialogTitle>
-                      <DialogContent>
-                        Are you sure you want to delete this item?
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleCancelDelete} color="primary">
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={handleConfirmDelete}
-                          color="error"
-                          autoFocus
-                        >
-                          Delete
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
+                  <Dialog open={showConfirmation} onClose={handleCancelDelete}>
+                    <DialogTitle>Confirm Delete</DialogTitle>
+                    <DialogContent>
+                      Are you sure you want to delete this item?
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleCancelDelete} color="primary">
+                        Cancel
+                      </Button>
+                      <Button
+                        onClick={handleConfirmDelete}
+                        color="error"
+                        autoFocus
+                      >
+                        Delete
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                 </TableRow>
               ))}
               {emptyRows > 0 && (
@@ -736,53 +788,6 @@ function SuperAdmin() {
           />
         </TableContainer>
       </Box>
-      {/* <div style={{ height: 400, width: "100%" }}>
-        <h2>All Places</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Area</th>
-              <th>Category</th>
-              <th>SubCategory</th>
-              <th>Phone</th>
-              <th>Telegram</th>
-              <th>Website</th>
-              <th style={BlueLinkStyle}>Edit</th>
-              <th style={RedLinkStyle}>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {places.map((item) => (
-              <tr key={item._id}>
-                <td>{item.name}</td>
-                <td>{item.area}</td>
-                <td>{item.category}</td>
-                <td>{item.subCategory}</td>
-                <td>{item.phoneNumber}</td>
-                <td>{item.telegram}</td>
-                <td>
-                  <a href={item.website} target="_blank">
-                    {item.website}
-                  </a>
-                </td>
-                <td>
-                  <a href={`edit/${item._id}`} style={BlueLinkStyle}>
-                    Edit
-                  </a>
-                </td>
-                <td>
-                  <a href={`delete/${item._id}`} style={RedLinkStyle}>
-                    Delete
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2>All Places for new</h2>
-
-      </div> */}
     </div>
   );
 }

@@ -11,7 +11,7 @@ import CategoryTabs from '../components/Category/Tabs';
 import Cards from '../components/Category/Cards';
 import { useDispatch, useSelector } from 'react-redux';
 import { setactive } from '../redux/tab';
-import { setData, setMainCategory } from '../redux/mainCategory';
+import { setData, setMainCategory, setSubServices } from '../redux/mainCategory';
 function Category() {
   const [mCategory, setMCategory] = useState({})
   const activeTab = useSelector((state) => state.tabstate.tab);
@@ -28,21 +28,21 @@ function Category() {
   console.log("tab persist")
   // axios.get('https://wedeyet.herokuapp.com/api/service/all', {
    
-  useEffect(() => {
-    axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
-      headers: {
-        'Authorization': `Bearer ${auth.token}`
-      },
-    })
-      .then(res => {
-        
-        setMCategory(res.data);
-
+    useEffect(() => {
+      axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
+        headers: {
+          'Authorization': `Bearer ${auth.token}`
+        },
       })
-      .catch(err => {
-        console.log('err', err);
-      });
-  }, []);
+        .then(res => {
+          
+          setMCategory(res.data);
+  console.log('mcategoty', res.data)
+        })
+        .catch(err => {
+          console.log('err', err);
+        });
+    }, []);
   useEffect(() => {
     axios.get('https://wedeyet.herokuapp.com/api/service/all', {
       headers: {
@@ -50,18 +50,35 @@ function Category() {
       },
     })
       .then(res => {
-      console.log(" Sub Cate ",res.data)
+      console.log(" SubCategory ",res.data)
       setMainCategoryData(res?.data);
     })
     .catch(err => {
       console.log('err', err);
     });
   }, []);
+
+  //sub services
+  useEffect(() => {
+    axios.get('https://wedeyet.herokuapp.com/api/subservice/all', {
+      headers: {
+        'Authorization': `Bearer ${auth.token}`
+      },
+    })
+      .then(res => {
+        dispatch(setSubServices(res.data))
+        // setMCategory(res.data); setSubServices
+console.log('mcategotySUB ', res.data)
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  }, []);
   
-  dispatch(setMainCategory(mainCategory))
+  dispatch(setMainCategory(mainCategory)) //the right one service=maincategory.services
   dispatch(setData(mCategory))
   const data = useSelector((state) => state.mainCategoryState.ServiceSubService);
-  console.log(data)
+  console.log("jk ", data)
   return (
     <>
       <Header title={" Add Category"} />
@@ -72,10 +89,10 @@ function Category() {
         handleChange={handleChange}
       />
 
-
     </>
 
   )
 }
 
 export default Category
+

@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select'; import { useSelector, useDispatch } from "react-redux";
-import categorys from "../../data/category.json"
+import categorys from "../../data/category.json";
 import { setData, setFilterSub } from '../../redux/mainCategory';
 import Switch from '@mui/material/Switch';
 import { Add } from '@mui/icons-material';

@@ -4,7 +4,8 @@ const initialState = {
   TotalServices:null,
   ServiceSubService:[],
   sub: [],
-  mainCategory: []
+  mainCategory: [],
+  subServices: []
 };
 
 
@@ -20,6 +21,9 @@ export const mainCategorySlice = createSlice({
     },
     setMainCategory: (state, action) => {
       state.mainCategory = action.payload;
+    },
+    setSubServices: (state, action) => {
+      state.subServices = action.payload;//added by
     },
     addNewMainCategory(state, action) {
       state.mainCategory.unshift(action.payload)
@@ -68,6 +72,6 @@ export const mainCategorySlice = createSlice({
 },
 );
 
-export const { setData, setMainCategory,deleteRows, addNewMainCategory, editMainCategory, addNewSubCategory, editSubCategory, deleteSubCategory,setFilterSub } =
+export const { setData, setMainCategory, setSubServices,deleteRows, addNewMainCategory, editMainCategory, addNewSubCategory, editSubCategory, deleteSubCategory,setFilterSub } =
   mainCategorySlice.actions;
 export default mainCategorySlice.reducer;

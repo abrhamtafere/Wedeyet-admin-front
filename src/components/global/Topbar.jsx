@@ -112,7 +112,7 @@ const Topbar = () => {
   const handleProfileClick = () => {
     // Handle profile click logic
   };
-
+  // nahom@gmail.com
   const handleLogout = () => {
     localStorage.removeItem('persist:root');
     window.location.reload()
@@ -138,7 +138,8 @@ const Topbar = () => {
       navigate("/settings");
     }
       else if(setting === 'Logout'){
-        navigate("/logout");
+        handleLogout()
+        // navigate("/logout");
       }
   };
 

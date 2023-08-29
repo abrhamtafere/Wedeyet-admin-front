@@ -26,7 +26,6 @@ SummaryCard.propTypes = {
   sx: PropTypes.object,
 };
 export default function SummaryCard({ title, total, icon, color = 'primary', sx, ...other }) {
-    
   
 const theme = useTheme();
 const colors = tokens(theme.palette.mode);
@@ -53,14 +52,20 @@ const colors = tokens(theme.palette.mode);
             )} 100%)`,
         }}
       >
-   
-        <Iconify icon={icon} width={40} height={40} />
+        <img src={icon} width={40} height={40} />
+        {/* <Iconify icon={icon} width={40} height={40} /> */}
       </StyledIcon>
 
       <Typography variant="h4">{title}</Typography>
 
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        {total} Sub-category
+        {
+          total?
+       
+        `${total} Sub-category`:
+        <p>No Sub-category</p>
+      
+      }
       </Typography>
     </Card>
   );

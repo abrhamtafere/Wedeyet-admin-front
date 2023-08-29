@@ -30,6 +30,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import AdminMenu from "./AdminMenu";
 import { useSelector } from "react-redux";
+import PlaceIcon from '@mui/icons-material/Place';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -232,6 +233,13 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
                 setSelected={setSelected}
               />
               <Item
+                title="Area"
+                to="/place"
+                icon={<PlaceIcon sx={{ color: colors.grey[500] }} />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
                 title="FAQ"
                 to="/faq"
                 icon={<QuizIcon sx={{ color: colors.grey[500] }} />}
@@ -260,6 +268,13 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
                 title="Businesses"
                 to="/businesses"
                 icon={<BusinessIcon sx={{ color: colors.grey[500] }} />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Area"
+                to="/place"
+                icon={<PlaceIcon sx={{ color: colors.grey[500] }} />}
                 selected={selected}
                 setSelected={setSelected}
               />

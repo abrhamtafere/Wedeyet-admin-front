@@ -25,7 +25,7 @@ function Table({rowsData, setMainCategoryName}) {
     const dispatch = useDispatch();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const data = useSelector((state) => state.mainCategoryState.mainCategory);
+    const data = useSelector((state) => state.mainCategoryState);
     const rowsDatas = rowsData?.Services?.map((service) => ({
     id: service._id,
     name: service.name,
@@ -44,6 +44,7 @@ console.log(rowsData)
             minWidth: 200,
             flex: 1,
             renderCell: (params) => {
+                console.log('params: ', params)
                 return (
                     <Box display="flex" alignItems="center" justifyContent={"center"} gap={"5px"}>
                         <Box backgroundColor={"#F3F6F9"} padding={"3px"}  borderRadius={"5px"}>
@@ -54,12 +55,17 @@ console.log(rowsData)
                                 }}
                             >
                                 {/* <Iconify icon={params.row?.image} width={30} height={30} /> */}
+                                <img src={params.row?.image} width={30} height={30} />
                             </StyledIcon>
 
                         </Box>
                         <Box gap={"1px"} alignItems="center" justifyContent={"center"}  >
                             <Box >{params?.row?.name} </Box> <p ></p>
-                           {/* {params.row.subcategories?.length?  <p> {`${params.row.subcategories?.length} subcatagory`} </p>:<p>no sub category</p>} */}
+                           {
+                           data.subServices.SubServices.filter((item)=> item.category.name === params.row?.name).length?  
+                           <p> {`${(data.subServices.SubServices.filter((item)=> item.category.name === params.row?.name).length)} subcatagory`} </p>
+                           :<p>no sub category</p>
+                           }
                         </Box>
 
                     </Box>
