@@ -14,7 +14,7 @@ import LoginPage from "./Page/LoginPage";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SuperAdmin from "./Page/SuperAdminPage/SuperAdmin";
-import  Dashboard from "./Page/SuperAdminPage/Dashboard";
+import Dashboard from "./Page/SuperAdminPage/Dashboard";
 import AdminPage from "./Page/AdminPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Unauthorized from "./Page/Unauthorized";
@@ -25,6 +25,7 @@ import EditPlacePage from "./Page/EditPlace";
 import DeleteComponent from "./Page/DeletePlace";
 import DeletePlacePage from "./Page/DeletePlace";
 import PlaceRegistration from "./components/Area/PlaceRegistration";
+import axios from "axios";
 // import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
 
 function App() {
@@ -40,11 +41,31 @@ function App() {
 
   const [isSidebarOn, setIsSidebar] = useState(true);
   const [theme, colorMode] = useMode();
+  const [user, setUser] = useState({});
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, [token]);
+
+  //current user info
+  useEffect(() => {
+    axios
+      .get("https://wedeyet.herokuapp.com/api/auth/current/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setUser(response.data.User);
+        console.log("auth data ", user);
+        // setAllSubCategory(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log(error);
+      });
+  }, []);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -77,8 +98,12 @@ function App() {
 
             {isSidebarOn ? (
               <Grid item xs={12} sm={9} md={isSidebarOn ? 9 : 11}>
-                <main className="content">
-                  {token && <Topbar setIsSidebar={setIsSidebar} />}
+                <main className="content transition duration-700 ease-in-out">
+                  {token && (
+                    <div className="p-12 bg-transparent">
+                      <Topbar setIsSidebar={setIsSidebar} />
+                    </div>
+                  )}
                   <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/unauthorized" element={<Unauthorized />} />
@@ -90,7 +115,10 @@ function App() {
                       }
                     >
                       <Route exact path="/" element={<Category />} />
-                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route
+                        path="/profile"
+                        element={<ProfilePage user={user} />}
+                      />
                       {/* <Route path="/categorydetails" element={<CategoryDetails />} /> */}
                       <Route path="/place" element={<PlaceRegistration />} />
                       <Route path="/categorys" element={<Category />} />
@@ -112,10 +140,14 @@ function App() {
                   </Routes>
                 </main>
               </Grid>
-            ) : (   
+            ) : (
               <Grid item xs={12} sm={9} md={10}>
                 <main className="content">
-                  {token && <Topbar setIsSidebar={setIsSidebar} />}
+                  {token && (
+                    <div className="p-12">
+                      <Topbar setIsSidebar={setIsSidebar} />
+                    </div>
+                  )}
                   <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/unauthorized" element={<Unauthorized />} />
@@ -127,6 +159,10 @@ function App() {
                       }
                     >
                       <Route exact path="/" element={<Category />} />
+                      <Route
+                        path="/profile"
+                        element={<ProfilePage user={user} />}
+                      />
                       <Route path="/categorys" element={<Category />} />
                       <Route path="/businesses" element={<Business />} />
                       <Route path="/edit/:id" element={<EditPlacePage />} />

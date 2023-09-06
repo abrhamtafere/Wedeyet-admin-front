@@ -5,6 +5,11 @@
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import {
+  Close as CloseIcon,
+  Notifications as NotificationsIcon,
+} from "@mui/icons-material";
+
 // import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 // import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 // import SearchIcon from "@mui/icons-material/Search";
@@ -71,35 +76,79 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 
 // export default Topbar;
 
-
-import { Box, IconButton, useTheme, Menu, MenuItem, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import {
+  Box,
+  IconButton,
+  useTheme,
+  Menu,
+  MenuItem,
+  Typography,
+  Badge,
+} from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AccountCircle, Settings, ExitToApp } from "@mui/icons-material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import { FeedbackComponent } from "../FeedbackComponent";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { SnackbarProvider, useSnackbar } from "notistack";
 
 const Topbar = () => {
   const theme = useTheme();
   const settings = [
     { name: "Profile", icon: <AccountCircle /> },
     { name: "Settings", icon: <SettingsOutlinedIcon /> },
-    { name: "Logout", icon: <ExitToAppOutlinedIcon /> }
+    { name: "Logout", icon: <ExitToAppOutlinedIcon /> },
   ];
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const isAuth = useSelector((state) => state.persistedReducer.user);
-  
+
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [isFeedbacksOpen, setIsFeedbacksOpen] = useState(false);
   const navigate = useNavigate();
   const colorMode = useContext(ColorModeContext);
+  const [cookies, setCookies, removeCookie] = useCookies();
+  const token = cookies.token;
+
+  const handleCloseFeedback = (index) => {
+    setFeedbacks((prevFeedbacks) =>
+      prevFeedbacks.filter((_, i) => i !== index)
+    );
+  };
+
+  const handleToggleFeedbacks = () => {
+    setIsFeedbacksOpen((prevIsFeedbacksOpen) => !prevIsFeedbacksOpen);
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://wedeyet.herokuapp.com/api/feedback/get", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("feedback ", response.data.Feedbacks);
+        // console.log(res);
+        // setAdmins(res);
+        setFeedbacks(response.data.Feedbacks);
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log(error);
+      });
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -114,8 +163,8 @@ const Topbar = () => {
   };
   // nahom@gmail.com
   const handleLogout = () => {
-    localStorage.removeItem('persist:root');
-    window.location.reload()
+    localStorage.removeItem("persist:root");
+    window.location.reload();
     navigate("/login");
   };
 
@@ -132,19 +181,27 @@ const Topbar = () => {
   const handleSettingsClick = (setting) => {
     handleCloseUserMenu();
     // Navigate to the settings page
-    if(setting === 'Profile'){
+    if (setting === "Profile") {
       navigate("/profile");
-    } else if(setting === 'Settings'){
+    } else if (setting === "Settings") {
       navigate("/settings");
+    } else if (setting === "Logout") {
+      handleLogout();
+      // navigate("/logout");
     }
-      else if(setting === 'Logout'){
-        handleLogout()
-        // navigate("/logout");
-      }
+  };
+
+  const addFeedback = (message, severity) => {
+    setFeedbacks((prevFeedbacks) => [...prevFeedbacks, { message, severity }]);
   };
 
   return (
-    <Box display="flex" justifyContent="flex-end" p={2}>
+    <Box
+      display="flex"
+      justifyContent="flex-end"
+      p={2}
+      className="fixed top-0 left-0 w-full shadow bg-gradient-to-r from-transparent to-gray-100 pr-20 "
+    >
       {/* SEARCH BAR */}
       <form onSubmit={handleSubmit}>
         <div className="relative flex items-center rounded-md">
@@ -164,47 +221,81 @@ const Topbar = () => {
         </div>
       </form>
       <IconButton onClick={colorMode.toggleColorMode}>
-    {theme.palette.mode === "dark" ? (
-      <LightModeOutlinedIcon />
-    ) : (
-      <DarkModeOutlinedIcon />
-    )}
-  </IconButton>
-  <IconButton>
-    <NotificationsOutlinedIcon />
-  </IconButton>
+        {theme.palette.mode === "dark" ? (
+          <LightModeOutlinedIcon />
+        ) : (
+          <DarkModeOutlinedIcon />
+        )}
+      </IconButton>
+      {/*  onClick={() => addFeedback('New message', 'info')} */}
+      {/* <SnackbarProvider maxSnack={3}>
+      <MyApp />
+    </SnackbarProvider> */}
+      {/* <IconButton
+        color="inherit"
+        onClick={() => {
+          // addFeedback("New message", "info");
+          handleToggleFeedbacks();
+        }}
+      >
+        <Badge
+          badgeContent={feedbacks ? feedbacks.length : 0}
+          color="secondary"
+        >
+          {/* <NotificationsOutlinedIcon /> */}
+          {/* <NotificationsIcon /> */}
+        {/* </Badge> */}
+      {/* </IconButton> */} 
+      {/* {feedbacks.map((feedback, index) => ( */}
+      <>
+        <FeedbackComponent
+          // key={index}
+          message={feedbacks}
+          severity={"info"}
+          setFeedbacks={setFeedbacks}
+
+          // onClose={() => handleCloseFeedback(index)}
+        />
+        {/* {console.log("feed.mes: ", feedback.message)} */}
+      </>
+      {/* ))} */}
       {/* ICONS */}
-      <Box sx={{ flexGrow: 0 }}>
+      <Box sx={{ flexGrow: 0, marginX: "10px" }}>
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="https://source.unsplash.com/user/c_v_r/100x100" />
+            <Avatar alt="Remy Sharp" src="./profile.avif" />
           </IconButton>
         </Tooltip>
         <Menu
-  sx={{ mt: '45px' }}
-  id="menu-appbar"
-  anchorEl={anchorElUser}
-  anchorOrigin={{
-    vertical: 'top',
-    horizontal: 'right',
-  }}
-  keepMounted
-  transformOrigin={{
-    vertical: 'top',
-    horizontal: 'right',
-  }}
-  open={Boolean(anchorElUser)}
-  onClose={handleCloseUserMenu}
->
-{settings.map((setting) => (
-  <MenuItem key={setting.name} onClick={() => handleSettingsClick(setting.name)}>
-    <div className="flex items-center">
-      {setting.icon}
-      <Typography className='pl-2' textAlign="center">{setting.name}</Typography>
-    </div>
-  </MenuItem>
-))}
-</Menu>
+          sx={{ mt: "45px" }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem
+              key={setting.name}
+              onClick={() => handleSettingsClick(setting.name)}
+            >
+              <div className="flex items-center">
+                {setting.icon}
+                <Typography className="pl-2" textAlign="center">
+                  {setting.name}
+                </Typography>
+              </div>
+            </MenuItem>
+          ))}
+        </Menu>
       </Box>
     </Box>
   );

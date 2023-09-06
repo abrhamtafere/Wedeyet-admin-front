@@ -1,132 +1,235 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+// import { Modal, Button } from "@mui/material";
+import { Modal, Button } from "@mui/material";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
-const Profile = () => {
-  const [openSettings, setOpenSettings] = useState(false);
+const UserProfile = ({ user }) => {
+  const [data, setData] = useState({
+    firstName: "Abrham",
+    lastName: "T",
+    phoneNumber: "0909092020",
+    email: "abrham@gmail.com",
+    password: "$2b$10$51cNBvMf82xOujMqGYVANuRx9BXUQerKG60G37aYzJFF9AwrjwBSC",
+    plainPassword: "12345678",
+    role: "ADMIN",
+    image: "./profile.avif",
+  });
+  const [cookies, setCookies, removeCookie] = useCookies();
+  const token = cookies.token;
+  console.log(token);
+
+  const [user1, setUser1] = useState(user);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [firstName, setFirstName] = useState(user1.firstName);
+  const [lastName, setLastName] = useState(user1.lastName);
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(user1.phoneNumber);
+  const [photo, setPhoto] = useState("");
+
+  if (!user1.lastName) {
+    return <h1>loading...</h1>;
+  }
+
+  const handleEditClick = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    // Handle form submissi
+    const updatedData = {
+      firstName,
+      lastName,
+      phoneNumber,
+    };
+
+    try {
+      // Send the PUT request to update the user data
+      const response = await axios.put(
+        `https://wedeyet.herokuapp.com/api/auth/update/${user._id}`,
+        updatedData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Handle the response as needed
+      console.log("User data updated:", response.data);
+
+      setUser1({ ...user, ...updatedData });
+      console.log("updated data: ", updatedData);
+      // Close the modal or perform any other action
+      setIsEditModalOpen(false);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      // Handle error appropriately, such as showing an error message to the user
+    }
+  };
 
   return (
-    <div className="h-full bg-gray-200 p-8">
-      <div className="bg-white rounded-lg shadow-xl pb-8">
-        <div className="relative">
-          <button
-            onClick={() => setOpenSettings(!openSettings)}
-            className="absolute right-12 mt-4 rounded border border-gray-400 p-2 text-gray-300 hover:text-gray-300 bg-gray-100 bg-opacity-10 hover:bg-opacity-20"
-            title="Settings"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="relative ">
+      <div className="bg-gray-100 rounded-lg shadow-lg p-6 relative z-10 h-[80vh]">
+        <div
+          className=" h-1/3 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('./Capture.PNG')" }}
+        ></div>
+        <div className="flex flex-col mt-[-65px] items-center z-30">
+          <img
+            src="./profile.avif"
+            alt="User"
+            className="w-32 h-32 rounded-full mb-4 bg-white p-1"
+          />
+          <h2 className="text-2xl font-semibold">
+            {user1.firstName} {user1.lastName}
+          </h2>
+          <p className="text-base text-gray-500">{user1.role}</p>
+        </div>
+        {/* // */}
+        <Modal
+          open={isEditModalOpen}
+          onClose={handleModalClose}
+          aria-labelledby="edit-modal"
+          className="mt-8"
+        >
+          <div className="modal-content flex justify-center items-center m-auto h-fit w-fit lg:w-1/4 mt-auto  rounded-lg shadow-lg">
+            <form
+              onSubmit={handleFormSubmit}
+              className="flex flex-col  bg-gray-300 p-4 gap-4 w-full rounded-lg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="3"
-                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              ></path>
-            </svg>
-          </button>
-          {openSettings && (
-            <div
-              onClick={() => setOpenSettings(false)}
-              className="bg-white absolute right-0 w-40 py-2 mt-1 border border-gray-200 shadow-2xl"
-            >
-              <div className="py-2 border-b">
-                <p className="text-gray-400 text-xs px-6 uppercase mb-1">
-                  Settings
-                </p>
-                <button className="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    ></path>
-                  </svg>
-                  <span className="text-sm text-gray-700">Share Profile</span>
+              <h2 className="text-2xl font-semibold">Edit Profile</h2>
+              <div className="form-group flex flex-col">
+                <label htmlFor="name" className="text-gray-800">
+                  Name:
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="form-group flex flex-col">
+                <label htmlFor="lastname" className="text-gray-800">
+                  Lastname:
+                </label>
+                <input
+                  type="text"
+                  id="lastname"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="form-group flex flex-col">
+                <label htmlFor="password" className="text-gray-800">
+                  Password:
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="form-group flex flex-col">
+                <label htmlFor="phoneNumber" className="text-gray-800">
+                  Phone Number:
+                </label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="form-group flex flex-row gap-8">
+                <label htmlFor="photo" className="text-gray-800">
+                  Photo:
+                </label>
+                <div className="relative w-32 h-32 mt-2 border-2 border-dashed border-gray-400 rounded-md overflow-hidden">
+                  <input
+                    type="file"
+                    id="photo"
+                    onChange={(e) => setPhoto(e.target.files[0])}
+                    className="absolute inset-0 w-full h-full opacity-0"
+                  />
+                  {photo ? (
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="Selected Photo"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="w-12 h-12 text-gray-400"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="button-group flex justify-end gap-4">
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Save Changes
                 </button>
-                <button className="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-                    ></path>
-                  </svg>
-                  <span className="text-sm text-gray-700">Block User</span>
-                </button>
-                <button className="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 16h-1v-4h-1"
-                    ></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 20h.01M12 20a8 8 0 110-16 8 8 0 010 16zm0 0v0z"
-                    ></path>
-                  </svg>
-                  <span className="text-sm text-gray-700">Report User</span>
+                <button
+                  type="button"
+                  onClick={handleModalClose}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Cancel
                 </button>
               </div>
-            </div>
-          )}
+            </form>
+          </div>
+        </Modal>
+        {/* // */}
+        <div className="mt-6">
+          <p className="text-xl">
+            <strong>Email:</strong> {user1.email}
+          </p>
+          <p className="text-xl">
+            <strong>Phone Number:</strong> {user1.phoneNumber}
+          </p>
         </div>
-        <div className="px-8 py-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold">John Doe</h2>
-            <p className="text-gray-600">Frontend Developer</p>
-          </div>
-          <div className="mb-6">
-            <h3 className="text-lg font-bold mb-2">About</h3>
-            <p className="text-gray-600">
-              I'm a frontend developer with a passion for creating beautiful and
-              user-friendly web interfaces.
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="text-lg font-bold mb-2">Experience</h3>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>Senior Frontend Developer at ABC Company</li>
-              <li>Frontend Engineer at XYZ Tech</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold mb-2">Education</h3>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>Bachelor's Degree in Computer Science</li>
-              <li>Web Development Certification from PQR Academy</li>
-            </ul>
-          </div>
-        </div>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-6"
+          onClick={handleEditClick}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default UserProfile;

@@ -30,7 +30,6 @@ import {
   Modal,
 } from "@mui/material"; //Link
 import AddIcon from "@mui/icons-material/Add";
-import EditPlacePage from '../../Page/EditPlace';
 //
 
 const Area = [
@@ -500,24 +499,23 @@ function SuperAdmin() {
   };
 
   return (
-    <div className="bg-400 border p-24 m-8">
-      <div className="flex justify-end pb-2 pr-2">
+    <div className="bg-400 border m-8">
+      <div className="flex justify-end pb-2 pr-2 ">
         <button
           onClick={openModal}
-          className="flex text-2xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center 
-       "
+          className="flex text-2xl bg-lime-400 hover:bg-lime-600 text-white font-bold py-1 px-2 rounded flex items-center mr-2 mt-2 "
         >
-          <AddIcon className="mr-2" fontSize="large" />
+          <AddIcon className="mr-1" fontSize="large" />
           Add New
         </button>
       </div>
 
-      <Modal open={isModalOpen} onClose={closeModal} className="m-4">
-        <div className="flex justify-center items-center ">
-          <div className="bg-white shadow-md rounded-md p-4 space-y-4 w-full md:w-2/4">
-            <h1>Add Place here</h1>
-            <form className="flex flex-col justify-center items-center ">
-              <div className="flex flex-row gap-6">
+      <Modal open={isModalOpen} onClose={closeModal} className="mt-8 ">
+        <div className="flex justify-center items-center m-auto w-1/2">
+          <div className="bg-white shadow-md rounded-md p-4 space-y-4 w-full">
+            <h1 className='text-2xl font-semibold'>Add Place here</h1>
+            <form className="flex flex-col justify-center items-center">
+              <div className="flex flex-row w-3/4 gap-6">
                 <div className="flex flex-col w-1/2 gap-2">
                   <TextField
                     required
@@ -635,13 +633,16 @@ function SuperAdmin() {
                     placeholder="[9.88353,32.0910]"
                     onChange={(e) => setLocation(e.target.value)}
                     className="col-span-2"
+                    sx={{ width: "100%", marginBottom: "1rem" }}
                   />
                   <StyledTextarea
                     aria-label="minimum height"
                     minRows={2}
                     placeholder="Place Description"
                     onChange={(e) => setDescription(e.target.value)}
-                    className="col-span-2 w-full border"
+                    sx={{ width: "70%", marginBottom: "1rem" }}
+                    className="col-span-2 border"
+
                   />
                 </div>
               </div>

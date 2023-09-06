@@ -12,6 +12,7 @@ import Cards from '../components/Category/Cards';
 import { useDispatch, useSelector } from 'react-redux';
 import { setactive } from '../redux/tab';
 import { setData, setMainCategory, setSubServices } from '../redux/mainCategory';
+import { Loading } from '../components/Loading';
 function Category() {
   const [mCategory, setMCategory] = useState({})
   const activeTab = useSelector((state) => state.tabstate.tab);
@@ -78,7 +79,11 @@ console.log('mcategotySUB ', res.data)
   dispatch(setMainCategory(mainCategory)) //the right one service=maincategory.services
   dispatch(setData(mCategory))
   const data = useSelector((state) => state.mainCategoryState.ServiceSubService);
-  console.log("jk ", data)
+  console.log("jk ser data", data)
+
+  if (!mainCategory.Services ||  !data) {
+    return <Loading />
+  }
   return (
     <>
       <Header title={" Add Category"} />
