@@ -66,7 +66,7 @@ function App() {
         console.log(error);
       });
   }, []);
-
+// if(!user) return <h1>user is fetching hello world</h1>
   return (
     <ColorModeContext.Provider value={colorMode}>
       {/* <h1 className='text-3xl bg-blue-300 underline'>Hellow world</h1> */}
