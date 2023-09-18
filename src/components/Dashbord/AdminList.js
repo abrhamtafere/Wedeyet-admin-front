@@ -7,7 +7,7 @@ const AdminList = () => {
         {/* First Column */}
         <div className="bg-white w-3/4 rounded-lg shadow-md p-4 mr-8 mb-4">
         <div className="flex items-center mb-4">
-            <div className="w-16 h-16 rounded-full ring-2 ring-lime-400 bg-gray-300"></div>
+            <div className="w-16 h-16 rounded-full ring-2 ring-lime-400 bg-gray-300"><img src="./profile.avif" alt='no' className='w-16 h-16 rounded-full '/></div>
             <div className="ml-4">
               <h2 className="text-lg font-medium">Admin Name</h2>
               <p className="text-gray-500">Admin Role</p>
