@@ -111,6 +111,7 @@ const EmailTemplateComponent = () => {
                 editorState={body}
                 onEditorStateChange={setBody}
                 className="min-h-50vh bg-blue-300"
+                placeholder="write your message here ..."
               />
             </Box>
           </Box>
