@@ -164,6 +164,7 @@ function App() {
                         element={<ProfilePage user={user} />}
                       />
                       <Route path="/categorys" element={<Category />} />
+                      <Route path="/place" element={<PlaceRegistration />} />
                       <Route path="/businesses" element={<Business />} />
                       <Route path="/edit/:id" element={<EditPlacePage />} />
                       <Route path="/delete/:id" element={<DeletePlacePage />} />

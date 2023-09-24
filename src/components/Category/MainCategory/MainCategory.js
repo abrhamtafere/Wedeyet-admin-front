@@ -133,7 +133,9 @@ function MainCategory() {
 
       <Box display="flex" borderRadius="10px" bgcolor="white" width="70vw" padding=" 1rem 3rem" alignItems="center" justifyContent="center">
 
-        <Box
+       {/* // */}
+       
+       <Box
           display="grid"
           gap="10px"
           gridTemplateColumns="repeat(1, minmax(0, 1fr))"
@@ -225,6 +227,8 @@ function MainCategory() {
           {/* <FileChooserButton fileName={fileName} setFileName={setFileName} inputRef={fileInputRef} /> */}
           <ButtonComponent buttonText={"Add"} onClick={handleAdd} />
         </Box>
+
+{/*  */}
       </Box>
 
       <Box borderRadius="10px" bgcolor="white" width="70vw" height="400px" marginTop="20px" padding=" 1rem 3rem">

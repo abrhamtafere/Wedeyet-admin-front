@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, Button, Pagination, PaginationItem } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 const pageSize = 10; // Number of items per page
 const PlaceRegistration = () => {
@@ -224,9 +225,13 @@ const PlaceRegistration = () => {
   return (
     <div className="container mx-auto p-4 w-3/4">
       <h2 className="text-lg font-bold mb-4">Register and Add Places</h2>
-      <Button variant="contained" onClick={openAreaModal}>
-        Open Modal
-      </Button>
+      <button
+          onClick={openAreaModal}
+          className="flex text-xl bg-lime-400 hover:bg-lime-500 text-white font-bold py-1 px-2 rounded flex items-center mr-2 "
+        >
+          <AddIcon className="mr-1" fontSize="large" />
+          Add User
+        </button>
       <Modal open={isAreaModalOpen} onClose={closeAreaModal} className="m-4">
         <div className="bg-white p-4 w-96 mx-auto mt-24">
           <h2 className="text-lg font-bold mb-4">Add Places</h2>
@@ -266,9 +271,9 @@ const PlaceRegistration = () => {
       </Modal>
       {Area.length > 0 && (
         <div>
-          <h2 className="text-lg font-bold mb-4">Registered Places</h2>
-          <div className="flex flex-col xborder items-end">
-            <div className=" mb-4 w-1/3 ">
+          <div className="flex flex justify-between mt-6">
+          <h2 className="text-lg font-bold">Registered Places</h2>
+            <div className="flex flex-col mb-4 w-1/3 ">
               <label for="search" className="block mb-1">
                 Search:
               </label>
@@ -286,10 +291,10 @@ const PlaceRegistration = () => {
             <table className="w-full lg:1/2 ">
               <thead>
                 <tr>
-                  <th className="text-2xl font-semi-bold border border-gray-100 px-4 py-2">
+                  <th className="text-xl font-semi-bold border border-gray-100 px-4 py-2">
                     Place Name
                   </th>
-                  <th className="text-2xl font-semi-bold border border-gray-100 px-4 py-2">
+                  <th className="text-xl font-semi-bold border border-gray-100 px-4 py-2">
                     Actions
                   </th>
                 </tr>
@@ -302,7 +307,7 @@ const PlaceRegistration = () => {
                       index % 2 === 0 ? "bg-gray-100" : "bg-white"
                     } hover:bg-gray-200`}
                   >
-                    <td className="text-2xl px-4 py-2">{place}</td>
+                    <td className="text-lg px-4 py-2">{place}</td>
                     <td className=" px-4 py-2 flex justify-center items-center gap-2">
                       <button
                         className="px-4 py-1 border border-blue-500 text-blue-600 font-semi-bold hover:text-white rounded xoutline hover:bg-blue-600 mr-2 transition-colors duration-300"
@@ -322,7 +327,7 @@ const PlaceRegistration = () => {
               </tbody>
             </table>
             {/* Pagination */}
-            <div className=" flex justify-center mt-4">
+            {/* <div className=" flex justify-center mt-4">
               {Array.from({ length: Math.ceil(Area.length / pageSize) }).map(
                 (_, index) => (
                   <button
@@ -338,7 +343,7 @@ const PlaceRegistration = () => {
                   </button>
                 )
               )}
-            </div>
+            </div> */}
             <div className="flex justify-center mt-4">
               <Pagination
                 count={Math.ceil(Area.length / pageSize)}
@@ -346,21 +351,20 @@ const PlaceRegistration = () => {
                 onChange={(_, page) => handlePaginationClick(page)}
                 variant="outlined"
                 shape="rounded"
-                color="primary"
                 // showFirstButton
                 // showLastButton
                 className="flex justify-center mt-4"
                 classes={{
                   ul: "flex items-center space-x-1",
-                  outlined: "border border-gray-600 rounded-lg",
+                  outlined: "border border-gray-200 p-2 rounded-lg",
                   rounded: "rounded-lg",
                 }}
 
                 renderItem={(item) => (
                   <PaginationItem 
                     {...item}
-                    className={`px-4 py-2 hover:bg-blue-500 hover:text-white transition-colors duration-300 ${
-                      item.selected ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'
+                    className={`px-4 py-2 hover:text-blue-500 transition-colors duration-300 ${
+                      item.selected ? ' text-blue-600' : 'bg-gray-300 text-black'
                     }`}
                   /> 
                 )}
