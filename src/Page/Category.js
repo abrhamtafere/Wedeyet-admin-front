@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setactive } from '../redux/tab';
 import { setData, setMainCategory, setSubServices } from '../redux/mainCategory';
 import { Loading } from '../components/Loading';
+import LoginPage from "../Page/LoginPage";
+
 function Category() {
   const [mCategory, setMCategory] = useState({})
   const activeTab = useSelector((state) => state.tabstate.tab);
@@ -28,7 +30,7 @@ function Category() {
   };
   console.log("tab persist")
   // axios.get('https://wedeyet.herokuapp.com/api/service/all', {
-   
+   console.log('auth ', auth)
     useEffect(() => {
       axios.get('https://wedeyet.herokuapp.com/api/service/category/all', {
         headers: {
@@ -84,6 +86,11 @@ console.log('mcategotySUB ', res.data)
   if (!mainCategory.Services ||  !data) {
     return <Loading />
   }
+//if you are not login
+  if (!auth.firstName) {
+    return <LoginPage />
+  }
+  //LoginPage
   return (
     <>
       <Header title={" Add Category"} />
