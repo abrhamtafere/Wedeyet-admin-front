@@ -219,7 +219,7 @@ const Sidebar = ({ setIsSidebar, isSidebarOn }) => {
                 setSelected={setSelected}
               />
               <Item
-                title="Categorys first"
+                title="Categorys"
                 to="/categorys"
                 icon={<CategoryIcon sx={{ color: colors.grey[500] }} />}
                 selected={selected}

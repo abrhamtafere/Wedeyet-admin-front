@@ -12,22 +12,25 @@ const LoginPage = () => {
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
-    <>
+    <div  className=' overflow-hidden h-screen'>
       <Box
-        width="10%"
+        // width="10%"
         p="1rem 6%"
         textAlign="left"
+        border='2 solid red'
+       
       >
-        <Box display="flex" flexDirection="row" justifyContent="flex-left" alignItems="center" >
+        <Box display="flex" flexDirection="row" justifyContent="flex-between" alignItems="center" >
           <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center"
           >
             <img
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="text-white font-bold rounded"
               alt="profile-user"
               width="50px"
               height="50px" 
               object-fit="cover"
-              src={wedeyetLogo}
+              // src={wedeyetLogo}
+              src="/wedeyetLogo.png"
               style={{ cursor: "pointer", borderRadius: "50%" }}
             />
           </Box>
@@ -36,7 +39,6 @@ const LoginPage = () => {
               variant="h5"
               color={colors.grey[100]}
               fontWeight="bold"
-
             >
               Wedeyet
             </Typography>
@@ -66,7 +68,7 @@ const LoginPage = () => {
           <LoginForm />
         </Box>
       </Box>
-    </>
+    </div>
   );
 };
 
