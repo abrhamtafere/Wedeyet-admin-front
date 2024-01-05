@@ -6,8 +6,8 @@ import {Cookies} from 'react-cookie';
 let parsedData;
 
 const initialState = {
-  user: parsedData||localStorage.getItem('persist:root')
-
+  user: parsedData||localStorage.getItem('persist:root'),
+  token: null, 
 };
 
 // remove setted cookie

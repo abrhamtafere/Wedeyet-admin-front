@@ -3,48 +3,71 @@ import { apiSlice } from "./apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllSubServices: builder.query({ //get all subServices
+    getAllUsers: builder.query({
       query: () => ({
-        url: `/subService/all`,
+        url: `/auth/get/`,
       }),
-      providesTags: ["SubService"],
+      providesTags: ["User"],
     }),
-    getSubService: builder.query({ //get a subService   
+    getUser: builder.query({
       query: (id) => ({
-        url: `/subservice/get/${id}`,
+        url: `/auth/get/${id}`,
       }),
-      providesTags: ["SubService"],
+      providesTags: ["User"],
     }),
-    addSubService: builder.mutation({
+    getCurrrentUser: builder.query({
+      query: (id) => ({
+        url: `/auth/get/${id}`,
+      }),
+      providesTags: ["User"],
+    }),
+    getLogoutUser: builder.query({
+      query: () => ({
+        url: `/auth/logout`,
+      }),
+      // providesTags: ["User"],
+    }),
+    registerUser: builder.mutation({
       query: (data) => ({
-        url: `/subservice/create`,
+        url: `/auth/register`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["SubService"]
+      invalidatesTags: ["User"],
     }),
-    updateSubService: builder.mutation({
+    loginUser: builder.mutation({
+      query: (data) => ({
+        url: `/auth/login`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    updateUser: builder.mutation({
       query: (id, value) => ({
-        url: `/${id}`,
+        url: `/auth/update/${id}`,
         method: "PUT",
         body: value,
       }),
-      invalidatesTag: ["SubCategory"]
+      invalidatesTag: ["User"],
     }),
-    deleteSubService: builder.mutation({
+    deleteUser: builder.mutation({
       query: (id) => ({
-        url: `/subservice/delete/${id}`,
+        url: `/auth/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['SubService']
-    })
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
 export const {
-  useGetAllSubServicesQuery,
-  useGetSubServiceQuery,
-  useAddSubServiceMutation,
-  useUpdateSubServiceMutation,
+  useGetAllUsersQuery,
+  useGetUserQuery,
+  useGetCurrrentUserQuery,
+  useGetLogoutUserQuery,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = authApiSlice;
-
