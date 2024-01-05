@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import authReducer from './redux/auth';
 import mainCategory from './redux/mainCategory';
+import { apiSlice } from './redux/api/apiSlice'
 import Services from './redux/Services';
 import tab, { tabSlice } from './redux/tab';
 import Faq from './redux/Faq';
@@ -24,6 +25,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
 import 'tailwindcss/tailwind.css';//for test
+
 const persistConfig =
 {
   key: "root",
@@ -34,6 +36,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const tabReducer = persistReducer(persistConfig, tab);
 const rootReducer = {
   // tabstate:tab,
+  [apiSlice.reducerPath]: apiSlice.reducer,
   mainCategoryState: mainCategory,
   serviceState:Services,
   faqSate:Faq,
@@ -48,7 +51,8 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware),
+    devTools: true,
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

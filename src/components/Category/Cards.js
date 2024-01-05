@@ -4,11 +4,14 @@ import SummaryCard from "./SummaryCard";
 import categorys from "../../data/category.json";
 import { useSelector } from "react-redux";
 import Lable from "../global/Lable";
-import CircularProgress from "@mui/material/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";  
+import { useGetAllCategoryQuery } from '../../redux/api/categoryApiSlice';
 
 function Cards() {
   const data = useSelector((state) => state.mainCategoryState);
+  const {data:mainCategory, isLoading, } = useGetAllCategoryQuery();
   console.log("from cards ", data);
+  console.log("from cards m ", mainCategory);
   if (!data.subServices.SubServices ) {
     return (
       <div className="flex justify-center mt-8">
@@ -17,7 +20,8 @@ function Cards() {
     );
   }
 
-  if (Object.keys(data).length === 0) {
+  //if is loading data  
+  if (Object.keys(data).length === 0 || isLoading) {
     return (
       <div className="flex justify-center mt-8">
         <div className="loader ease-linear rounded-full border-[7px]  border-t-blue-500  h-16 w-16 animate-spin"></div>
@@ -36,7 +40,7 @@ function Cards() {
         m="2.5rem 10rem"
       >
         <Lable
-          text={`${data.TotalServices} Total Services and 
+          text={`${mainCategory.TotalServices} Total Services and 
           
           ${
             data?.subServices.TotalSubServices

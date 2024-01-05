@@ -14,7 +14,7 @@ import { setactive } from '../redux/tab';
 import { setData, setMainCategory, setSubServices } from '../redux/mainCategory';
 import { Loading } from '../components/Loading';
 import LoginPage from "../Page/LoginPage";
-
+import { useGetAllCategoryQuery } from '../redux/api/categoryApiSlice'
 function Category() {
   const [mCategory, setMCategory] = useState({})
   const activeTab = useSelector((state) => state.tabstate.tab);
@@ -24,6 +24,9 @@ function Category() {
   const [mainCategory, setMainCategoryData]=useState({})
   const colors = tokens(theme.palette.mode);
   const auth = useSelector((state) => state.persistedReducer.user);
+  
+  const {data:MCategory1, isLoading, } = useGetAllCategoryQuery();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(setactive(newValue))
@@ -93,16 +96,14 @@ console.log('mcategotySUB ', res.data)
   //LoginPage
   return (
     <>
-      <Header title={" Add Category"} />
+      <Header title={" Add Category kklkl"} />
       <Cards />
 
       <CategoryTabs
         active={value}
         handleChange={handleChange}
       />
-
     </>
-
   )
 }
 
